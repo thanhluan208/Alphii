@@ -51,7 +51,7 @@ export const CardStack = ({
 				return (
 					<motion.div
 						key={card.id}
-						className="absolute bg-white w-full h-full p-10 rounded-[28px] border-2 border-[#E7E8EC]  shadow-[0px_4px_8px_rgba(0,0,0,0.04)] grid grid-cols-2 gap-[60px]"
+						className={cn("p-6","absolute bg-white w-full h-full md:p-10 rounded-[28px] border-2 border-[#E7E8EC]  shadow-[0px_4px_8px_rgba(0,0,0,0.04)] grid grid-cols-2 gap-[60px]")}
 						style={{
 							transformOrigin: "top center"
 						}}
@@ -73,8 +73,8 @@ export const CardStack = ({
 						<div className="col-span-1 flex items-start justify-center gap-6 flex-col">
 							<p className="text-primary">{`// Step ${card.index}`}</p>
 							<div>
-								<p className="text-[28px] leading-8 font-[500]">{card.title}</p>
-								<p className="mt-3">{card.description}</p>
+								<p className={cn("text-md leading-4","md:text-[28px] md:leading-8 font-[500]")}>{card.title}</p>
+								<p className="text-xs md:text-base mt-3">{card.description}</p>
 							</div>
 						</div>
 						<div className="col-span-1 max-h-[100%] overflow-hidden">

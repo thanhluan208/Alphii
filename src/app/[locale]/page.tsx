@@ -92,7 +92,7 @@ const Home = () => {
 
 	return (
 		<div className="relative text-white bg-[#0A0812]">
-			<div className="fixed top-0 left-0 flex items-center justify-between w-full h-[80px] bg-[#0404068C] z-10 px-[150px] py-5 backdrop-blur-md">
+			<div className="fixed top-0 left-0 flex items-center justify-between w-full h-[80px] bg-[#0404068C] z-10 px-4 md:px-8 lg:px-[150px] py-5 backdrop-blur-md">
 				<div className="flex items-center gap-[60px]">
 					<Image
 						src={"/images/logo.png"}
@@ -100,7 +100,7 @@ const Home = () => {
 						width={86}
 						height={23.71}
 					/>
-					<div className="flex gap-6 items-center">
+					<div className="hidden md:flex gap-6 items-center">
 						<Link href={"#feature"}>{translation("lFeature")}</Link>
 						<Link href={"#about"}>{translation("lHowItWork")}</Link>
 						<Link href={"#roadmap"}>{translation("lTestimonials")}</Link>
@@ -115,7 +115,7 @@ const Home = () => {
 					{translation("lGetStarted")}
 				</Button>
 			</div>
-			<div className="w-full bg-[url(/images/home-sec-1.jpeg)] bg-center bg-cover px-[150px] pt-[80px]">
+			<div className="w-full bg-[url(/images/home-sec-1.jpeg)] bg-center bg-cover px-4 md:px-8 lg:px-[150px] pt-[80px]">
 				<div className="pt-[240px] pb-[100px] border-x border-[#FFFFFF1A]">
 					<div className="px-10 flex flex-col gap-[60px]">
 						<div className="p-1.5 pl-3 flex items-center gap-2 rounded-[10px] backdrop-blur-md bg-[#00000033] w-fit">
@@ -126,14 +126,14 @@ const Home = () => {
 							</div>
 						</div>
 						<div>
-							<div className="w-[1060px] h-[144px] not-italic font-medium text-[64px] leading-[72px] tracking-[-0.03em] bg-gradient-to-r from-[#D0D0D0] via-[#ECECEC] to-[#D0D0D0] bg-clip-text text-transparent mix-blend-color-dodge whitespace-pre-line">
+							<div className="w-full max-w-[1060px] h-auto md:h-[144px] not-italic font-medium text-4xl md:text-5xl lg:text-[64px] leading-tight md:leading-[72px] tracking-[-0.03em] bg-gradient-to-r from-[#D0D0D0] via-[#ECECEC] to-[#D0D0D0] bg-clip-text text-transparent mix-blend-color-dodge whitespace-pre-line">
 								{translation("lPowerUp")}
 							</div>
 							<p className="text-xl leading-7 whitespace-pre-line mt-5">
 								{translation("lCreate")}
 							</p>
 						</div>
-						<div className="flex gap-4 items-center">
+						<div className="flex gap-4 items-center flex-wrap">
 							<Button>
 								{translation("lGetStartedForFree")} <DoubleChevronRight />
 							</Button>
@@ -184,7 +184,7 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className="bg-[linear-gradient(180deg,#140D22_0%,#0A0812_100%)] border-t border-[#FFFFFF1A] px-[150px] py-[100px] grid grid-cols-2 gap-10">
+			<div className="bg-[linear-gradient(180deg,#140D22_0%,#0A0812_100%)] border-t border-[#FFFFFF1A] px-4 md:px-8 lg:px-[150px] py-12 md:py-[100px] grid grid-cols-1 md:grid-cols-2 gap-10">
 				<div className="col-span-1">
 					<p className="text-primary uppercase">
 						{"//"} {translation("lWhy")} Alphii AI
@@ -217,7 +217,7 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className="bg-[#F9F9FB] px-[150px] py-[100px] text-[#1E1F24]">
+			<div className={cn("px-4","bg-[#F9F9FB] lg:px-[150px] py-[100px] text-[#1E1F24]")}>
 				<div className="flex flex-col gap-6">
 					<p className="text-primary uppercase">
 						{"//"} {translation("lWhy")} Alphii AI
@@ -230,8 +230,8 @@ const Home = () => {
 						{translation("lNotBot")}
 					</p>
 				</div>
-				<div className="mt-[60px] grid grid-cols-3 gap-6">
-					<div className="col-span-1 ">
+				<div className={cn("grid-cols-1","mt-[60px] grid sm:grid-cols-3 gap-6")}>
+					<div className="col-span-1">
 						<div className="rounded-[32px] overflow-hidden border border-[#E7E8EC]">
 							<div className="h-11 w-full flex items-center justify-center bg-[url('/images/home-line-header.png')] bg-center bg-cover">
 								<p>✢ {translation("lAlwayOn")} ✢</p>
@@ -252,7 +252,7 @@ const Home = () => {
 							/>
 						</div>
 					</div>
-					<div className="col-span-1 pt-[140px]">
+					<div className="col-span-1 sm:pt-[140px]">
 						<div className="rounded-[32px] overflow-hidden border border-[#E7E8EC]">
 							<div className="h-11 w-full flex items-center justify-center bg-[url('/images/home-line-header.png')] bg-center bg-cover">
 								<p>✢ {translation("lActLikeManager")} ✢</p>
@@ -273,7 +273,7 @@ const Home = () => {
 							/>
 						</div>
 					</div>
-					<div className="col-span-1 pt-[250px]">
+					<div className="col-span-1 sm:pt-[250px]">
 						<div className="rounded-[32px] overflow-hidden border border-[#E7E8EC]">
 							<div className="h-11 w-full flex items-center justify-center bg-[url('/images/home-line-header.png')] bg-center bg-cover">
 								<p>✢ {translation("lUnderstandTeamate")} ✢</p>
@@ -298,7 +298,7 @@ const Home = () => {
 				<p className="mt-6 text-[14px] text-center">
 					{`✢   ${translation("lAssembleEasy")}   ✢`}
 				</p>
-				<div className="mt-[100px] flex gap-[80px] items-center">
+				<div className="mt-[100px] flex sm:flex-row flex-col sm:gap-[80px] gap-6 items-center">
 					<div className="flex-1">
 						<p className="text-primary">{`// ALPHI AI AGent teams`}</p>
 						<p className="text-[44px] leading-[52px] font-[500] mt-6">
@@ -314,7 +314,7 @@ const Home = () => {
 				</div>
 				<div className="w-full mt-[60px]">
 					<CardStack
-						className="w-full h-[430px]"
+						className={cn("h-[320px]","w-full sm:h-[430px]")}
 						items={[
 							{
 								id: uuid(),
@@ -345,8 +345,8 @@ const Home = () => {
 				</div>
 				<p className="mt-[60px] text-center">✢ {translation("lSimple")} ✢</p>
 			</div>
-			<div className="bg-[#0A0812] px-[150px] py-[100px] text-white ">
-				<div className="grid grid-cols-2 gap-[60px] h-[534px]">
+			<div className={cn("px-4","bg-[#0A0812] lg:px-[150px] py-[100px] text-white ")}>
+				<div className={cn("grid-cols-1","grid md:grid-cols-2 gap-[60px]")}>
 					<div className="col-span-1 flex flex-col justify-between">
 						<div className="flex flex-col gap-6">
 							<p className="text-primary uppercase">
@@ -375,7 +375,7 @@ const Home = () => {
 						</div>
 						<div className="flex gap-3 items-center">
 							<CodeIcon />
-							<p className="w-[494px] h-[28px] flex items-center font-medium text-[16px] leading-[24px] tracking-[-0.01em] bg-gradient-to-r from-[#7D7B85] via-[#D2D1D3] to-[#7D7B85] bg-clip-text text-transparent">
+							<p className="w-[494px] mt-2 flex items-center font-medium text-[16px] leading-[24px] tracking-[-0.01em] bg-gradient-to-r from-[#7D7B85] via-[#D2D1D3] to-[#7D7B85] bg-clip-text text-transparent">
 								Code & Develop Software Applications in any language you
 								request.
 							</p>
@@ -428,10 +428,10 @@ const Home = () => {
 			<div className="bg-[#0A0812] -translate-y-[1px]">
 				<DirectionAwareTabs
 					tabs={tabs}
-					className={cn("px-[100px] w-[164px] h-10")}
+					className={cn("px-2 w-full","sm:px-[100px] sm:w-[164px] h-10")}
 				/>
 			</div>
-			<div className="px-[150px] py-[100px] bg-[url('/images/home-compare.png')] h-[976px] w-full bg-center bg-cover">
+			<div className={cn("px-4","lg:px-[150px] py-[100px] bg-[url('/images/home-compare.png')] h-[976px] w-full bg-center bg-cover")}>
 				<div className="flex flex-col gap-6">
 					<p className="text-primary uppercase">
 						{"//"} {translation("lWhy")} Alphii AI
@@ -441,9 +441,9 @@ const Home = () => {
 					</p>
 					<p className="text-xl text-[#62636C]">{translation("lTransform")}</p>
 				</div>
-				<div className="mt-[60px] grid grid-cols-2 border-2 border-[#FFFFFF14] rounded-[32px] gap-10 p-4 bg-[#0A0812]">
+				<div className="mt-[60px] grid grid-cols-2 border-2 border-[#FFFFFF14] rounded-[32px] gap-3 sm:gap-10 p-4 bg-[#0A0812]">
 					<div className="col-span-1 p-8 flex flex-col gap-[60px]">
-						<p className="text-[28px] font-[500] leading-8">
+						<p className={cn("text-xl","sm:text-[28px] font-[500] leading-8")}>
 							{translation("lOthers")}
 						</p>
 						<div>
@@ -491,7 +491,7 @@ const Home = () => {
 						)}
 					>
 						<div className="w-full h-full p-8 bg-[linear-gradient(162.24deg,#221C3A_0.05%,rgba(10,8,18,0.9)_87.87%)] flex flex-col gap-[60px] rounded-[34px]">
-							<p className="text-[28px] font-[500] leading-8">
+							<p className={cn("text-xl","sm:text-[28px] font-[500] leading-8")}>
 								{translation("lOthers")}
 							</p>
 							<div>
@@ -535,7 +535,7 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className="bg-white px-[150px] py-[100px] text-[#1E1F24] ">
+			<div className="bg-white px-4 md:px-8 lg:px-[150px] py-12 md:py-[100px] text-[#1E1F24]">
 				<p className="text-[44px] leading-[52px] font-bold">
 					Why our customer loves us
 				</p>
@@ -543,7 +543,7 @@ const Home = () => {
 					Transform your customer's journey into a seamless experience.{" "}
 				</p>
 
-				<div className="mt-[60px] grid grid-cols-3 gap-6">
+				<div className="mt-[60px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 					{favorCards.map((card, index) => (
 						<FavorCard
 							key={card.title}
@@ -560,26 +560,26 @@ const Home = () => {
 						Incredibly powerful, yet simply affordable.
 					</p>
 
-					<div className="mt-[60px] grid grid-cols-3 gap-6">
+					<div className="mt-[60px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 						<PriceCard variant="basic" />
 						<PriceCard variant="plus+" />
 						<PriceCard variant="custom" />
 					</div>
 				</div>
-				<div className="mt-[100px] grid grid-cols-2 gap-[60px]">
+				<div className="mt-[60px] md:mt-[100px] grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-[60px]">
 					<div>
-						<p className="text-[44px] leading-[52px] font-bold">
+						<p className="text-3xl md:text-4xl lg:text-[44px] leading-tight lg:leading-[52px] font-bold">
 							Frequently Asked Questions
 						</p>
-						<p className="text-[#62636C] text-xl leading-7">
+						<p className="text-lg md:text-xl leading-7 text-[#62636C] mt-4">
 							Incredibly powerful, yet simply affordable.
 						</p>
 					</div>
 					<FAQs />
 				</div>
 			</div>
-			<div className="bg-[#0A0812] px-[150px] py-[100px] text-white ">
-				<div className="grid grid-cols-2 gap-6 text-[#62636C]">
+			<div className="bg-[#0A0812] px-4 md:px-8 lg:px-[150px] py-12 md:py-[100px] text-white">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-[#62636C]">
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
 						voluptates repellendus rem laudantium et impedit repellat, ipsum ad
@@ -617,8 +617,8 @@ const Home = () => {
 					</div>
 					<p></p>
 				</div>
-				<div className="mt-[60px] flex items-center justify-between border-t border-[#23262F] py-4">
-					<div className="flex gap-10 items-center">
+				<div className="mt-[60px] flex sm:flex-row gap-10 flex-col items-end sm:items-center justify-between border-t border-[#23262F] py-4">
+					<div className="flex justify-between sm:justify-start sm:gap-10 items-center w-full">
 						<p>Alphii AI ©️ 2025</p>
 						<p>Terms and Conditions</p>
 						<p>Privacy Policy</p>
