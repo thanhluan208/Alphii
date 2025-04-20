@@ -5,12 +5,12 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 const buttonVariants = cva(
-	"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+	"inline-flex items-center box-border flex flex-row justify-center items-center px-5 py-2.5 border border-white/10 shadow-[0_4px_10px_rgba(0,0,0,0.12)] rounded-xl gap-1 w-48 h-12  justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
 	{
 		variants: {
 			variant: {
 				default:
-					"bg-[linear-gradient(90.44deg,#091D13_-11.04%,#247252_99.93%)] to-primary text-primary-foreground hover:bg-primary/60 hover:bg-none active:bg-primary disabled:bg-grey-2 disabled:bg-none disabled:text-white",
+					"bg-gradient-to-r from-[#3A10D1] to-[#794BFF] text-primary-foreground disabled:bg-grey-2 disabled:bg-none disabled:text-white",
 				secondary: "border border-red-600 bg-background text-red-600 ",
 				outline:
 					"border border-primary bg-transparent text-primary hover:bg-primary/10  disabled:border-grey-2 disabled:text-grey-2",

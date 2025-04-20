@@ -31,7 +31,7 @@ const config = {
 				foreground: "hsl(var(--foreground))",
 				description: "#333639",
 				primary: {
-					DEFAULT: "#247252",
+					DEFAULT: "#876FE5",
 					foreground: "hsl(var(--primary-foreground))"
 				},
 				secondary: {
@@ -102,12 +102,19 @@ const config = {
 					to: {
 						height: "0"
 					}
+				},
+				scroll: {
+					to: {
+						transform: "translate(calc(-50% - 0.5rem))"
+					}
 				}
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
-				"caret-blink": "caret-blink 1.25s ease-out infinite"
+				"caret-blink": "caret-blink 1.25s ease-out infinite",
+				scroll:
+					"scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite"
 			}
 		}
 	},

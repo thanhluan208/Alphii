@@ -49,7 +49,7 @@ export default async function RootLayout({
 			<body className={twJoin(josefin.variable, instrument.variable)}>
 				<NextIntlClientProvider messages={messages}>
 					<Providers>
-						<main className="flex flex-col font-sans">{children}</main>
+						<main className="flex flex-col font-sans bg-[#0A0812]">{children}</main>
 					</Providers>
 				</NextIntlClientProvider>
 			</body>
