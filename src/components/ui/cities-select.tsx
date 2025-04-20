@@ -67,17 +67,28 @@ const CitySelect = ({
 					ref={buttonRef}
 					disabled={disabled}
 				>
-					{value ? <p className="text-black">{value}</p> : <p>{placeholder || t("pCitySelect")}</p>}
+					{value ? (
+						<p className="text-black">{value}</p>
+					) : (
+						<p>{placeholder || t("pCitySelect")}</p>
+					)}
 					<ChevronsUpDown className="opacity-50" />
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className={cn("w-[200px] p-0", classnamePopoverContent)} style={{
-				width: buttonRef?.current?.offsetWidth
-			}}>
+			<PopoverContent
+				className={cn("w-[200px] p-0", classnamePopoverContent)}
+				style={{
+					width: buttonRef?.current?.offsetWidth
+				}}
+			>
 				<Command>
 					<CommandInput placeholder={t("pCountrySelectSearch")} />
 					<CommandList>
-						<CommandEmpty>{!countrySelected ? "Select country to find a city" : t("lCountrySelectNotFound")}</CommandEmpty>
+						<CommandEmpty>
+							{!countrySelected
+								? "Select country to find a city"
+								: t("lCountrySelectNotFound")}
+						</CommandEmpty>
 						{options.map((opt) => {
 							return (
 								<CommandGroup key={opt.country} heading={opt.country}>

@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { Eye, EyeOff } from "lucide-react"
 
-interface CommonInputProps extends ComponentPropsWithRef<'input'> {
+interface CommonInputProps extends ComponentPropsWithRef<"input"> {
 	iconLeft: React.ReactNode
 	iconRight?: React.ReactNode
 	type?: string

@@ -1,28 +1,31 @@
-import React, { ComponentPropsWithoutRef } from "react";
+import React, { ComponentPropsWithoutRef } from "react"
+
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./tooltip";
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger
+} from "./tooltip"
 
 interface TooltipContainerProps extends ComponentPropsWithoutRef<"div"> {
-  tooltipContent?: React.ReactNode;
+	tooltipContent?: React.ReactNode
 }
 
 const TooltipContainer = ({
-  children,
-  tooltipContent,
-  className
+	children,
+	tooltipContent,
+	className
 }: TooltipContainerProps) => {
-  return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger className={className}>{children}</TooltipTrigger>
-        <TooltipContent className="max-w-[300px] text-wrap z-[100000] whitespace-pre-line">{tooltipContent}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  );
-};
+	return (
+		<TooltipProvider>
+			<Tooltip>
+				<TooltipTrigger className={className}>{children}</TooltipTrigger>
+				<TooltipContent className="max-w-[300px] text-wrap z-[100000] whitespace-pre-line">
+					{tooltipContent}
+				</TooltipContent>
+			</Tooltip>
+		</TooltipProvider>
+	)
+}
 
-export default TooltipContainer;
+export default TooltipContainer

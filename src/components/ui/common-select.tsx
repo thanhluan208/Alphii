@@ -1,5 +1,6 @@
 import React, { ComponentPropsWithoutRef } from "react"
 
+import { cn } from "@/lib/utils"
 import { CommonOption } from "@/types"
 import { SelectProps } from "@radix-ui/react-select"
 
@@ -10,7 +11,6 @@ import {
 	SelectTrigger,
 	SelectValue
 } from "./select"
-import { cn } from "@/lib/utils"
 
 interface CommonSelectProps extends ComponentPropsWithoutRef<"input"> {
 	options: CommonOption[]

@@ -217,7 +217,12 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className={cn("px-4","bg-[#F9F9FB] lg:px-[150px] py-[100px] text-[#1E1F24]")}>
+			<div
+				className={cn(
+					"px-4",
+					"bg-[#F9F9FB] lg:px-[150px] py-[100px] text-[#1E1F24]"
+				)}
+			>
 				<div className="flex flex-col gap-6">
 					<p className="text-primary uppercase">
 						{"//"} {translation("lWhy")} Alphii AI
@@ -226,11 +231,12 @@ const Home = () => {
 						{translation("lPowerUp")}
 					</p>
 					<p className="whitespace-pre-line text-xl">
-						{" "}
 						{translation("lNotBot")}
 					</p>
 				</div>
-				<div className={cn("grid-cols-1","mt-[60px] grid sm:grid-cols-3 gap-6")}>
+				<div
+					className={cn("grid-cols-1", "mt-[60px] grid sm:grid-cols-3 gap-6")}
+				>
 					<div className="col-span-1">
 						<div className="rounded-[32px] overflow-hidden border border-[#E7E8EC]">
 							<div className="h-11 w-full flex items-center justify-center bg-[url('/images/home-line-header.png')] bg-center bg-cover">
@@ -314,7 +320,7 @@ const Home = () => {
 				</div>
 				<div className="w-full mt-[60px]">
 					<CardStack
-						className={cn("h-[320px]","w-full sm:h-[430px]")}
+						className={cn("h-[320px]", "w-full sm:h-[430px]")}
 						items={[
 							{
 								id: uuid(),
@@ -345,8 +351,13 @@ const Home = () => {
 				</div>
 				<p className="mt-[60px] text-center">✢ {translation("lSimple")} ✢</p>
 			</div>
-			<div className={cn("px-4","bg-[#0A0812] lg:px-[150px] py-[100px] text-white ")}>
-				<div className={cn("grid-cols-1","grid md:grid-cols-2 gap-[60px]")}>
+			<div
+				className={cn(
+					"px-4",
+					"bg-[#0A0812] lg:px-[150px] py-[100px] text-white "
+				)}
+			>
+				<div className={cn("grid-cols-1", "grid md:grid-cols-2 gap-[60px]")}>
 					<div className="col-span-1 flex flex-col justify-between">
 						<div className="flex flex-col gap-6">
 							<p className="text-primary uppercase">
@@ -428,10 +439,15 @@ const Home = () => {
 			<div className="bg-[#0A0812] -translate-y-[1px]">
 				<DirectionAwareTabs
 					tabs={tabs}
-					className={cn("px-2 w-full","sm:px-[100px] sm:w-[164px] h-10")}
+					className={cn("px-2 w-full", "sm:px-[100px] sm:w-[164px] h-10")}
 				/>
 			</div>
-			<div className={cn("px-4","lg:px-[150px] py-[100px] bg-[url('/images/home-compare.png')] h-[976px] w-full bg-center bg-cover")}>
+			<div
+				className={cn(
+					"px-4",
+					"lg:px-[150px] py-[100px] bg-[url('/images/home-compare.png')] h-[976px] w-full bg-center bg-cover"
+				)}
+			>
 				<div className="flex flex-col gap-6">
 					<p className="text-primary uppercase">
 						{"//"} {translation("lWhy")} Alphii AI
@@ -443,7 +459,7 @@ const Home = () => {
 				</div>
 				<div className="mt-[60px] grid grid-cols-2 border-2 border-[#FFFFFF14] rounded-[32px] gap-3 sm:gap-10 p-4 bg-[#0A0812]">
 					<div className="col-span-1 p-8 flex flex-col gap-[60px]">
-						<p className={cn("text-xl","sm:text-[28px] font-[500] leading-8")}>
+						<p className={cn("text-xl", "sm:text-[28px] font-[500] leading-8")}>
 							{translation("lOthers")}
 						</p>
 						<div>
@@ -491,7 +507,9 @@ const Home = () => {
 						)}
 					>
 						<div className="w-full h-full p-8 bg-[linear-gradient(162.24deg,#221C3A_0.05%,rgba(10,8,18,0.9)_87.87%)] flex flex-col gap-[60px] rounded-[34px]">
-							<p className={cn("text-xl","sm:text-[28px] font-[500] leading-8")}>
+							<p
+								className={cn("text-xl", "sm:text-[28px] font-[500] leading-8")}
+							>
 								{translation("lOthers")}
 							</p>
 							<div>
@@ -540,7 +558,7 @@ const Home = () => {
 					Why our customer loves us
 				</p>
 				<p className="text-xl leading-7 text-[#62636C]">
-					Transform your customer's journey into a seamless experience.{" "}
+					{`Transform your customer's journey into a seamless experience.`}
 				</p>
 
 				<div className="mt-[60px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

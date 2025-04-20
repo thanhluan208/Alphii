@@ -22,7 +22,7 @@ import { Button } from "./button"
 import { Input } from "./input"
 import { Popover, PopoverContent, PopoverTrigger } from "./popover"
 
-interface PlaceAutocomplete extends ComponentPropsWithoutRef<'input'> {
+interface PlaceAutocomplete extends ComponentPropsWithoutRef<"input"> {
 	onPlaceSelect?: (place: PlaceOption | null) => void
 	value: string
 	placeholder?: string

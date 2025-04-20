@@ -1,4 +1,5 @@
 import { CSSProperties } from "react"
+import { ReadonlyURLSearchParams } from "next/navigation"
 
 import { Column } from "@tanstack/react-table"
 import { clsx, type ClassValue } from "clsx"
@@ -8,7 +9,6 @@ import { twMerge } from "tailwind-merge"
 
 import { STATUS_CODE } from "./../types/index"
 import { TIME_IN_SECONDS } from "./constant"
-import { ReadonlyURLSearchParams } from "next/navigation"
 
 dayjs.extend(duration)
 
@@ -64,10 +64,7 @@ export const optionFromEnum = (enumInput: object) => {
 	})
 }
 
-export const generatePageNumbers = (
-	page: number,
-	totalPage: number,
-) => {
+export const generatePageNumbers = (page: number, totalPage: number) => {
 	if (totalPage > 5) {
 		if (page < 3 || page > totalPage - 2) {
 			return [1, 2, "...", totalPage - 1, totalPage]
@@ -79,8 +76,10 @@ export const generatePageNumbers = (
 	}
 }
 
-
-export const createQueryString =(searchParams: ReadonlyURLSearchParams, queries: { name: string; value: string }[]) => {
+export const createQueryString = (
+	searchParams: ReadonlyURLSearchParams,
+	queries: { name: string; value: string }[]
+) => {
 	const params = new URLSearchParams(searchParams.toString())
 	queries.forEach((query) => {
 		params.set(query.name, query.value)

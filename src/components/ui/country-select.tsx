@@ -22,7 +22,7 @@ interface CountrySelectProps {
 	citiesSelected?: string
 	placeholder?: React.ReactNode
 	classname?: string
-	classnamePopoverContent?: string,
+	classnamePopoverContent?: string
 	disabled?: boolean
 }
 

@@ -34,7 +34,7 @@ const Pagination = ({
 		onPageChange && onPageChange(page)
 		const queries = [{ name: "page", value: String(page) }]
 		searchParams.forEach((value, key) => {
-			if (value && key !== 'page') {
+			if (value && key !== "page") {
 				queries.push({
 					name: key,
 					value

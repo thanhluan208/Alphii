@@ -1,7 +1,6 @@
 import { ComponentPropsWithoutRef } from "react"
 import { ControllerRenderProps, FieldValues, Path } from "react-hook-form"
 
-import Spinner from "@/components/icons/Spinner"
 import { cn } from "@/lib/utils"
 import { CommonOption } from "@/types"
 import { motion } from "framer-motion"
@@ -82,7 +81,6 @@ const SelectField = <
 				</FormControl>
 				<SelectContent className="relative z-[10000] max-h-[300px] overflow-y-auto">
 					{options?.length === 0 && <p>No data found</p>}
-					{isLoading && <Spinner />}
 					{options?.map((opt) => {
 						return (
 							<SelectItem
@@ -102,7 +100,6 @@ const SelectField = <
 							handleLoadmore && handleLoadmore()
 						}}
 					/>
-					{isFetchingMore && <Spinner />}
 				</SelectContent>
 			</Select>
 			{description && <FormDescription>{description}</FormDescription>}

@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
 
-import WarningDelete from "../icons/WarningDelete"
 import { Button } from "../ui"
 import {
 	Dialog,
@@ -51,10 +50,6 @@ const ConfirmDialog = ({
 				{buttonDelete}
 			</div>
 			<DialogContent className="items-center flex flex-col w-[412px] p-12 gap-8">
-				<WarningDelete
-					className={cn(isDestructive ? "text-destructive" : "text-primary")}
-				/>
-
 				<div className="flex flex-col items-center">
 					<DialogHeader
 						className={cn(

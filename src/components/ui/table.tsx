@@ -3,7 +3,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
-	wrapperRef?: React.LegacyRef<HTMLDivElement> 
+	wrapperRef?: React.LegacyRef<HTMLDivElement>
 }
 
 const Table = React.forwardRef<HTMLTableElement, TableProps>(

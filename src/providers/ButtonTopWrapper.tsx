@@ -4,10 +4,16 @@ interface ButtonTopWrapperProps extends ComponentPropsWithoutRef<"div"> {
 	button?: React.ReactNode
 }
 
-const ButtonTopWrapper = ({ children, button, ...rest }: ButtonTopWrapperProps) => {
+const ButtonTopWrapper = ({
+	children,
+	button,
+	...rest
+}: ButtonTopWrapperProps) => {
 	return (
 		<Fragment>
-			<div className="aboslute top-6 left-0" {...rest}>{button}</div>
+			<div className="aboslute top-6 left-0" {...rest}>
+				{button}
+			</div>
 			{children}
 		</Fragment>
 	)

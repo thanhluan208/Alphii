@@ -15,9 +15,9 @@ import {
 } from "react-dropzone"
 
 import { cn } from "@/lib/utils"
+import { Trash2Icon } from "lucide-react"
 
 import { Button, ButtonProps } from "./button"
-import { Trash2Icon } from "lucide-react"
 
 type DropzoneResult<TUploadRes, TUploadError> =
 	| {
@@ -680,7 +680,12 @@ const DropzoneRemoveFile = forwardRef<
 		// 	{props.children}
 		// 	<span className="sr-only">Remove file</span>
 		// </Button>
-		<Button variant={"ghost"} onClick={context.onRemoveFile} ref={ref} type="button">
+		<Button
+			variant={"ghost"}
+			onClick={context.onRemoveFile}
+			ref={ref}
+			type="button"
+		>
 			<Trash2Icon />
 		</Button>
 	)

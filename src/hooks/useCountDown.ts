@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react"
 
 /**
  * Countdown function
@@ -11,82 +11,82 @@ import { useState, useEffect } from "react";
  *
  */
 const useCountdown = (
-  targetTime?: number,
-  onComplete?: () => void,
-  isUnixTimestamp = true
+	targetTime?: number,
+	onComplete?: () => void,
+	isUnixTimestamp = true
 ) => {
-  const [secondRemaining, setSecondRemaining] = useState<number | null>(null);
-  const [initTimestamp, setInitTimestamp] = useState<number | null>(null);
+	const [secondRemaining, setSecondRemaining] = useState<number | null>(null)
+	const [initTimestamp, setInitTimestamp] = useState<number | null>(null)
 
-  const onFinishCountdown = () => {
-    if (onComplete instanceof Function) {
-      onComplete();
-    }
-  };
+	const onFinishCountdown = () => {
+		if (onComplete instanceof Function) {
+			onComplete()
+		}
+	}
 
-  useEffect(() => {
-    if (initTimestamp && initTimestamp <= Math.ceil(Date.now() / 1000)) {
-      onFinishCountdown();
-      return;
-    }
+	useEffect(() => {
+		if (initTimestamp && initTimestamp <= Math.ceil(Date.now() / 1000)) {
+			onFinishCountdown()
+			return
+		}
 
-    let countdownInterval: number;
-    if (secondRemaining && secondRemaining > 0) {
-      countdownInterval = window.setInterval(() => {
-        if (initTimestamp) {
-          const secondLeft = Math.max(
-            initTimestamp - Math.ceil(Date.now() / 1000),
-            0
-          );
-          setSecondRemaining(secondLeft);
+		let countdownInterval: number
+		if (secondRemaining && secondRemaining > 0) {
+			countdownInterval = window.setInterval(() => {
+				if (initTimestamp) {
+					const secondLeft = Math.max(
+						initTimestamp - Math.ceil(Date.now() / 1000),
+						0
+					)
+					setSecondRemaining(secondLeft)
 
-          if (secondLeft === 0) {
-            onFinishCountdown();
-            clearInterval(countdownInterval);
-          }
-        }
-      }, 1000);
-    }
+					if (secondLeft === 0) {
+						onFinishCountdown()
+						clearInterval(countdownInterval)
+					}
+				}
+			}, 1000)
+		}
 
-    return () => {
-      clearInterval(countdownInterval);
-    };
+		return () => {
+			clearInterval(countdownInterval)
+		}
 
-    // The "countdownInterval" will get clear when "secondRemaining" change and will affect performance if pass to dependency
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initTimestamp]);
+		// The "countdownInterval" will get clear when "secondRemaining" change and will affect performance if pass to dependency
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [initTimestamp])
 
-  useEffect(() => {
-    if (targetTime === null || targetTime === undefined) return;
+	useEffect(() => {
+		if (targetTime === null || targetTime === undefined) return
 
-    const currentUnixTimestamp = Math.ceil(Date.now() / 1000);
-    const unixTimestampValue = isUnixTimestamp
-      ? targetTime
-      : targetTime + currentUnixTimestamp;
-    const secondValue = isUnixTimestamp
-      ? targetTime - currentUnixTimestamp
-      : targetTime;
+		const currentUnixTimestamp = Math.ceil(Date.now() / 1000)
+		const unixTimestampValue = isUnixTimestamp
+			? targetTime
+			: targetTime + currentUnixTimestamp
+		const secondValue = isUnixTimestamp
+			? targetTime - currentUnixTimestamp
+			: targetTime
 
-    /* 
+		/* 
       isUnixTimestamp == true => targetTime == unixTimestamp
       isUnixTimestamp == false => targetTime == second
     */
 
-    setInitTimestamp(unixTimestampValue);
-    setSecondRemaining(secondValue);
-  }, [targetTime, isUnixTimestamp]);
+		setInitTimestamp(unixTimestampValue)
+		setSecondRemaining(secondValue)
+	}, [targetTime, isUnixTimestamp])
 
-  return secondRemaining ? Math.max(secondRemaining, 0) : null;
-};
+	return secondRemaining ? Math.max(secondRemaining, 0) : null
+}
 
 const useCountdownByTimestamp = (
-  targetTimestamp?: number,
-  onComplete?: () => void
-) => useCountdown(targetTimestamp, onComplete, true);
+	targetTimestamp?: number,
+	onComplete?: () => void
+) => useCountdown(targetTimestamp, onComplete, true)
 
 const useCountdownByDuration = (
-  durationSeconds?: number,
-  onComplete?: () => void
-) => useCountdown(durationSeconds, onComplete, false);
+	durationSeconds?: number,
+	onComplete?: () => void
+) => useCountdown(durationSeconds, onComplete, false)
 
-export { useCountdownByTimestamp, useCountdownByDuration };
+export { useCountdownByTimestamp, useCountdownByDuration }

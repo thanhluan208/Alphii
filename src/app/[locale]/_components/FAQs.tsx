@@ -17,6 +17,7 @@ const FAQs = () => {
 			{Array.from({ length: 5 }, (_, i) => {
 				return (
 					<AccordionItem
+						key={i}
 						value={`${i}`}
 						className="shadow-[0px_4px_10px_0px_#00000014] p-6 rounded-[20px] flex flex-col gap-3 mt-3"
 					>
