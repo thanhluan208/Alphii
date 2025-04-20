@@ -6,7 +6,6 @@ import { routing } from "./i18n/routing"
 import { ACCESS_TOKEN, Routes } from "./lib/constant"
 import { LANGUAGE } from "./types"
 
-const intlMiddleware = createMiddleware(routing)
 
 const outsiders = [
 	Routes.login,
@@ -36,10 +35,7 @@ export default async function middleware(request: NextRequest) {
 		)
 	}
 
-	const handleI18nRouting = createMiddleware({
-		locales: [LANGUAGE.EN, LANGUAGE.TH],
-		defaultLocale: LANGUAGE.EN
-	})
+	const handleI18nRouting = createMiddleware(routing)
 
 	const response = handleI18nRouting(request)
 
@@ -47,6 +43,5 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-	// Match only internationalized pathnames
 	matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)"
 }

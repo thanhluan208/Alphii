@@ -4,8 +4,6 @@ import createNextIntlPlugin from "next-intl/plugin"
 const withNextIntl = createNextIntlPlugin()
 
 const nextConfig = {
-	output: "standalone",
-
 	env: {
 		BASE_URL: process.env.BASE_URL || "http://backend-default",
 		GOOGLE_MAP_KEY: process.env.GOOGLE_MAP_KEY || ""
