@@ -6,7 +6,6 @@ import { routing } from "./i18n/routing"
 import { ACCESS_TOKEN, Routes } from "./lib/constant"
 import { LANGUAGE } from "./types"
 
-
 const outsiders = [
 	Routes.login,
 	Routes.forgotPassword,

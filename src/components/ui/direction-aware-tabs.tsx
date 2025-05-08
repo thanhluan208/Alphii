@@ -73,7 +73,7 @@ function DirectionAwareTabs({
 	}, [initActiveTab])
 
 	return (
-		<div className=" flex flex-col items-center w-full">
+		<div className="flex flex-col items-center w-full">
 			<ScrollArea className={cn("w-full whitespace-nowrap")}>
 				<div
 					className={cn(
@@ -90,11 +90,12 @@ function DirectionAwareTabs({
 								!tab.disabled && handleTabClick(tab.id)
 							}}
 							className={cn(
-								"relative  h-[42px] bg-[#171326] px-3.5 py-1.5 flex-1 justify-center text-xs sm:text-sm font-medium  transition  flex gap-2 items-center ",
+								"relative  h-[42px] bg-[#F0F0F3] px-3.5 py-1.5 flex-1 justify-center text-xs sm:text-sm font-medium  transition  flex gap-2 items-center ",
 								tab?.disabled && "opacity-50",
 								index === 0 && "rounded-l-lg",
 								index === tabs.length - 1 && "rounded-r-lg",
-								rounded
+								rounded,
+								activeTab === tab.id && "text-white"
 							)}
 							style={{ WebkitTapHighlightColor: "transparent" }}
 							disabled={tab.disabled}
@@ -102,7 +103,7 @@ function DirectionAwareTabs({
 							{activeTab === tab.id && (
 								<motion.span
 									layoutId="bubble"
-									className="absolute rounded-lg inset-0 z-10 bg-[#FFFFFF1A] text-white   "
+									className="absolute rounded-lg inset-0 z-10 bg-[#1E1F24] text-white   "
 									transition={{ type: "spring", bounce: 0.19, duration: 0.5 }}
 								/>
 							)}

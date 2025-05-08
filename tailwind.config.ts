@@ -19,9 +19,7 @@ const config = {
 		},
 		extend: {
 			fontFamily: {
-				sans: ["var(--font-josefin)", "sans-serif"],
-				nico: ["var(--font-nico)", "sans-serif"],
-				intrument: ["var(--font-intrument)", "sans-serif"]
+				inter: ["var(--font-inter)", "sans-serif"]
 			},
 			colors: {
 				border: "hsl(var(--border))",

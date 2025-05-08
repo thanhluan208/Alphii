@@ -2,16 +2,21 @@ import { useTranslations } from "next-intl"
 import Image from "next/image"
 
 import {
+	ArrowUpRight,
 	CodeIcon,
 	Document,
 	DoubleChevronRight,
+	DoubleRobots,
 	Linkedin,
+	Logo,
+	Punch,
 	RoleBase,
 	Security,
 	StoreDataIcon,
+	Template,
 	Twitter
 } from "@/components/icons"
-import { Button } from "@/components/ui"
+import { Button, Input } from "@/components/ui"
 import { CardStack } from "@/components/ui/card-stack"
 import { DirectionAwareTabs } from "@/components/ui/direction-aware-tabs"
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-card"
@@ -33,7 +38,7 @@ const Home = () => {
 			index: 1,
 			title: "Agents that actually work",
 			description:
-				"They don’t just run prompts. They plan, adapt, and deliver results—on their own."
+				"They don't just run prompts. They plan, adapt, and deliver results—on their own."
 		},
 		{
 			index: 2,
@@ -91,8 +96,8 @@ const Home = () => {
 	]
 
 	return (
-		<div className="relative text-white bg-[#0A0812]">
-			<div className="fixed top-0 left-0 flex items-center justify-between w-full h-[80px] bg-[#0404068C] z-10 px-4 md:px-8 lg:px-[150px] py-5 backdrop-blur-md">
+		<div className="relative text-white bg-[#0A0812] font-[500] overflow-hidden">
+			<div className="fixed top-0 left-0 flex items-center justify-between w-full h-[80px] bg-white z-50 px-4 md:px-8 lg:px-[150px] py-5 backdrop-blur-md">
 				<div className="flex items-center gap-[60px]">
 					<Image
 						src={"/images/logo.png"}
@@ -100,7 +105,7 @@ const Home = () => {
 						width={86}
 						height={23.71}
 					/>
-					<div className="hidden md:flex gap-6 items-center">
+					<div className="hidden md:flex gap-6 items-center text-[#8C8D98]">
 						<Link href={"#feature"}>{translation("lFeature")}</Link>
 						<Link href={"#about"}>{translation("lHowItWork")}</Link>
 						<Link href={"#roadmap"}>{translation("lTestimonials")}</Link>
@@ -108,470 +113,303 @@ const Home = () => {
 						<Link href={"#faq"}>{translation("lFAQs")}</Link>
 					</div>
 				</div>
-				<Button
-					className="bg-white hover:bg-white text-black h-10 w-[109px] rounded-[10px]"
-					variant="ghost"
-				>
-					{translation("lGetStarted")}
+				<Button className="items-center gap-2">
+					{translation("lGetStartedForFree")} <ArrowUpRight />
 				</Button>
 			</div>
-			<div className="w-full bg-[url(/images/home-sec-1.jpeg)] bg-center bg-cover px-4 md:px-8 lg:px-[150px] pt-[80px]">
-				<div className="pt-[240px] pb-[100px] border-x border-[#FFFFFF1A]">
-					<div className="px-10 flex flex-col gap-[60px]">
-						<div className="p-1.5 pl-3 flex items-center gap-2 rounded-[10px] backdrop-blur-md bg-[#00000033] w-fit">
-							<p>{translation("lLaunch")}</p>
-							<div className="bg-[#00000059] py-1 px-2.5 flex items-center gap-0.5 rounded-md">
-								<p>{translation("lLearnMore")}</p>
-								<ArrowUp className="rotate-45 h-4 w-4" />
-							</div>
-						</div>
-						<div>
-							<div className="w-full max-w-[1060px] h-auto md:h-[144px] not-italic font-medium text-4xl md:text-5xl lg:text-[64px] leading-tight md:leading-[72px] tracking-[-0.03em] bg-gradient-to-r from-[#D0D0D0] via-[#ECECEC] to-[#D0D0D0] bg-clip-text text-transparent mix-blend-color-dodge whitespace-pre-line">
-								{translation("lPowerUp")}
-							</div>
-							<p className="text-xl leading-7 whitespace-pre-line mt-5">
-								{translation("lCreate")}
-							</p>
-						</div>
-						<div className="flex gap-4 items-center flex-wrap">
-							<Button>
-								{translation("lGetStartedForFree")} <DoubleChevronRight />
-							</Button>
-							<Button
-								className="h-12 bg-[#00000033] hover:[#00000033] border-2 border-[#FFFFFF1F] rounded-lg"
-								variant={"ghost"}
-							>
-								{translation("lDocumentation")}
-								<Document className="text-[#EFF0F3]" />
-							</Button>
-							<div className="gap-2 flex items-center">
-								<p>✢</p>
-								<p>{translation("lTrial")}</p>
-								<p>✢</p>
-							</div>
-						</div>
-						<div className="flex items-center justify-center p-6 flex-col gap-10">
-							<Image
-								fill
-								alt="code"
-								src={"/images/home-code.png"}
-								className="w-full !static"
-							/>
-							<div className="max-w-[100%]">
-								<p className="text-center">{translation("lLaunch")}</p>
-								<div>
-									<InfiniteMovingCards
-										className="mt-6"
-										items={Array.from({ length: 10 }, (_, i) => (
-											<div
-												key={i}
-												className="py-1 px-6 flex items-center justify-center"
-											>
-												<Image
-													src={"/images/home-software.png"}
-													alt="code"
-													width={111.56}
-													height={28}
-												/>
-											</div>
-										))}
-										direction="right"
-										speed="slow"
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="bg-[linear-gradient(180deg,#140D22_0%,#0A0812_100%)] border-t border-[#FFFFFF1A] px-4 md:px-8 lg:px-[150px] py-12 md:py-[100px] grid grid-cols-1 md:grid-cols-2 gap-10">
-				<div className="col-span-1">
-					<p className="text-primary uppercase">
-						{"//"} {translation("lWhy")} Alphii AI
+			<div className="w-full relative bg-white flex-col flex items-center text-black justify-center bg-center bg-cover px-4 md:px-8 lg:pb-[20px] lg:px-[150px] pt-[80px]">
+				<div className="lg:w-[70%] text-center flex items-center flex-col mt-[180px] z-10 relative">
+					<p className="text-4xl sm:text-[64px] sm:leading-[72px] font-[500]">
+						Build wonders with your customisable A2A team
 					</p>
-					<p className="mt-6 whitespace-pre-line text-[44px] leading-[52px]">
-						{translation("lBuildForTrust")}
+					<p className="font-[500] leading-6 text-[#8C8D98] mt-3 lg:w-[528px]">
+						Build agents that think and act—on their own, or with your team.
+						They plan, talk, and get things done. No hand-holding. No downtime.
 					</p>
 				</div>
-				<div className="col-span-1 py-6 flex flex-col gap-[60px]">
-					<div>
-						<div className="flex gap-2.5 items-center">
-							<Security />
-							<p className="text-xl">{translation("lSecurity")}</p>
-						</div>
-						<p className="mt-3">{translation("msgSecurity")}</p>
-					</div>
-					<div>
-						<div className="flex gap-2.5 items-center">
-							<RoleBase />
-							<p className="text-xl">{translation("lRoleBase")}</p>
-						</div>
-						<p className="mt-3">{translation("msgRoleBase")}</p>
-					</div>
-					<div>
-						<div className="flex gap-2.5 items-center">
-							<StoreDataIcon />
-							<p className="text-xl">{translation("lStoreData")}</p>
-						</div>
-						<p className="mt-3">{translation("msgStoreData")}</p>
-					</div>
+				<div className="mt-8 flex gap-3 z-10 relative">
+					<Button variant="outline" className="items-center w-[159px] gap-2">
+						<p>Watch a demo</p>
+						<ArrowUpRight />
+					</Button>
+					<Button className="items-center gap-2">
+						{translation("lGetStartedForFree")} <ArrowUpRight />
+					</Button>
 				</div>
-			</div>
-			<div
-				className={cn(
-					"px-4",
-					"bg-[#F9F9FB] lg:px-[150px] py-[100px] text-[#1E1F24]"
-				)}
-			>
-				<div className="flex flex-col gap-6">
-					<p className="text-primary uppercase">
-						{"//"} {translation("lWhy")} Alphii AI
-					</p>
-					<p className="font-[500] text-[44px] whitespace-pre-line leading-[52px]">
-						{translation("lPowerUp")}
-					</p>
-					<p className="whitespace-pre-line text-xl">
-						{translation("lNotBot")}
-					</p>
-				</div>
-				<div
-					className={cn("grid-cols-1", "mt-[60px] grid sm:grid-cols-3 gap-6")}
-				>
-					<div className="col-span-1">
-						<div className="rounded-[32px] overflow-hidden border border-[#E7E8EC]">
-							<div className="h-11 w-full flex items-center justify-center bg-[url('/images/home-line-header.png')] bg-center bg-cover">
-								<p>✢ {translation("lAlwayOn")} ✢</p>
-							</div>
-							<div className="p-6">
-								<p className="text-2xl font-bold ">
-									{translation("lNeverSleep")}
-								</p>
-								<p className="mt-2.5 text-[18px]">
-									{translation("msgNeverSleep")}
-								</p>
-							</div>
-							<Image
-								src={"/images/home-nosleep.png"}
-								alt="code"
-								fill
-								className="!w-full !static object-cover object-center !h-auto"
-							/>
-						</div>
-					</div>
-					<div className="col-span-1 sm:pt-[140px]">
-						<div className="rounded-[32px] overflow-hidden border border-[#E7E8EC]">
-							<div className="h-11 w-full flex items-center justify-center bg-[url('/images/home-line-header.png')] bg-center bg-cover">
-								<p>✢ {translation("lActLikeManager")} ✢</p>
-							</div>
-							<div className="p-6">
-								<p className="text-2xl font-bold ">
-									{translation("lLikeManager")}
-								</p>
-								<p className="mt-2.5 text-[18px]">
-									{translation("msgLikeManager")}
-								</p>
-							</div>
-							<Image
-								src={"/images/home-manager.png"}
-								alt="code"
-								fill
-								className="!w-full !static object-cover object-center !h-auto"
-							/>
-						</div>
-					</div>
-					<div className="col-span-1 sm:pt-[250px]">
-						<div className="rounded-[32px] overflow-hidden border border-[#E7E8EC]">
-							<div className="h-11 w-full flex items-center justify-center bg-[url('/images/home-line-header.png')] bg-center bg-cover">
-								<p>✢ {translation("lUnderstandTeamate")} ✢</p>
-							</div>
-							<div className="p-6">
-								<p className="text-2xl font-bold ">
-									{translation("lLikeATeam")}
-								</p>
-								<p className="mt-2.5 text-[18px]">
-									{translation("msgLikeATeam")}
-								</p>
-							</div>
-							<Image
-								src={"/images/home-teammate.png"}
-								alt="code"
-								fill
-								className="!w-full !static object-cover object-center !h-auto"
-							/>
-						</div>
-					</div>
-				</div>
-				<p className="mt-6 text-[14px] text-center">
-					{`✢   ${translation("lAssembleEasy")}   ✢`}
-				</p>
-				<div className="mt-[100px] flex sm:flex-row flex-col sm:gap-[80px] gap-6 items-center">
-					<div className="flex-1">
-						<p className="text-primary">{`// ALPHI AI AGent teams`}</p>
-						<p className="text-[44px] leading-[52px] font-[500] mt-6">
-							{translation("lImagine")}
-						</p>
-					</div>
+
+				<div>
 					<Image
-						src={"/images/home-hola.png"}
-						alt="code"
-						width={272.1301574707031}
-						height={148.71661376953125}
+						src={"/images/home-bg.png"}
+						alt="bg"
+						fill
+						className="!static"
 					/>
 				</div>
-				<div className="w-full mt-[60px]">
-					<CardStack
-						className={cn("h-[320px]", "w-full sm:h-[430px]")}
-						items={[
-							{
-								id: uuid(),
-								index: 1,
-								title: translation("lCreateListing"),
-								description:
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse accumsan placerat gravida. Aenean malesuada ligula tortor. Curabitur non molestie lectus. Maecenas vel varius nisl. Donec a faucibus justo. Nulla ornare, mauris varius bibendum pharetra, nulla elit pharetra elit, vel fringilla leo erat sit amet purus.",
-								image: "/images/home-step.png"
-							},
-							{
-								id: uuid(),
-								index: 2,
-								title: translation("lCreateListing"),
-								description:
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse accumsan placerat gravida. Aenean malesuada ligula tortor. Curabitur non molestie lectus. Maecenas vel varius nisl. Donec a faucibus justo. Nulla ornare, mauris varius bibendum pharetra, nulla elit pharetra elit, vel fringilla leo erat sit amet purus.",
-								image: "/images/home-step.png"
-							},
-							{
-								id: uuid(),
-								index: 3,
-								title: translation("lCreateListing"),
-								description:
-									"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse accumsan placerat gravida. Aenean malesuada ligula tortor. Curabitur non molestie lectus. Maecenas vel varius nisl. Donec a faucibus justo. Nulla ornare, mauris varius bibendum pharetra, nulla elit pharetra elit, vel fringilla leo erat sit amet purus.",
-								image: "/images/home-step.png"
-							}
-						]}
-					/>
-				</div>
-				<p className="mt-[60px] text-center">✢ {translation("lSimple")} ✢</p>
 			</div>
-			<div
-				className={cn(
-					"px-4",
-					"bg-[#0A0812] lg:px-[150px] py-[100px] text-white "
-				)}
-			>
-				<div className={cn("grid-cols-1", "grid md:grid-cols-2 gap-[60px]")}>
-					<div className="col-span-1 flex flex-col justify-between">
-						<div className="flex flex-col gap-6">
-							<p className="text-primary uppercase">
-								{`// ${translation("lWhy")} Alphii AI`}
-							</p>
-							<p className="text-[44px] leading-[52px] font-[500]">
-								{translation("lExplore")}
-							</p>
-							<p className="text-2xl leading-9">
-								<span className="text-[#80828D]">
-									{translation("msgExplore1")}
-								</span>
-								<span className="bg-[#80828D]/20 pl-2 rounded-lg text-primary pt-1 mr-2">
-									{translation("lFromSoftware")}
-								</span>
-								<span className="text-[#80828D]">
-									{translation("lToDigital")}
-								</span>
-								<span className="text-[#80828D]">
-									{translation("lToOfficeTask")}
-								</span>
-								<span className="text-[#80828D]">
-									{translation("msgExplore2")}
-								</span>
-							</p>
-						</div>
-						<div className="flex gap-3 items-center">
-							<CodeIcon />
-							<p className="w-[494px] mt-2 flex items-center font-medium text-[16px] leading-[24px] tracking-[-0.01em] bg-gradient-to-r from-[#7D7B85] via-[#D2D1D3] to-[#7D7B85] bg-clip-text text-transparent">
-								Code & Develop Software Applications in any language you
-								request.
-							</p>
-						</div>
-					</div>
-
-					<div
-						className={cn(
-							"col-span-1 relative z-0 before:content-[''] before:absolute before:inset-0 before:-z-10 before:rounded-[34px] before:p-[2px] before:bg-[linear-gradient(156.1deg,#896FDF_3.87%,rgba(137,111,223,0.3)_84.65%)]",
-							"rounded-[32px] p-0.5 "
-						)}
-					>
-						<div className="w-full h-full bg-[linear-gradient(162.24deg,#221C3A_0.05%,rgba(10,8,18,0.9)_87.87%)] rounded-[32px] p-5">
-							<div className="flex items-center gap-4">
-								<div className="h-11 w-11 flex items-center justify-center rounded-lg bg-[#F7B6BD]">
+			<div className="w-full relative bg-white flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:pb-[120px] lg:px-[60px] pt-[60px]">
+				<div className="max-w-[100%]">
+					<p className="text-center text-[32px] leading-10">
+						Connect more apps.
+						<br />
+						<span className="text-[#8C8D98]"> Unlock more capabilities.</span>
+					</p>
+					<div>
+						<InfiniteMovingCards
+							className="mt-6"
+							items={Array.from({ length: 10 }, (_, i) => (
+								<div
+									key={i}
+									className="py-1 px-6 flex items-center justify-center"
+								>
 									<Image
-										src={"/images/agents/bob.png"}
-										alt="bob"
-										width={40}
-										height={40}
+										src={"/images/home-software.png"}
+										alt="code"
+										width={111.56}
+										height={28}
 									/>
 								</div>
-								<p className="text-[18px]">Bob - Software Developer Agent</p>
-							</div>
-
-							<div className="mt-7 w-full max-h-[415px] overflow-hidden">
-								<Image
-									src={"/images/home-code-bob.png"}
-									alt="code"
-									fill
-									className="!w-full !static !h-[495px]"
-								/>
-							</div>
-						</div>
-						<div className="absolute w-[calc(100%-4px)] left-0.5 bottom-0.5 rounded-b-[32px] h-[358px] bg-[linear-gradient(180deg,rgba(33,29,54,0)_0%,#211D36_91.04%)] z-10" />
-					</div>
-				</div>
-				<div className="mt-[100px]">
-					<div className="flex flex-col gap-6">
-						<p className="text-primary text-sm">{`// ALPHII AI DEMO`}</p>
-						<p className="text-[44px] leading-[52px] font-[500] whitespace-pre-line">
-							{translation("lGetStartedRightNow")}
-						</p>
-						<p className="text-xl text-[#62636C]">
-							{translation("msgGetStartedRightNow")}
-						</p>
-					</div>
-				</div>
-			</div>
-			<div className="bg-[#0A0812] -translate-y-[1px]">
-				<DirectionAwareTabs
-					tabs={tabs}
-					className={cn("px-2 w-full", "sm:px-[100px] sm:w-[164px] h-10")}
-				/>
-			</div>
-			<div
-				className={cn(
-					"px-4",
-					"lg:px-[150px] py-[100px] bg-[url('/images/home-compare.png')] h-[976px] w-full bg-center bg-cover"
-				)}
-			>
-				<div className="flex flex-col gap-6">
-					<p className="text-primary uppercase">
-						{"//"} {translation("lWhy")} Alphii AI
-					</p>
-					<p className="font-[500] text-[44px] whitespace-pre-line leading-[52px]">
-						{translation("lPowerUp")}
-					</p>
-					<p className="text-xl text-[#62636C]">{translation("lTransform")}</p>
-				</div>
-				<div className="mt-[60px] grid grid-cols-2 border-2 border-[#FFFFFF14] rounded-[32px] gap-3 sm:gap-10 p-4 bg-[#0A0812]">
-					<div className="col-span-1 p-8 flex flex-col gap-[60px]">
-						<p className={cn("text-xl", "sm:text-[28px] font-[500] leading-8")}>
-							{translation("lOthers")}
-						</p>
-						<div>
-							<p className="text-sm font-semibold">
-								{translation("lForPersonal")}
-							</p>
-							<div className="mt-6 flex flex-col gap-3">
-								<div className="h-9 w-full flex items-center gap-2.5">
-									<div className="w-9 h-9 flex justify-center items-center">
-										<Check className="text-[#06BF78]" />
-									</div>
-									<p>No Customization</p>
-								</div>
-								<div className="h-9 w-full flex items-center gap-2.5">
-									<div className="w-9 h-9 flex justify-center items-center">
-										<Check className="text-[#06BF78]" />
-									</div>
-									<p>No Customization</p>
-								</div>
-								<div className="h-9 w-full flex items-center gap-2.5">
-									<div className="w-9 h-9 flex justify-center items-center">
-										<Check className="text-[#06BF78]" />
-									</div>
-									<p>No Customization</p>
-								</div>
-								<div className="h-9 w-full flex items-center gap-2.5">
-									<div className="w-9 h-9 flex justify-center items-center">
-										<Check className="text-[#06BF78]" />
-									</div>
-									<p>No Customization</p>
-								</div>
-								<div className="h-9 w-full flex items-center gap-2.5">
-									<div className="w-9 h-9 flex justify-center items-center">
-										<Check className="text-[#06BF78]" />
-									</div>
-									<p>No Customization</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div
-						className={cn(
-							"col-span-1 relative z-0 before:content-[''] before:absolute before:inset-0 before:-z-10 before:rounded-[34px] before:p-[2px] before:bg-[linear-gradient(156.1deg,#896FDF_3.87%,rgba(137,111,223,0.3)_84.65%)]",
-							"rounded-[32px] p-[1px]"
-						)}
-					>
-						<div className="w-full h-full p-8 bg-[linear-gradient(162.24deg,#221C3A_0.05%,rgba(10,8,18,0.9)_87.87%)] flex flex-col gap-[60px] rounded-[34px]">
-							<p
-								className={cn("text-xl", "sm:text-[28px] font-[500] leading-8")}
-							>
-								{translation("lOthers")}
-							</p>
-							<div>
-								<p className="text-sm font-semibold">
-									{translation("lForPersonal")}
-								</p>
-								<div className="mt-6 flex flex-col gap-3">
-									<div className="h-9 w-full flex items-center gap-2.5">
-										<div className="w-9 h-9 flex justify-center items-center">
-											<Check className="text-[#06BF78]" />
-										</div>
-										<p>No Customization</p>
-									</div>
-									<div className="h-9 w-full flex items-center gap-2.5">
-										<div className="w-9 h-9 flex justify-center items-center">
-											<Check className="text-[#06BF78]" />
-										</div>
-										<p>No Customization</p>
-									</div>
-									<div className="h-9 w-full flex items-center gap-2.5">
-										<div className="w-9 h-9 flex justify-center items-center">
-											<Check className="text-[#06BF78]" />
-										</div>
-										<p>No Customization</p>
-									</div>
-									<div className="h-9 w-full flex items-center gap-2.5">
-										<div className="w-9 h-9 flex justify-center items-center">
-											<Check className="text-[#06BF78]" />
-										</div>
-										<p>No Customization</p>
-									</div>
-									<div className="h-9 w-full flex items-center gap-2.5">
-										<div className="w-9 h-9 flex justify-center items-center">
-											<Check className="text-[#06BF78]" />
-										</div>
-										<p>No Customization</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="bg-white px-4 md:px-8 lg:px-[150px] py-12 md:py-[100px] text-[#1E1F24]">
-				<p className="text-[44px] leading-[52px] font-bold">
-					Why our customer loves us
-				</p>
-				<p className="text-xl leading-7 text-[#62636C]">
-					{`Transform your customer's journey into a seamless experience.`}
-				</p>
-
-				<div className="mt-[60px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-					{favorCards.map((card, index) => (
-						<FavorCard
-							key={card.title}
-							index={index + 1}
-							description={card.description}
-							title={card.title}
+							))}
+							direction="right"
+							speed="slow"
 						/>
-					))}
+					</div>
+				</div>
+			</div>
+			<div className="w-full relative bg-white flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:px-[60px]">
+				<p className="text-center text-[32px] leading-10">
+					Made for trust.
+					<br />
+					<span className="text-[#8C8D98]"> Designed for you.</span>
+				</p>
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-[60px]">
+					<div>
+						<div className="bg-[#F9F9FB] flex flex-col h-full rounded-[16px] ">
+							<Image
+								src={"/images/home-illust-1.png"}
+								alt="illust"
+								fill
+								className="!relative !w-full"
+							/>
+							<div className="my-4 px-5">
+								<p className="text-xl font-[500] leading-6">
+									Always-On Strategy Companion
+								</p>
+								<p className="text-[#8C8D98]">
+									Thinks ahead, plans smartly, and helps you stay one step
+									ahead.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div className="flex flex-col gap-6">
+							<div className="bg-[#F9F9FB] rounded-[16px] overflow-hidden">
+								<Image
+									src={"/images/home-illust-2.png"}
+									alt="illust"
+									fill
+									className="!static !w-full"
+								/>
+								<div className="my-4 px-5">
+									<p className="text-xl font-[500] leading-6">
+										Perfect Memory Project Buddy
+									</p>
+									<p className="text-[#8C8D98]">
+										Remembers every detail so you can stay focused on what
+										matters.
+									</p>
+								</div>
+							</div>
+							<div className="bg-[#F9F9FB] rounded-[16px] overflow-hidden">
+								<Image
+									src={"/images/home-illust-3.png"}
+									alt="illust"
+									fill
+									className="!static !w-full"
+								/>
+								<div className="my-4 px-5">
+									<p className="text-xl font-[500] leading-6">
+										Teammate That Just Knows
+									</p>
+									<p className="text-[#8C8D98]">
+										Understands your flow, follows your lead, and helps you move
+										fast.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div className="flex flex-col gap-6">
+							<div className="bg-[#F9F9FB] rounded-[16px] overflow-hidden">
+								<Image
+									src={"/images/home-illust-4.png"}
+									alt="illust"
+									fill
+									className="!static !w-full"
+								/>
+								<div className="my-4 px-5">
+									<p className="text-xl font-[500] leading-6">
+										Perfect Memory Project Buddy
+									</p>
+									<p className="text-[#8C8D98]">
+										Remembers every detail so you can stay focused on what
+										matters.
+									</p>
+								</div>
+							</div>
+							<div className="bg-[#F9F9FB] rounded-[16px] overflow-hidden">
+								<Image
+									src={"/images/home-illust-5.png"}
+									alt="illust"
+									fill
+									className="!static !w-full"
+								/>
+								<div className="my-4 px-5">
+									<p className="text-xl font-[500] leading-6">
+										{"You're in the loop"}
+									</p>
+									<p className="text-[#8C8D98]">
+										{`With everything visible you can join in, observe because
+										it's your team too.`}
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 
+				<p className="text-[#8C8D98] mt-[60px]">
+					Understands your flow, follows your lead, and helps you move fast.
+				</p>
+			</div>
+
+			<div className="w-full relative bg-white flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:pb-[100px] lg:px-[60px] pt-[60px]">
+				<div className="flex w-full items-start flex-col gap-[100px]">
+					<p className="text-[32px]">
+						What makes us special{" "}
+						<span className="text-[#8C8D98]">from other products</span>
+					</p>
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-10 container1">
+						<div className="flex group flex-col gap-6 justify-between items-start">
+							<Template className="group-hover:text-primary transition-colors text-[#81828D]" />
+							<p className="text-xl">
+								Start fast or make it yours.{" "}
+								<span className="text-[#81828D]">
+									Pick a team template to get started or make one from scratch,
+									fully customisable.
+								</span>
+							</p>
+						</div>
+						<div className="flex group flex-col gap-6 justify-between items-start">
+							<DoubleRobots className="group-hover:text-primary transition-colors text-[#81828D]" />
+							<p className="text-xl">
+								Agents that talk to agents.{" "}
+								<span className="text-[#81828D]">
+									Your agents sync, share context, and collaborate seamlessly
+									just like a real team.
+								</span>
+							</p>
+						</div>
+						<div className="flex group flex-col gap-6 justify-between items-start">
+							<Punch className="group-hover:text-primary transition-colors text-[#81828D]" />
+							<p className="text-xl">
+								{"You're part of the loop."}{" "}
+								<span className="text-[#81828D]">
+									{`With everything visible you can join in, guide, or simply
+									observe because it's your team too.`}
+								</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="w-full relative bg-[#F9F9FB] flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:pb-[100px] lg:px-[60px] pt-[100px]">
+				<p className="text-[32px] font-[500] text-center">
+					<span className="text-[#8C8D98]">
+						Start by choosing a template, or
+					</span>
+					<br />
+					create your own fully customizable agent-to-agent team
+				</p>
+
+				<div className="mt-[60px]">
+					<DirectionAwareTabs
+						tabs={tabs}
+						className="max-w-[673px] px-10 mx-auto pb-0 mb-0 flex-wrap"
+					/>
+				</div>
+
+				<div className="w-full max-w-6xl mx-auto p-4 mt-[120px]">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-x-[120px] gap-y-10">
+						{/* Row 1 */}
+						<div className=" border-blue-500 p-6 rounded">
+							<h2 className="text-lg font-medium text-[#6530EE] mb-2">
+								Trained Only. Tracked Never. Yours Always.
+							</h2>
+							<p className="text-gray-600">
+								{`Your data powers your agents — and nothing else. Private,
+								encrypted, and used only to train what's yours.`}
+							</p>
+						</div>
+
+						<div className=" border-blue-500 p-6 rounded">
+							<h2 className="text-lg font-medium text-[#6530EE] mb-2">
+								{"Pricing That Fits. Nothing You Don't."}
+							</h2>
+							<p className="text-gray-600">
+								Flexible plans for every size team. Start small or scale up —
+								only pay for what you actually use.
+							</p>
+						</div>
+
+						{/* Row 2 */}
+						<div className=" border-blue-500 p-6 rounded">
+							<h2 className="text-lg font-medium text-[#6530EE] mb-2">
+								So Simple It Just Makes Sense.
+							</h2>
+							<p className="text-gray-600">
+								No steep learning curve. Just intuitive tools that let your
+								agents work like teammates — fast, fluid, friendly.
+							</p>
+						</div>
+
+						<div className=" border-blue-500 p-6 rounded">
+							<h2 className="text-lg font-medium text-[#6530EE] mb-2">
+								See It Talk. Watch It Think.
+							</h2>
+							<p className="text-gray-600">
+								Agents respond like real teammates. Chat, delegate, collaborate
+								— all in natural language, all in real time.
+							</p>
+						</div>
+
+						{/* Row 3 */}
+						<div className=" border-blue-500 p-6 rounded">
+							<h2 className="text-lg font-medium text-[#6530EE] mb-2">
+								Customize It. Train It. Own It.
+							</h2>
+							<p className="text-gray-600">
+								Drop in your knowledge base, and your agent adapts. Personalized
+								smarts, built right into the workflow.
+							</p>
+						</div>
+
+						<div className=" border-blue-500 p-6 rounded">
+							<h2 className="text-lg font-medium text-[#6530EE] mb-2">
+								Knows The Job. Never Takes Breaks.
+							</h2>
+							<p className="text-gray-600">
+								{`Like your best coworker — but tireless. Agents remember, learn,
+								and act like they've always been on the team.`}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="bg-white px-4 md:px-8 lg:px-[150px] py-12 md:py-[100px] text-[#1E1F24]">
 				<div className="mt-[100px] ">
 					<p className="text-[44px] leading-[52px] font-bold">Our Pricing</p>
 					<p className="text-xl leading-7 text-[#62636C]">
@@ -596,54 +434,78 @@ const Home = () => {
 					<FAQs />
 				</div>
 			</div>
-			<div className="bg-[#0A0812] px-4 md:px-8 lg:px-[150px] py-12 md:py-[100px] text-white">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-[#62636C]">
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-						voluptates repellendus rem laudantium et impedit repellat, ipsum ad
-						id dignissimos hic velit eligendi cum assumenda exercitationem sit!
-						Provident, qui asperiores. Lorem ipsum dolor sit amet consectetur
-						adipisicing elit. Consectetur adipisci commodi nisi expedita
-						asperiores facilis ab dolor beatae quibusdam at, recusandae officia
-						modi, ea aspernatur? Voluptate voluptatibus culpa hic reiciendis.
-					</p>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-						voluptates repellendus rem laudantium et impedit repellat, ipsum ad
-						id dignissimos hic velit eligendi cum assumenda exercitationem sit!
-						Provident, qui asperiores. Lorem ipsum dolor sit amet consectetur
-						adipisicing elit. Consectetur adipisci commodi nisi expedita
-						asperiores facilis ab dolor beatae quibusdam at, recusandae officia
-						modi, ea aspernatur? Voluptate voluptatibus culpa hic reiciendis.
-					</p>
-				</div>
-				<div className="mt-[60px] flex justify-between items-end">
-					<div>
-						<Image
-							src={"/images/logo.png"}
-							alt="logo"
-							width={86}
-							height={23.71}
-						/>
-						<p className="text-[40px] mt-10 leading-[48px] font-[500] text-[#62636C]">
-							{translation("lPowerUp").split("\n")[0]}
-							<br />
-							<span className="text-white">
-								{translation("lPowerUp").split("\n")[1]}
-							</span>
+			<div className="p-5 bg-white">
+				<div className="bg-[#0A0812] rounded-3xl px-4 md:px-8 lg:px-10 py-14  text-white">
+					<div className="w-full items-center flex flex-col">
+						<Logo className="text-[#FCFCFD]" />
+						<p className="mt-5 text-3xl">
+							Build wonders with your <br /> customisable A2A team
 						</p>
+						<Button className="items-center gap-2 mt-5">
+							{translation("lGetStartedForFree")} <ArrowUpRight />
+						</Button>
 					</div>
-					<p></p>
-				</div>
-				<div className="mt-[60px] flex sm:flex-row gap-10 flex-col items-end sm:items-center justify-between border-t border-[#23262F] py-4">
-					<div className="flex justify-between sm:justify-start sm:gap-10 items-center w-full">
-						<p>Alphii AI ©️ 2025</p>
-						<p>Terms and Conditions</p>
-						<p>Privacy Policy</p>
+					<div className="mt-[60px]">
+						<div className="flex flex-wrap gap-10 justify-between items-center">
+							<div>
+								<p className="bg-[linear-gradient(90deg,#777E90_0%,#FFFFFF_31.12%,#777E91_62.25%)] bg-clip-text text-transparent font-bold text-[28px] leading-8">
+									Exclusive Beta Coming Q1 2025
+								</p>
+								<p className="text-[#62636C] mt-3">
+									{`Don't miss your chance to be part of something new. Join our
+									closed beta today.`}
+								</p>
+							</div>
+							<div className="flex gap-2 flex-wrap">
+								<Input
+									placeholder="0x25@alphiiai.com"
+									className="w-[224px] h-12 rounded-xl bg-transparent border-[#23262F]"
+								/>
+								<Button
+									className="text-black bg-white hover:bg-white h-12"
+									variant="ghost"
+								>
+									Join the waitlist
+								</Button>
+							</div>
+						</div>
+
+						<div className="grid grid-cols-1 gap-10 lg:grid-cols-2 mt-8 text-xs lg:gap-[60px] text-[#62636C]">
+							<p>
+								{`Alphii AI is an emerging startup proudly built in Vietnam. As we
+								continue to grow, we're actively developing and refining our
+								technology. Some features showcased may still be in early access
+								or under development. The full feature set will be released in
+								accordance with our public roadmap, and we're working hard to
+								deliver everything very soon. Thank you for your patience and
+								support as we build something ambitious and useful, together.`}
+							</p>
+							<div className="flex flex-col gap-2.5">
+								<p>
+									[1] Alphii AI is a Vietnam-based startup currently in active
+									development.
+								</p>
+								<p>
+									[2] Some features are experimental or pre-release and may
+									change as we progress.
+								</p>
+								<p>
+									[3] Full feature rollout is coming soon as we follow the
+									roadmap.
+								</p>
+							</div>
+						</div>
 					</div>
-					<div className="flex gap-3 items-center">
-						<Twitter />
-						<Linkedin />
+					<div className="mt-[60px] flex sm:flex-row gap-10 flex-col items-end sm:items-center justify-between border-t border-[#23262F] py-4">
+						<div className="flex justify-between sm:justify-start sm:gap-10 items-center w-full">
+							<p>Alphii AI ©️ 2025</p>
+							<p>Terms and Conditions</p>
+							<p>Privacy Policy</p>
+						</div>
+						<div className="flex gap-3 items-center">
+							<Twitter />
+							<Linkedin />
+						</div>
 					</div>
 				</div>
 			</div>

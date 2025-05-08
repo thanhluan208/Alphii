@@ -4,16 +4,16 @@ This is a [Next.js 14](https://nextjs.org/) application using the App Router, Re
 
 ## 🚀 Features
 
-- App Router & Layouts  
-- React Server Components  
-- SEO-optimized  
-- TypeScript support (optional)  
-- Ready for API integration  
+- App Router & Layouts
+- React Server Components
+- SEO-optimized
+- TypeScript support (optional)
+- Ready for API integration
 
 ## 🧰 Requirements
 
-- Node.js v18 or later  
-- npm or yarn  
+- Node.js v18 or later
+- npm or yarn
 
 ## 📦 Installation
 
@@ -44,3 +44,4 @@ yarn start
 npm run lint
 # or
 yarn lint
+```

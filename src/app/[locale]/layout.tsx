@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Instrument_Sans, Josefin_Sans } from "next/font/google"
+import { Instrument_Sans, Inter, Josefin_Sans } from "next/font/google"
 
 import { Providers } from "@/providers"
 
@@ -14,16 +14,10 @@ import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
 import { twJoin } from "tailwind-merge"
 
-const josefin = Josefin_Sans({
+const inter = Inter({
 	subsets: ["latin"],
-	weight: ["300", "400", "600", "700"],
-	variable: "--font-josefin"
-})
-
-const instrument = Instrument_Sans({
-	subsets: ["latin"],
-	weight: ["400", "600", "700", "500"],
-	variable: "--font-intrument"
+	weight: ["400", "500", "600", "700"],
+	variable: "--font-inter"
 })
 
 export const metadata: Metadata = {
@@ -46,10 +40,10 @@ export default async function RootLayout({
 
 	return (
 		<html lang={locale}>
-			<body className={twJoin(josefin.variable, instrument.variable)}>
+			<body className={twJoin(inter.variable)}>
 				<NextIntlClientProvider messages={messages}>
 					<Providers>
-						<main className="flex flex-col font-sans bg-[#0A0812]">
+						<main className="flex flex-col font-inter bg-[#0A0812]">
 							{children}
 						</main>
 					</Providers>
