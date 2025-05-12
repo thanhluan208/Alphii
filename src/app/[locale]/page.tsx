@@ -96,7 +96,7 @@ const Home = () => {
 	]
 
 	return (
-		<div className="relative text-white bg-[#0A0812] font-[500] overflow-hidden">
+		<div className="relative flex flex-col items-center text-white bg-white font-[500] overflow-hidden">
 			<div className="fixed top-0 left-0 flex items-center justify-between w-full h-[80px] bg-white z-50 px-4 md:px-8 lg:px-[150px] py-5 backdrop-blur-md">
 				<div className="flex items-center gap-[60px]">
 					<Image
@@ -117,7 +117,7 @@ const Home = () => {
 					{translation("lGetStartedForFree")} <ArrowUpRight />
 				</Button>
 			</div>
-			<div className="w-full relative bg-white flex-col flex items-center text-black justify-center bg-center bg-cover px-4 md:px-8 lg:pb-[20px] lg:px-[150px] pt-[80px]">
+			<div className="w-full relative bg-white max-w-[1250px] flex-col flex items-center text-black justify-center bg-center bg-cover px-4 md:px-8 lg:pb-[20px] lg:px-[150px] pt-[80px]">
 				<div className="lg:w-[70%] text-center flex items-center flex-col mt-[180px] z-10 relative">
 					<p className="text-4xl sm:text-[64px] sm:leading-[72px] font-[500]">
 						Build wonders with your customisable A2A team
@@ -146,7 +146,7 @@ const Home = () => {
 					/>
 				</div>
 			</div>
-			<div className="w-full relative bg-white flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:pb-[120px] lg:px-[60px] pt-[60px]">
+			<div className="w-full relative bg-white max-w-[1250px] flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:pb-[120px] lg:px-[60px] pt-[60px]">
 				<div className="max-w-[100%]">
 					<p className="text-center text-[32px] leading-10">
 						Connect more apps.
@@ -175,7 +175,7 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className="w-full relative bg-white flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:px-[60px]">
+			<div className="w-full relative bg-white max-w-[1250px] flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:px-[60px]">
 				<p className="text-center text-[32px] leading-10">
 					Made for trust.
 					<br />
@@ -284,7 +284,7 @@ const Home = () => {
 				</p>
 			</div>
 
-			<div className="w-full relative bg-white flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:pb-[100px] lg:px-[60px] pt-[60px]">
+			<div className="w-full relative bg-white max-w-[1250px] flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:pb-[100px] lg:px-[60px] pt-[60px]">
 				<div className="flex w-full items-start flex-col gap-[100px]">
 					<p className="text-[32px]">
 						What makes us special{" "}

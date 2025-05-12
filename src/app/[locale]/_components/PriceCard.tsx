@@ -44,20 +44,94 @@ const PriceCard = ({ variant, className }: PriceCardProps) => {
 			case "basic":
 				return (
 					<p className="text-[40px] font-[500] leading-[48px] text-[#1E1F24]">
-						$89
+						$20
 					</p>
 				)
 			case "plus+":
 				return (
 					<p className="text-[40px] font-[500] leading-[48px] text-[#1E1F24]">
-						$89
+						$50
 					</p>
 				)
 			case "custom":
 				return (
 					<p className="text-[40px] font-[500] leading-[48px] text-[#1E1F24]">
-						$89
+						$100
 					</p>
+				)
+		}
+	}
+
+	const subTitle = () => {
+		switch (variant) {
+			case "basic":
+				return (
+					<p className="text-xs text-[#1E1F24]">
+						Perfect for casual users exploring Alphii at their own pace with
+						curiosity and ease
+					</p>
+				)
+			case "plus+":
+				return (
+					<p className="text-xs text-[#1E1F24]">
+						Designed for regular users engaging with Alphii daily for steady,
+						reliable access
+					</p>
+				)
+			case "custom":
+				return (
+					<p className="text-xs text-[#1E1F24]">
+						Built for expert users relying on Alphii as a core tool for
+						high-performance work
+					</p>
+				)
+		}
+	}
+
+	const content = () => {
+		switch (variant) {
+			case "basic":
+				return (
+					<div className="grid grid-cols-[50px_1fr] mt-5 gap-y-2 items-center">
+						<Check className="text-[#06BF78]" />
+						<p className="text-xs font-semibold">10M Token</p>
+						<Check className="text-[#06BF78]" />
+						<p className="text-xs font-semibold">
+							Advance teams concurrence executions
+						</p>
+						<Check className="text-[#06BF78]" />
+						<p className="text-xs font-semibold">Support advance features</p>
+					</div>
+				)
+			case "plus+":
+				return (
+					<div className="grid grid-cols-[50px_1fr] mt-5 gap-y-2 items-center">
+						<Check className="text-[#06BF78]" />
+						<p className="text-xs font-semibold">25M Token</p>
+						<Check className="text-[#06BF78]" />
+						<p className="text-xs font-semibold">
+							Unlimited teams concurrent executions
+						</p>
+						<Check className="text-[#06BF78]" />
+						<p className="text-xs font-semibold">
+							Fully support advance features
+						</p>
+					</div>
+				)
+			case "custom":
+				return (
+					<div className="grid grid-cols-[50px_1fr] mt-5 gap-y-2 items-center">
+						<Check className="text-[#06BF78]" />
+						<p className="text-xs font-semibold">100M Token</p>
+						<Check className="text-[#06BF78]" />
+						<p className="text-xs font-semibold">
+							Unlimited teams concurrent executions
+						</p>
+						<Check className="text-[#06BF78]" />
+						<p className="text-xs font-semibold">
+							Fully support advance features
+						</p>
+					</div>
 				)
 		}
 	}
@@ -86,39 +160,8 @@ const PriceCard = ({ variant, className }: PriceCardProps) => {
 					</p>
 				</div>
 				<div>
-					<p className="text-sm font-semibold">{translation("lForPersonal")}</p>
-					<div className="mt-6 flex flex-col gap-3">
-						<div className="h-9 w-full flex items-center gap-2.5">
-							<div className="w-9 h-9 flex justify-center items-center">
-								<Check className="text-[#06BF78]" />
-							</div>
-							<p>No Customization</p>
-						</div>
-						<div className="h-9 w-full flex items-center gap-2.5">
-							<div className="w-9 h-9 flex justify-center items-center">
-								<Check className="text-[#06BF78]" />
-							</div>
-							<p>No Customization</p>
-						</div>
-						<div className="h-9 w-full flex items-center gap-2.5">
-							<div className="w-9 h-9 flex justify-center items-center">
-								<Check className="text-[#06BF78]" />
-							</div>
-							<p>No Customization</p>
-						</div>
-						<div className="h-9 w-full flex items-center gap-2.5">
-							<div className="w-9 h-9 flex justify-center items-center">
-								<Check className="text-[#06BF78]" />
-							</div>
-							<p>No Customization</p>
-						</div>
-						<div className="h-9 w-full flex items-center gap-2.5">
-							<div className="w-9 h-9 flex justify-center items-center">
-								<Check className="text-[#06BF78]" />
-							</div>
-							<p>No Customization</p>
-						</div>
-					</div>
+					<p className="text-sm font-semibold">{subTitle()}</p>
+					{content()}
 				</div>
 			</div>
 			<Button
