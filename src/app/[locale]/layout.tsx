@@ -43,9 +43,7 @@ export default async function RootLayout({
 			<body className={twJoin(inter.variable)}>
 				<NextIntlClientProvider messages={messages}>
 					<Providers>
-						<main className="flex flex-col font-inter bg-[#0A0812]">
-							{children}
-						</main>
+						<main className="flex flex-col font-inter ">{children}</main>
 					</Providers>
 				</NextIntlClientProvider>
 			</body>
