@@ -3,31 +3,21 @@ import Image from "next/image"
 
 import {
 	ArrowUpRight,
-	CodeIcon,
-	Document,
-	DoubleChevronRight,
 	DoubleRobots,
 	Linkedin,
 	Logo,
 	Punch,
-	RoleBase,
-	Security,
-	StoreDataIcon,
 	Template,
 	Twitter
 } from "@/components/icons"
 import { Button, Input } from "@/components/ui"
-import { CardStack } from "@/components/ui/card-stack"
 import { DirectionAwareTabs } from "@/components/ui/direction-aware-tabs"
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-card"
 import { Link } from "@/i18n/routing"
-import { cn } from "@/lib/utils"
-import { ArrowUp, Check } from "lucide-react"
-import { v4 as uuid } from "uuid"
+import { Routes } from "@/lib/constant"
 
 import Demos from "./_components/Demos"
 import FAQs from "./_components/FAQs"
-import FavorCard from "./_components/FavorCard"
 import PriceCard from "./_components/PriceCard"
 
 const Home = () => {
@@ -96,8 +86,8 @@ const Home = () => {
 	]
 
 	return (
-		<div className="relative flex flex-col items-center text-white bg-white font-[500] overflow-hidden">
-			<div className="fixed top-0 left-0 flex items-center justify-between w-full h-[80px] bg-white z-50 px-4 md:px-8 lg:px-[150px] py-5 backdrop-blur-md">
+		<div className="relative flex flex-col items-center font-[500] overflow-hidden">
+			<div className="fixed top-0 left-0 flex items-center justify-between w-full h-[80px]  z-50 px-4 md:px-8 lg:px-[150px] py-5 backdrop-blur-md">
 				<div className="flex items-center gap-[60px]">
 					<Image
 						src={"/images/logo.png"}
@@ -113,12 +103,14 @@ const Home = () => {
 						<Link href={"#faq"}>{translation("lFAQs")}</Link>
 					</div>
 				</div>
-				<Button className="items-center gap-2">
-					{translation("lGetStartedForFree")} <ArrowUpRight />
-				</Button>
+				<Link href={Routes.SHOWCASE}>
+					<Button className="items-center gap-2">
+						{translation("lGetStartedForFree")} <ArrowUpRight />
+					</Button>
+				</Link>
 			</div>
-			<div className="w-full relative bg-white max-w-[1250px] flex-col flex items-center text-black justify-center bg-center bg-cover px-4 md:px-8 lg:pb-[20px] lg:px-[150px] pt-[80px]">
-				<div className="lg:w-[70%] text-center flex items-center flex-col mt-[180px] z-10 relative">
+			<div className="w-full relative  max-w-[1250px] flex-col flex items-center  justify-center bg-center bg-cover px-4 md:px-8 lg:pb-[20px] lg:px-[150px] pt-[80px]">
+				<div className="text-center flex items-center flex-col mt-[180px] z-10 relative">
 					<p className="text-4xl sm:text-[64px] sm:leading-[72px] font-[500]">
 						Build wonders with your customisable A2A team
 					</p>
@@ -146,7 +138,7 @@ const Home = () => {
 					/>
 				</div>
 			</div>
-			<div className="w-full relative bg-white max-w-[1250px] flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:pb-[120px] lg:px-[60px] pt-[60px]">
+			<div className="w-full relative  max-w-[1250px] flex-col flex items-center  justify-center bg-center px-4 md:px-8 lg:pb-[120px] lg:px-[60px] pt-[60px]">
 				<div className="max-w-[100%]">
 					<p className="text-center text-[32px] leading-10">
 						Connect more apps.
@@ -175,7 +167,7 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className="w-full relative bg-white max-w-[1250px] flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:px-[60px]">
+			<div className="w-full relative  max-w-[1250px] flex-col flex items-center  justify-center bg-center px-4 md:px-8 lg:px-[60px]">
 				<p className="text-center text-[32px] leading-10">
 					Made for trust.
 					<br />
@@ -284,7 +276,7 @@ const Home = () => {
 				</p>
 			</div>
 
-			<div className="w-full relative bg-white max-w-[1250px] flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:pb-[100px] lg:px-[60px] pt-[60px]">
+			<div className="w-full relative  max-w-[1250px] flex-col flex items-center  justify-center bg-center px-4 md:px-8 lg:pb-[100px] lg:px-[60px] pt-[60px]">
 				<div className="flex w-full items-start flex-col gap-[100px]">
 					<p className="text-[32px]">
 						What makes us special{" "}
@@ -325,7 +317,7 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div className="w-full relative bg-[#F9F9FB] flex-col flex items-center text-black justify-center bg-center px-4 md:px-8 lg:pb-[100px] lg:px-[60px] pt-[100px]">
+			<div className="w-full relative bg-[#F9F9FB] flex-col flex items-center  justify-center bg-center px-4 md:px-8 lg:pb-[100px] lg:px-[60px] pt-[100px]">
 				<p className="text-[32px] font-[500] text-center">
 					<span className="text-[#8C8D98]">
 						Start by choosing a template, or
@@ -409,7 +401,7 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div className="bg-white px-4 md:px-8 lg:px-[150px] py-12 md:py-[100px] text-[#1E1F24]">
+			<div className=" px-4 md:px-8 lg:px-[150px] py-12 md:py-[100px] text-[#1E1F24]">
 				<div className="mt-[100px] ">
 					<p className="text-[44px] leading-[52px] font-bold">Our Pricing</p>
 					<p className="text-xl leading-7 text-[#62636C]">
@@ -434,8 +426,8 @@ const Home = () => {
 					<FAQs />
 				</div>
 			</div>
-			<div className="p-5 bg-white">
-				<div className="bg-[#0A0812] rounded-3xl px-4 md:px-8 lg:px-10 py-14  text-white">
+			<div className="p-5 ">
+				<div className="bg-[#0A0812] rounded-3xl px-4 md:px-8 lg:px-10 py-14  ">
 					<div className="w-full items-center flex flex-col">
 						<Logo className="text-[#FCFCFD]" />
 						<p className="mt-5 text-3xl">
@@ -461,10 +453,7 @@ const Home = () => {
 									placeholder="0x25@alphiiai.com"
 									className="w-[224px] h-12 rounded-xl bg-transparent border-[#23262F]"
 								/>
-								<Button
-									className="text-black bg-white hover:bg-white h-12"
-									variant="ghost"
-								>
+								<Button className="  hover: h-12" variant="ghost">
 									Join the waitlist
 								</Button>
 							</div>

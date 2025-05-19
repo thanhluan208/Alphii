@@ -25,7 +25,14 @@ const config = {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
-				background: "hsl(var(--background))",
+
+				alphii_primary: "var(--alphii-primary)",
+				alphii_primary_50: "var(--alphii-primary-50)",
+				alphii_border: "var(--alphii-border)",
+				alphii_text_sub_600: "var(--alphii-text-sub-600)",
+				alphii_skeleton: "var(--alphii-skeleton)",
+
+				background: "var(--background)",
 				foreground: "hsl(var(--foreground))",
 				description: "#333639",
 				primary: {

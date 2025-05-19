@@ -66,24 +66,24 @@ const PriceCard = ({ variant, className }: PriceCardProps) => {
 		switch (variant) {
 			case "basic":
 				return (
-					<p className="text-xs text-[#1E1F24]">
+					<span className="text-xs text-[#1E1F24]">
 						Perfect for casual users exploring Alphii at their own pace with
 						curiosity and ease
-					</p>
+					</span>
 				)
 			case "plus+":
 				return (
-					<p className="text-xs text-[#1E1F24]">
+					<span className="text-xs text-[#1E1F24]">
 						Designed for regular users engaging with Alphii daily for steady,
 						reliable access
-					</p>
+					</span>
 				)
 			case "custom":
 				return (
-					<p className="text-xs text-[#1E1F24]">
+					<span className="text-xs text-[#1E1F24]">
 						Built for expert users relying on Alphii as a core tool for
 						high-performance work
-					</p>
+					</span>
 				)
 		}
 	}

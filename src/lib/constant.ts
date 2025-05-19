@@ -7,22 +7,8 @@ export const NEXT_LOCALE = "NEXT_LOCALE"
 export const DEFAULT_INIT_PAGE = "1"
 
 export const Routes = {
-	login: "/login",
-	dashboard: "/dashboard",
-	booking: "/booking-management",
-	report: "/report",
-	company: "/company-management",
-	user: "/user-management",
-	newUser: "/new-user",
-	service: "/service-management",
-	newService: "/new-service",
-	booking_details: "/booking-details",
-	forgotPassword: "/forgot-password",
-	resetPassword: "/reset-password",
-	otp: "/otp",
-	passengerManagement: "/passenger-management",
-	rolePermission: "/role-permission",
-	newRole: "/new-role"
+	ROOT: "/",
+	SHOWCASE: "/showcases"
 }
 
 export const QueryKeys = {
