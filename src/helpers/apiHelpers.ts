@@ -97,7 +97,7 @@ class httpServices {
 							// Redirect to login or handle appropriately
 							// window.location.reload()
 							redirect({
-								href: Routes.login,
+								href: Routes.LOGIN,
 								locale: locale || LANGUAGE.EN
 							})
 							return Promise.reject(refreshError)

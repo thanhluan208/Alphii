@@ -8,7 +8,8 @@ export const DEFAULT_INIT_PAGE = "1"
 
 export const Routes = {
 	ROOT: "/",
-	SHOWCASE: "/showcases"
+	SHOWCASE: "/showcases",
+	LOGIN: "/login",
 }
 
 export const QueryKeys = {
@@ -29,3 +30,5 @@ export const TIME_IN_SECONDS = {
 }
 
 export const COUNT_DOWN_OTP = 60 //In seconds
+
+

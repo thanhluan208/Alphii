@@ -31,6 +31,9 @@ const config = {
 				alphii_border: "var(--alphii-border)",
 				alphii_text_sub_600: "var(--alphii-text-sub-600)",
 				alphii_skeleton: "var(--alphii-skeleton)",
+				alphii_border_2: "var(--alphii-border-2)",
+				alphii_bg_soft_200: "var(--alphii-bg-soft-200)",
+				alphii_bg_weak_50: "var(--alphii-bg-weak-50)",
 
 				background: "var(--background)",
 				foreground: "hsl(var(--foreground))",
@@ -60,7 +63,7 @@ const config = {
 					foreground: "hsl(var(--popover-foreground))"
 				},
 				card: {
-					DEFAULT: "hsl(var(--card))",
+					DEFAULT: "var(--card)",
 					foreground: "hsl(var(--card-foreground))"
 				},
 				chart: {

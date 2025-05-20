@@ -50,9 +50,7 @@ export default async function RootLayout({
 						disableTransitionOnChange
 					>
 						<Providers>
-							<main className="flex flex-col font-inter bg-background ">
-								{children}
-							</main>
+							<main>{children}</main>
 						</Providers>
 					</ThemeProvider>
 				</NextIntlClientProvider>
