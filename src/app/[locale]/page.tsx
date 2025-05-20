@@ -427,7 +427,7 @@ const Home = () => {
 				</div>
 			</div>
 			<div className="p-5 ">
-				<div className="bg-[#0A0812] rounded-3xl px-4 md:px-8 lg:px-10 py-14  ">
+				<div className="bg-[#0A0812] text-white rounded-3xl px-4 md:px-8 lg:px-10 py-14  ">
 					<div className="w-full items-center flex flex-col">
 						<Logo className="text-[#FCFCFD]" />
 						<p className="mt-5 text-3xl">
