@@ -103,7 +103,7 @@ const Home = () => {
 						<Link href={"#faq"}>{translation("lFAQs")}</Link>
 					</div>
 				</div>
-				<Link href={Routes.SHOWCASE}>
+				<Link href={Routes.ROOT}>
 					<Button className="items-center gap-2">
 						{translation("lGetStartedForFree")} <ArrowUpRight />
 					</Button>
