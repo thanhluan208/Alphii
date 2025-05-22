@@ -125,6 +125,157 @@ export const Logo: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 	)
 }
 
+export const AddIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
+	fill = "currentColor",
+	className
+}) => {
+	return (
+		<svg
+			width="20"
+			height="20"
+			viewBox="0 0 20 20"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			className={className}
+		>
+			<path
+				d="M9.99996 1.6665C14.6025 1.6665 18.3333 5.39734 18.3333 9.99984C18.3333 14.6023 14.6025 18.3332 9.99996 18.3332C5.39746 18.3332 1.66663 14.6023 1.66663 9.99984C1.66663 5.39734 5.39746 1.6665 9.99996 1.6665ZM9.99996 5.83317C9.79585 5.8332 9.59884 5.90813 9.44632 6.04377C9.29379 6.1794 9.19634 6.36629 9.17246 6.569L9.16663 6.6665V9.1665H6.66663C6.45423 9.16674 6.24993 9.24807 6.09549 9.39388C5.94104 9.53968 5.8481 9.73897 5.83565 9.951C5.8232 10.163 5.89219 10.3718 6.02851 10.5347C6.16484 10.6976 6.35821 10.8023 6.56913 10.8273L6.66663 10.8332H9.16663V13.3332C9.16686 13.5456 9.24819 13.7499 9.394 13.9043C9.53981 14.0588 9.73909 14.1517 9.95112 14.1641C10.1632 14.1766 10.3719 14.1076 10.5348 13.9713C10.6977 13.835 10.8024 13.6416 10.8275 13.4307L10.8333 13.3332V10.8332H13.3333C13.5457 10.8329 13.75 10.7516 13.9044 10.6058C14.0589 10.46 14.1518 10.2607 14.1643 10.0487C14.1767 9.83664 14.1077 9.62785 13.9714 9.46498C13.8351 9.3021 13.6417 9.19742 13.4308 9.17234L13.3333 9.1665H10.8333V6.6665C10.8333 6.44549 10.7455 6.23353 10.5892 6.07725C10.4329 5.92097 10.221 5.83317 9.99996 5.83317Z"
+				fill={fill}
+			/>
+		</svg>
+	)
+}
+
+export const CollapseIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
+	fill = "currentColor",
+	className
+}) => {
+	return (
+		<svg
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			className={className}
+		>
+			<path
+				fillRule="evenodd"
+				clipRule="evenodd"
+				d="M5 3C4.46957 3 3.96086 3.21071 3.58579 3.58579C3.21071 3.96086 3 4.46957 3 5V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H19C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19V5C21 4.46957 20.7893 3.96086 20.4142 3.58579C20.0391 3.21071 19.5304 3 19 3H5ZM10 5H19V19H10V5ZM8 5H5V19H8V5Z"
+				fill={fill}
+			/>
+		</svg>
+	)
+}
+
+export const ExportIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
+	className
+}) => {
+	return (
+		<svg
+			width="20"
+			height="20"
+			viewBox="0 0 20 20"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			className={className}
+		>
+			<path
+				d="M16.25 5C16.25 4.65483 15.9702 4.375 15.625 4.375H4.375C4.02983 4.375 3.75 4.65483 3.75 5V15C3.75 15.3452 4.02983 15.625 4.375 15.625H15.625C15.9702 15.625 16.25 15.3452 16.25 15V5ZM5 11.875H7.13503C7.61725 12.9787 8.71855 13.75 10 13.75C11.2814 13.75 12.3827 12.9787 12.865 11.875H15V14.375H5V11.875ZM5 5.625H15V10.625H11.875C11.875 11.6606 11.0356 12.5 10 12.5C8.96444 12.5 8.125 11.6606 8.125 10.625H5V5.625ZM12.5 9.375H10.625V11.25H9.375V9.375H7.5L10 6.5625L12.5 9.375Z"
+				fill="#5C5C5C"
+			/>
+		</svg>
+	)
+}
+
+export const TokenIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
+	fill = "currentColor",
+	className
+}) => {
+	return (
+		<svg
+			width="14"
+			height="14"
+			viewBox="0 0 14 14"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<g clipPath="url(#clip0_428_28574)">
+				<g
+					clipPath="url(#paint0_angular_428_28574_clip_path)"
+					data-figma-skip-parse="true"
+				>
+					<g transform="matrix(0 0.00583333 -0.00583333 0 7.00008 6.99984)">
+						<foreignObject x="-1100" y="-1100" width="2200" height="2200">
+							<div
+								style={{
+									background:
+										"conic-gradient(from 90deg,rgba(232, 128, 255, 1) 0deg,rgba(102, 132, 255, 1) 180deg,rgba(231, 128, 255, 1) 360deg)",
+									height: "100%",
+									width: "100%",
+									opacity: 1
+								}}
+							></div>
+						</foreignObject>
+					</g>
+				</g>
+				<path
+					fillRule="evenodd"
+					clipRule="evenodd"
+					d="M7.00008 1.1665C3.77833 1.1665 1.16675 3.77809 1.16675 6.99984C1.16675 10.2216 3.77833 12.8332 7.00008 12.8332C10.2218 12.8332 12.8334 10.2216 12.8334 6.99984C12.8334 3.77809 10.2218 1.1665 7.00008 1.1665ZM7.00008 1.74984C7.00008 3.14222 6.44696 4.47758 5.46239 5.46215C4.47783 6.44671 3.14247 6.99984 1.75008 6.99984C3.14247 6.99984 4.47783 7.55296 5.46239 8.53753C6.44696 9.52209 7.00008 10.8575 7.00008 12.2498C7.00008 10.8575 7.55321 9.52209 8.53777 8.53753C9.52234 7.55296 10.8577 6.99984 12.2501 6.99984C10.8577 6.99984 9.52234 6.44671 8.53777 5.46215C7.55321 4.47758 7.00008 3.14222 7.00008 1.74984Z"
+					data-figma-gradient-fill="{&#34;type&#34;:&#34;GRADIENT_ANGULAR&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.90980392694473267,&#34;g&#34;:0.50196081399917603,&#34;b&#34;:1.0,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.40084603428840637,&#34;g&#34;:0.52067685127258301,&#34;b&#34;:1.0,&#34;a&#34;:1.0},&#34;position&#34;:0.50},{&#34;color&#34;:{&#34;r&#34;:0.90869998931884766,&#34;g&#34;:0.50200009346008301,&#34;b&#34;:1.0,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;stopsVar&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.90980392694473267,&#34;g&#34;:0.50196081399917603,&#34;b&#34;:1.0,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.40084603428840637,&#34;g&#34;:0.52067685127258301,&#34;b&#34;:1.0,&#34;a&#34;:1.0},&#34;position&#34;:0.50},{&#34;color&#34;:{&#34;r&#34;:0.90869998931884766,&#34;g&#34;:0.50200009346008301,&#34;b&#34;:1.0,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;transform&#34;:{&#34;m00&#34;:7.1437737037935065e-16,&#34;m01&#34;:-11.666666984558105,&#34;m02&#34;:12.833415031433105,&#34;m10&#34;:11.666666984558105,&#34;m11&#34;:7.1437737037935065e-16,&#34;m12&#34;:1.166503906250},&#34;opacity&#34;:1.0,&#34;blendMode&#34;:&#34;NORMAL&#34;,&#34;visible&#34;:true}"
+				/>
+			</g>
+			<defs>
+				<clipPath id="paint0_angular_428_28574_clip_path">
+					<path
+						fillRule="evenodd"
+						clipRule="evenodd"
+						d="M7.00008 1.1665C3.77833 1.1665 1.16675 3.77809 1.16675 6.99984C1.16675 10.2216 3.77833 12.8332 7.00008 12.8332C10.2218 12.8332 12.8334 10.2216 12.8334 6.99984C12.8334 3.77809 10.2218 1.1665 7.00008 1.1665ZM7.00008 1.74984C7.00008 3.14222 6.44696 4.47758 5.46239 5.46215C4.47783 6.44671 3.14247 6.99984 1.75008 6.99984C3.14247 6.99984 4.47783 7.55296 5.46239 8.53753C6.44696 9.52209 7.00008 10.8575 7.00008 12.2498C7.00008 10.8575 7.55321 9.52209 8.53777 8.53753C9.52234 7.55296 10.8577 6.99984 12.2501 6.99984C10.8577 6.99984 9.52234 6.44671 8.53777 5.46215C7.55321 4.47758 7.00008 3.14222 7.00008 1.74984Z"
+					/>
+				</clipPath>
+				<clipPath id="clip0_428_28574">
+					<rect width="14" height="14" fill="white" />
+				</clipPath>
+			</defs>
+		</svg>
+	)
+}
+
+export const PromptIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
+	fill = "currentColor",
+	className
+}) => {
+	return (
+		<svg
+			width="23"
+			height="22"
+			viewBox="0 0 23 22"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			className={className}
+		>
+			<g clipPath="url(#clip0_428_28565)">
+				<path
+					d="M11.1753 5.75C11.6233 5.75 12.0328 5.91858 12.342 6.19567C12.6285 5.93879 12.992 5.78393 13.3757 5.75525L13.5087 5.75H14.092C14.2407 5.75016 14.3837 5.8071 14.4918 5.90916C14.5999 6.01123 14.665 6.15072 14.6737 6.29915C14.6824 6.44757 14.6341 6.59372 14.5387 6.70774C14.4433 6.82175 14.3079 6.89502 14.1603 6.91258L14.092 6.91667H13.5087C13.3658 6.91669 13.2279 6.96914 13.1211 7.06408C13.0144 7.15903 12.9461 7.28985 12.9294 7.43175L12.9253 7.5V14.5C12.9254 14.6429 12.9778 14.7808 13.0728 14.8875C13.1677 14.9943 13.2985 15.0625 13.4404 15.0792L13.5087 15.0833H14.092C14.2407 15.0835 14.3837 15.1404 14.4918 15.2425C14.5999 15.3446 14.665 15.4841 14.6737 15.6325C14.6824 15.7809 14.6341 15.9271 14.5387 16.0411C14.4433 16.1551 14.3079 16.2284 14.1603 16.2459L14.092 16.25H13.5087C13.0607 16.25 12.6512 16.0814 12.342 15.8043C12.0555 16.0612 11.6921 16.2161 11.3083 16.2447L11.1753 16.25H10.592C10.4433 16.2498 10.3003 16.1929 10.1922 16.0908C10.0841 15.9888 10.019 15.8493 10.0103 15.7009C10.0016 15.5524 10.0499 15.4063 10.1453 15.2923C10.2408 15.1782 10.3761 15.105 10.5238 15.0874L10.592 15.0833H11.1753C11.3182 15.0833 11.4561 15.0309 11.5629 14.9359C11.6697 14.841 11.7379 14.7101 11.7546 14.5682L11.7587 14.5V7.5C11.7587 7.35712 11.7062 7.21922 11.6113 7.11245C11.5163 7.00568 11.3855 6.93747 11.2436 6.92075L11.1753 6.91667H10.592C10.4433 6.9165 10.3003 6.85957 10.1922 6.75751C10.0841 6.65544 10.019 6.51594 10.0103 6.36752C10.0016 6.2191 10.0499 6.07295 10.1453 5.95893C10.2408 5.84492 10.3761 5.77164 10.5238 5.75408L10.592 5.75H11.1753ZM15.2587 8.08333C15.553 8.08324 15.8365 8.1944 16.0523 8.39454C16.2682 8.59468 16.4003 8.86899 16.4224 9.1625L16.4253 9.25V12.75C16.4254 13.0443 16.3143 13.3278 16.1141 13.5437C15.914 13.7595 15.6397 13.8917 15.3462 13.9138L15.2587 13.9167H13.5087V12.75H15.2587V9.25H13.5087V8.08333H15.2587ZM7.09201 11.5833V12.75H11.1753V13.9167H7.09201C6.79767 13.9168 6.51418 13.8056 6.29835 13.6055C6.08253 13.4053 5.95033 13.131 5.92826 12.8375L5.92534 12.75V11.5833H7.09201ZM7.67534 6.33333C7.78447 6.33333 7.89141 6.36395 7.98401 6.42169C8.07661 6.47944 8.15116 6.562 8.19917 6.66L8.22717 6.72825L8.30301 6.94875C8.38304 7.18336 8.512 7.39828 8.68135 7.5793C8.8507 7.76032 9.05658 7.90329 9.28534 7.99875L9.39326 8.03958L9.61376 8.11483C9.72292 8.15215 9.81857 8.221 9.8886 8.31267C9.95864 8.40435 9.99992 8.51473 10.0072 8.62987C10.0145 8.745 9.98753 8.85972 9.92964 8.95951C9.87176 9.0593 9.78558 9.13968 9.68201 9.1905L9.61376 9.2185L9.39326 9.29433C9.15865 9.37437 8.94372 9.50333 8.76271 9.67268C8.58169 9.84203 8.43872 10.0479 8.34326 10.2767L8.30242 10.3846L8.22717 10.6051C8.18992 10.7143 8.12112 10.81 8.02948 10.8801C7.93784 10.9502 7.82748 10.9915 7.71234 10.9989C7.5972 11.0062 7.48246 10.9793 7.38263 10.9215C7.28281 10.8636 7.20237 10.7775 7.15151 10.6739L7.12351 10.6051L7.04767 10.3846C6.96764 10.15 6.83868 9.93505 6.66933 9.75403C6.49998 9.57302 6.2941 9.43005 6.06534 9.33458L5.95742 9.29375L5.73692 9.2185C5.62776 9.18118 5.53211 9.11233 5.46208 9.02066C5.39204 8.92898 5.35076 8.8186 5.34346 8.70347C5.33615 8.58833 5.36315 8.47362 5.42104 8.37383C5.47892 8.27403 5.5651 8.19365 5.66867 8.14283L5.73692 8.11483L5.95742 8.039C6.19203 7.95897 6.40696 7.83 6.58797 7.66065C6.76899 7.4913 6.91196 7.28543 7.00742 7.05667L7.04826 6.94875L7.12351 6.72825C7.16281 6.61309 7.23714 6.51311 7.33609 6.44229C7.43504 6.37148 7.55366 6.33338 7.67534 6.33333ZM7.67534 8.19767C7.53733 8.37131 7.37999 8.52866 7.20634 8.66667C7.38017 8.80433 7.53767 8.96183 7.67534 9.13567C7.81301 8.96183 7.97051 8.80433 8.14434 8.66667C7.9707 8.52866 7.81335 8.37131 7.67534 8.19767Z"
+					fill={fill}
+				/>
+			</g>
+			<defs>
+				<clipPath id="clip0_428_28565">
+					<rect
+						width="14"
+						height="14"
+						fill="white"
+						transform="translate(4.17554 4)"
+					/>
+				</clipPath>
+			</defs>
+		</svg>
+	)
+}
+
 export const Skill: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 	fill = "currentColor",
 	className
@@ -138,10 +289,10 @@ export const Skill: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 			xmlns="http://www.w3.org/2000/svg"
 			className={className}
 		>
-			<g clip-path="url(#clip0_338_4202)">
+			<g clipPath="url(#clip0_338_4202)">
 				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
+					fillRule="evenodd"
+					clipRule="evenodd"
 					d="M7.15583 2.01362C7.02166 1.90454 6.86416 1.82404 6.69033 1.78204C6.52191 1.73227 6.34442 1.7213 6.17116 1.74996H2.91616C2.60674 1.74996 2.30999 1.87287 2.0912 2.09166C1.87241 2.31046 1.74949 2.6072 1.74949 2.91662V9.2767C1.73997 9.80841 1.87528 10.3327 2.14091 10.7934C2.39525 11.2348 2.76144 11.6014 3.20258 11.8562C3.6453 12.1142 4.14849 12.2503 4.66091 12.2505C5.19363 12.2524 5.71657 12.1075 6.17233 11.8317L11.6819 8.65079C11.9499 8.49607 12.1454 8.24126 12.2255 7.94239C12.3055 7.64352 12.2636 7.32508 12.1089 7.05712L10.4814 4.23904C10.3867 3.98692 10.2073 3.77556 9.97391 3.64112L7.15583 2.01362ZM7.58341 7.78162V3.60787L9.39058 4.65145L7.58341 7.78162ZM11.0986 7.64045L7.96841 9.44762L10.0556 5.83329L11.0986 7.64045ZM5.54174 9.33329C5.54174 9.56535 5.44956 9.78791 5.28546 9.95201C5.12137 10.1161 4.89881 10.2083 4.66674 10.2083C4.43468 10.2083 4.21212 10.1161 4.04802 9.95201C3.88393 9.78791 3.79174 9.56535 3.79174 9.33329C3.79174 9.10122 3.88393 8.87866 4.04802 8.71457C4.21212 8.55048 4.43468 8.45829 4.66674 8.45829C4.89881 8.45829 5.12137 8.55048 5.28546 8.71457C5.44956 8.87866 5.54174 9.10122 5.54174 9.33329Z"
 					fill={fill}
 				/>
@@ -187,9 +338,9 @@ export const Punch: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					width="35.75"
 					height="38.3691"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB"
+					colorInterpolationFilters="sRGB"
 				>
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feBlend
 						mode="normal"
 						in="SourceGraphic"
@@ -278,9 +429,9 @@ export const DoubleRobots: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					width="35.75"
 					height="41.125"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB"
+					colorInterpolationFilters="sRGB"
 				>
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feBlend
 						mode="normal"
 						in="SourceGraphic"
@@ -313,9 +464,9 @@ export const DoubleRobots: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					width="35.75"
 					height="41.125"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB"
+					colorInterpolationFilters="sRGB"
 				>
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feBlend
 						mode="normal"
 						in="SourceGraphic"
@@ -358,7 +509,7 @@ export const CustomPriceIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<g filter="url(#filter0_di_41_3194)">
-				<g clip-path="url(#clip0_41_3194)">
+				<g clipPath="url(#clip0_41_3194)">
 					<rect
 						x="12"
 						y="10.2168"
@@ -375,7 +526,7 @@ export const CustomPriceIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 							height="52"
 							rx="12"
 							fill="url(#paint0_linear_41_3194)"
-							shape-rendering="crispEdges"
+							shapeRendering="crispEdges"
 						/>
 						<rect
 							x="19"
@@ -384,8 +535,8 @@ export const CustomPriceIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 							height="50"
 							rx="11"
 							stroke="url(#paint1_linear_41_3194)"
-							stroke-width="2"
-							shape-rendering="crispEdges"
+							strokeWidth="2"
+							shapeRendering="crispEdges"
 						/>
 					</g>
 				</g>
@@ -396,8 +547,8 @@ export const CustomPriceIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					height="62"
 					rx="15"
 					stroke="black"
-					stroke-opacity="0.08"
-					stroke-width="2"
+					strokeOpacity="0.08"
+					strokeWidth="2"
 				/>
 			</g>
 			<defs>
@@ -408,9 +559,9 @@ export const CustomPriceIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					width="88"
 					height="88"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB"
+					colorInterpolationFilters="sRGB"
 				>
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feColorMatrix
 						in="SourceAlpha"
 						type="matrix"
@@ -461,9 +612,9 @@ export const CustomPriceIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					width="72"
 					height="72"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB"
+					colorInterpolationFilters="sRGB"
 				>
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feColorMatrix
 						in="SourceAlpha"
 						type="matrix"
@@ -497,8 +648,8 @@ export const CustomPriceIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					y2="68.5498"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stop-color="white" stop-opacity="0" />
-					<stop offset="1" stop-color="white" stop-opacity="0.2" />
+					<stop stopColor="white" stopOpacity="0" />
+					<stop offset="1" stopColor="white" stopOpacity="0.2" />
 				</linearGradient>
 				<linearGradient
 					id="paint1_linear_41_3194"
@@ -508,9 +659,9 @@ export const CustomPriceIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					y2="68.5498"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stop-color="white" stop-opacity="0.08" />
-					<stop offset="0.5" stop-color="white" stop-opacity="0.55" />
-					<stop offset="1" stop-color="white" stop-opacity="0.08" />
+					<stop stopColor="white" stopOpacity="0.08" />
+					<stop offset="0.5" stopColor="white" stopOpacity="0.55" />
+					<stop offset="1" stopColor="white" stopOpacity="0.08" />
 				</linearGradient>
 				<clipPath id="clip0_41_3194">
 					<rect
@@ -539,7 +690,7 @@ export const PlusIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<g filter="url(#filter0_di_41_3145)">
-				<g clip-path="url(#clip0_41_3145)">
+				<g clipPath="url(#clip0_41_3145)">
 					<rect
 						x="12"
 						y="10.2168"
@@ -549,7 +700,7 @@ export const PlusIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 						fill="#FB8601"
 					/>
 					<g filter="url(#filter1_d_41_3145)">
-						<g clip-path="url(#clip1_41_3145)">
+						<g clipPath="url(#clip1_41_3145)">
 							<rect
 								x="18"
 								y="16.5498"
@@ -557,7 +708,7 @@ export const PlusIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 								height="52"
 								rx="12"
 								fill="url(#paint0_linear_41_3145)"
-								shape-rendering="crispEdges"
+								shapeRendering="crispEdges"
 							/>
 							<g filter="url(#filter2_di_41_3145)">
 								<path
@@ -573,8 +724,8 @@ export const PlusIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 							height="50"
 							rx="11"
 							stroke="url(#paint1_linear_41_3145)"
-							stroke-width="2"
-							shape-rendering="crispEdges"
+							strokeWidth="2"
+							shapeRendering="crispEdges"
 						/>
 					</g>
 				</g>
@@ -585,8 +736,8 @@ export const PlusIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					height="62"
 					rx="15"
 					stroke="black"
-					stroke-opacity="0.08"
-					stroke-width="2"
+					strokeOpacity="0.08"
+					strokeWidth="2"
 				/>
 			</g>
 			<defs>
@@ -597,9 +748,9 @@ export const PlusIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					width="88"
 					height="88"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB"
+					colorInterpolationFilters="sRGB"
 				>
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feColorMatrix
 						in="SourceAlpha"
 						type="matrix"
@@ -650,9 +801,9 @@ export const PlusIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					width="72"
 					height="72"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB"
+					colorInterpolationFilters="sRGB"
 				>
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feColorMatrix
 						in="SourceAlpha"
 						type="matrix"
@@ -685,9 +836,9 @@ export const PlusIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					width="50"
 					height="50"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB"
+					colorInterpolationFilters="sRGB"
 				>
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feColorMatrix
 						in="SourceAlpha"
 						type="matrix"
@@ -739,8 +890,8 @@ export const PlusIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					y2="68.5498"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stop-color="white" stop-opacity="0" />
-					<stop offset="1" stop-color="white" stop-opacity="0.2" />
+					<stop stopColor="white" stopOpacity="0" />
+					<stop offset="1" stopColor="white" stopOpacity="0.2" />
 				</linearGradient>
 				<linearGradient
 					id="paint1_linear_41_3145"
@@ -750,9 +901,9 @@ export const PlusIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					y2="68.5498"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stop-color="white" stop-opacity="0.08" />
-					<stop offset="0.5" stop-color="white" stop-opacity="0.55" />
-					<stop offset="1" stop-color="white" stop-opacity="0.08" />
+					<stop stopColor="white" stopOpacity="0.08" />
+					<stop offset="0.5" stopColor="white" stopOpacity="0.55" />
+					<stop offset="1" stopColor="white" stopOpacity="0.08" />
 				</linearGradient>
 				<clipPath id="clip0_41_3145">
 					<rect
@@ -791,7 +942,7 @@ export const BasicIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<g filter="url(#filter0_di_41_3096)">
-				<g clip-path="url(#clip0_41_3096)">
+				<g clipPath="url(#clip0_41_3096)">
 					<rect
 						x="12"
 						y="10.2168"
@@ -801,7 +952,7 @@ export const BasicIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 						fill="#643AFE"
 					/>
 					<g filter="url(#filter1_d_41_3096)">
-						<g clip-path="url(#clip1_41_3096)">
+						<g clipPath="url(#clip1_41_3096)">
 							<rect
 								x="18"
 								y="16.5498"
@@ -809,7 +960,7 @@ export const BasicIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 								height="52"
 								rx="12"
 								fill="url(#paint0_linear_41_3096)"
-								shape-rendering="crispEdges"
+								shapeRendering="crispEdges"
 							/>
 							<g filter="url(#filter2_d_41_3096)">
 								<path
@@ -825,8 +976,8 @@ export const BasicIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 							height="50"
 							rx="11"
 							stroke="url(#paint1_linear_41_3096)"
-							stroke-width="2"
-							shape-rendering="crispEdges"
+							strokeWidth="2"
+							shapeRendering="crispEdges"
 						/>
 					</g>
 				</g>
@@ -837,8 +988,8 @@ export const BasicIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					height="62"
 					rx="15"
 					stroke="black"
-					stroke-opacity="0.08"
-					stroke-width="2"
+					strokeOpacity="0.08"
+					strokeWidth="2"
 				/>
 			</g>
 			<defs>
@@ -849,9 +1000,9 @@ export const BasicIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					width="88"
 					height="88"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB"
+					colorInterpolationFilters="sRGB"
 				>
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feColorMatrix
 						in="SourceAlpha"
 						type="matrix"
@@ -902,9 +1053,9 @@ export const BasicIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					width="72"
 					height="72"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB"
+					colorInterpolationFilters="sRGB"
 				>
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feColorMatrix
 						in="SourceAlpha"
 						type="matrix"
@@ -937,9 +1088,9 @@ export const BasicIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					width="46"
 					height="51"
 					filterUnits="userSpaceOnUse"
-					color-interpolation-filters="sRGB"
+					colorInterpolationFilters="sRGB"
 				>
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feColorMatrix
 						in="SourceAlpha"
 						type="matrix"
@@ -973,8 +1124,8 @@ export const BasicIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					y2="68.5498"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stop-color="white" stop-opacity="0" />
-					<stop offset="1" stop-color="white" stop-opacity="0.2" />
+					<stop stopColor="white" stopOpacity="0" />
+					<stop offset="1" stopColor="white" stopOpacity="0.2" />
 				</linearGradient>
 				<linearGradient
 					id="paint1_linear_41_3096"
@@ -984,9 +1135,9 @@ export const BasicIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					y2="68.5498"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stop-color="white" stop-opacity="0.08" />
-					<stop offset="0.5" stop-color="white" stop-opacity="0.55" />
-					<stop offset="1" stop-color="white" stop-opacity="0.08" />
+					<stop stopColor="white" stopOpacity="0.08" />
+					<stop offset="0.5" stopColor="white" stopOpacity="0.55" />
+					<stop offset="1" stopColor="white" stopOpacity="0.08" />
 				</linearGradient>
 				<clipPath id="clip0_41_3096">
 					<rect
@@ -1235,7 +1386,7 @@ export const CodeIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 							height="18.75"
 							rx="4.125"
 							stroke="url(#paint1_linear_50_15)"
-							stroke-width="0.75"
+							strokeWidth="0.75"
 							shapeRendering="crispEdges"
 						/>
 						<path
@@ -1251,7 +1402,7 @@ export const CodeIcon: React.FC<ComponentPropsWithoutRef<"svg">> = ({
 					height="23.25"
 					rx="5.625"
 					stroke="url(#paint2_linear_50_15)"
-					stroke-width="0.75"
+					strokeWidth="0.75"
 				/>
 			</g>
 			<defs>

@@ -25,7 +25,17 @@ const config = {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
-				background: "hsl(var(--background))",
+
+				alphii_primary: "var(--alphii-primary)",
+				alphii_primary_50: "var(--alphii-primary-50)",
+				alphii_border: "var(--alphii-border)",
+				alphii_text_sub_600: "var(--alphii-text-sub-600)",
+				alphii_skeleton: "var(--alphii-skeleton)",
+				alphii_border_2: "var(--alphii-border-2)",
+				alphii_bg_soft_200: "var(--alphii-bg-soft-200)",
+				alphii_bg_weak_50: "var(--alphii-bg-weak-50)",
+
+				background: "var(--background)",
 				foreground: "hsl(var(--foreground))",
 				description: "#333639",
 				primary: {
@@ -53,7 +63,7 @@ const config = {
 					foreground: "hsl(var(--popover-foreground))"
 				},
 				card: {
-					DEFAULT: "hsl(var(--card))",
+					DEFAULT: "var(--card)",
 					foreground: "hsl(var(--card-foreground))"
 				},
 				chart: {

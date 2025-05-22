@@ -5,6 +5,7 @@ import { Column } from "@tanstack/react-table"
 import { clsx, type ClassValue } from "clsx"
 import dayjs from "dayjs"
 import duration from "dayjs/plugin/duration"
+import { Atom, Braces, File } from "lucide-react"
 import { twMerge } from "tailwind-merge"
 
 import { STATUS_CODE } from "./../types/index"
@@ -86,4 +87,14 @@ export const createQueryString = (
 	})
 
 	return params.toString()
+}
+
+export const fileIcon = (fileName: string) => {
+	const fileType = fileName.split(".").pop()
+
+	if (fileType === 'tsx' || fileType === "jsx") return Atom
+
+	if(fileType === 'json') return Braces
+
+	return File
 }

@@ -12,6 +12,7 @@ import { getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
 
 import { routing } from "@/i18n/routing"
+import { ThemeProvider } from "@/providers/themeProvider"
 import { twJoin } from "tailwind-merge"
 
 const inter = Inter({
@@ -42,9 +43,16 @@ export default async function RootLayout({
 		<html lang={locale}>
 			<body className={twJoin(inter.variable)}>
 				<NextIntlClientProvider messages={messages}>
-					<Providers>
-						<main className="flex flex-col font-inter ">{children}</main>
-					</Providers>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="light"
+						enableSystem
+						disableTransitionOnChange
+					>
+						<Providers>
+							<main>{children}</main>
+						</Providers>
+					</ThemeProvider>
 				</NextIntlClientProvider>
 			</body>
 		</html>
