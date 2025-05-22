@@ -1,6 +1,6 @@
 import React from "react"
 
-import FolderTree from "@/components/common/FolderTree/FolderTree"
+import FolderTree from "@/components/common/FolderTree/FolderTreeNodes"
 import { ExportIcon, Logo } from "@/components/icons"
 import { Button } from "@/components/ui"
 import { ChevronDown } from "lucide-react"

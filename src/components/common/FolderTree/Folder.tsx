@@ -1,20 +1,19 @@
 "use client"
 
-import React, { useState } from "react"
+import { useState } from "react"
+import { useSearchParams } from "next/navigation"
 
 import { Button } from "@/components/ui"
 import {
 	Accordion,
 	AccordionContent,
-	AccordionItem,
-	AccordionTrigger
+	AccordionItem
 } from "@/components/ui/accordion"
+import { usePathname, useRouter } from "@/i18n/routing"
 import { cn, fileIcon } from "@/lib/utils"
-import { ChevronUp, File } from "lucide-react"
+import { ChevronUp } from "lucide-react"
 
-import useFileStore from "@/stores/fileStore"
-
-import { TreeNode } from "./FolderTree"
+import { TreeNode } from "./FolderTreeNodes"
 
 interface FolderProps {
 	data: TreeNode
@@ -22,16 +21,20 @@ interface FolderProps {
 }
 
 const Folder = ({ data, level }: FolderProps) => {
-	const [value, setValue] = useState("")
+	const router = useRouter()
+	const pathname = usePathname()
+	const searchParams = useSearchParams()
 
-	const { setCurrentFile } = useFileStore()
+	const file = searchParams.get("file")
+
+	const [value, setValue] = useState("")
 
 	return (
 		<Accordion type="single" collapsible value={value} onValueChange={setValue}>
 			<AccordionItem value={data.name} className="border-0">
 				<Button
 					variant="ghost"
-					className="flex items-center mt-1 justify-start gap-2 h-6 p-0 px-4 shadow-none w-[230px]"
+					className="flex items-center border-0 mt-1 text-alphii_text_sub_600 justify-start gap-2 h-6 p-0 w-full px-4 shadow-none truncate"
 					onClick={() =>
 						setValue((prev) => (prev === data.name ? "" : data.name))
 					}
@@ -42,12 +45,19 @@ const Folder = ({ data, level }: FolderProps) => {
 							"transition-transform"
 						)}
 					/>
-					<p className={cn(value && "font-semibold")}>{data.name}</p>
+					<p
+						className={cn(
+							"max-w-[calc(100%-35px)] truncate",
+							value && "font-semibold text-card-foreground"
+						)}
+					>
+						{data.name}
+					</p>
 				</Button>
 				<AccordionContent
 					className="border-0"
 					style={{
-						paddingLeft: `${10 + level * 12}px`
+						paddingLeft: `${5 + level * 12}px`
 					}}
 				>
 					{data.children && data.children.length > 0 && (
@@ -58,13 +68,26 @@ const Folder = ({ data, level }: FolderProps) => {
 
 									return (
 										<Button
-											key={child.name}
-											onClick={() => setCurrentFile(child)}
+											key={child.path}
 											variant="ghost"
-											className="flex items-center mt-1 justify-start gap-2 h-6 p-0 px-4 shadow-none w-[230px]"
+											onClick={() => {
+												const search = new URLSearchParams(
+													window.location.search
+												)
+												search.set("file", child.path)
+
+												router.replace(pathname + "?" + search.toString())
+											}}
+											className={cn(
+												"flex items-center border-0 w-full p-0 mt-1 text-alphii_text_sub_600 justify-start hover:bg-alphii_primary_light gap-2 hover:text-primary h-6 px-4 shadow-none truncate",
+												file === child.path &&
+													"bg-alphii_primary_light text-primary "
+											)}
 										>
 											{<Icon />}
-											<span>{child.name}</span>
+											<span className="truncate max-w-[calc(100%-35px)]">
+												{child.name}
+											</span>
 										</Button>
 									)
 								}

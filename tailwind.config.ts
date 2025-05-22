@@ -28,12 +28,14 @@ const config = {
 
 				alphii_primary: "var(--alphii-primary)",
 				alphii_primary_50: "var(--alphii-primary-50)",
+				alphii_primary_light: "var(--alpgii-primary-light)",
 				alphii_border: "var(--alphii-border)",
 				alphii_text_sub_600: "var(--alphii-text-sub-600)",
 				alphii_skeleton: "var(--alphii-skeleton)",
 				alphii_border_2: "var(--alphii-border-2)",
 				alphii_bg_soft_200: "var(--alphii-bg-soft-200)",
 				alphii_bg_weak_50: "var(--alphii-bg-weak-50)",
+				alphii_bg_weak_40: "var(--alphii-bg-weak-40)",
 
 				background: "var(--background)",
 				foreground: "hsl(var(--foreground))",
