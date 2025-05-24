@@ -2,27 +2,8 @@
 
 import React from "react"
 import dynamic from "next/dynamic"
+import TerminalWindow from "./TerminalWindow"
 
-// Import the terminal component with dynamic import to ensure client-side only rendering
-const TerminalWindow = dynamic(() => import("./TerminalWindow"), {
-	ssr: false,
-	loading: () => (
-		<div
-			style={{
-				width: "100%",
-				height: "300px",
-				backgroundColor: "#1E1E1E",
-				borderRadius: "6px",
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-				color: "#E5E5E5"
-			}}
-		>
-			Loading terminal...
-		</div>
-	)
-})
 
 const TerminalContainer = () => {
 	return (

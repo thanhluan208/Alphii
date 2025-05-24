@@ -4,6 +4,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/componen
 
 import CodeEditor from "./CodeEditor"
 import FolderTree from "./FolderTree"
+import TerminalWindow from "@/app/[locale]/test/TerminalWindow"
 
 const Code = () => {
 	return (
@@ -19,7 +20,9 @@ const Code = () => {
 			</ResizablePanel>
 			<ResizableHandle />
 			<ResizablePanel defaultSize={25}>
-				<div className="border-t border-alphii_border_2 h-full px-3 py-2.5">TWO</div>
+				<div className="h-full">
+					<TerminalWindow />
+				</div>
 			</ResizablePanel>
 		</ResizablePanelGroup>
 	)

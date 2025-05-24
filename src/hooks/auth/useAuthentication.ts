@@ -1,10 +1,10 @@
 import toast from "react-hot-toast"
 import { useTranslations } from "next-intl"
 
-import { AuthServices } from "@/services"
 import { DefaultResponse } from "@/types"
 import { useMutation } from "@tanstack/react-query"
 import { AxiosError } from "axios"
+import AuthServices from "@/services/auth.service"
 
 export const useAuthentication = () => {
 	const commonTranslation = useTranslations("common")
