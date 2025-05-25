@@ -10,6 +10,12 @@ export const Routes = {
 	ROOT: "/",
 	SHOWCASE: "/showcases",
 	LOGIN: "/login",
+	REGISTER: "/register",
+	FORGOT_PASSWORD: "/forgot-password",
+	RESET_PASSWORD: "/reset-password",
+	GOOGLE_LOGIN: "http://localhost:8000/auth/google",
+	GITHUB_LOGIN: "http://localhost:8000/auth/github",
+	SOCIAL_LOGIN_ORIGIN: "http://localhost:8000"
 }
 
 export const QueryKeys = {
