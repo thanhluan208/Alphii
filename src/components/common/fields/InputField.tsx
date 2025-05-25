@@ -56,7 +56,7 @@ const InputField = <
 				</FormLabel>
 			)}
 			<FormControl>
-				<div className="relative h-[56px] !mt-1">
+				<div className="relative !mt-1">
 					{icon && (
 						<div className="absolute flex items-center justify-center left-3 top-4 h-6 w-6 text-muted-foreground">
 							{icon}
@@ -64,7 +64,7 @@ const InputField = <
 					)}
 					{otherInputProps.type === "password" && (
 						<div
-							className="absolute right-3 top-4 flex items-center justify-center h-6 w-6 text-muted-foreground"
+							className="absolute right-3 top-3 flex items-center justify-center h-5 w-5 text-neutral-400"
 							onClick={() => setShowPass(!showPass)}
 						>
 							{showPass ? <Eye /> : <EyeOff />}
