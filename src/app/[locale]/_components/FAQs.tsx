@@ -47,7 +47,7 @@ const FAQs = () => {
 					<AccordionItem
 						key={i}
 						value={`${i}`}
-						className="shadow-[0px_4px_10px_0px_#00000014] p-6 rounded-[20px] flex flex-col gap-3 mt-3"
+						className="shadow-[0px_4px_10px_0px_#00000014] p-6 rounded-[20px] flex flex-col gap-3 mt-3 border-b-0"
 					>
 						<div
 							className="flex items-center justify-between"
@@ -58,7 +58,7 @@ const FAQs = () => {
 							{item.question}
 							{value === `${i}` ? <Minus /> : <Plus />}
 						</div>
-						<AccordionContent className="text-[#62636C]">
+						<AccordionContent className="text-alphii_text_sub_600">
 							{item.answer}
 						</AccordionContent>
 					</AccordionItem>

@@ -19,48 +19,10 @@ import { Routes } from "@/lib/constant"
 import Demos from "./_components/Demos"
 import FAQs from "./_components/FAQs"
 import PriceCard from "./_components/PriceCard"
+import { ThemeButton } from "@/components/ui/theme-button"
 
 const Home = () => {
 	const translation = useTranslations("home")
-
-	const favorCards = [
-		{
-			index: 1,
-			title: "Agents that actually work",
-			description:
-				"They don't just run prompts. They plan, adapt, and deliver results—on their own."
-		},
-		{
-			index: 2,
-			title: "Teams build faster together",
-			description:
-				"Workflows stay in sync. Agents share context and collaborate, just like your team would."
-		},
-		{
-			index: 3,
-			title: "Built-in security, no add-ons",
-			description:
-				"Encryption, access control, and private deployment come standard. No hidden extras."
-		},
-		{
-			index: 4,
-			title: "Real-time collaboration",
-			description:
-				"See what agents are doing, make changes instantly, and stay in the loop effortlessly."
-		},
-		{
-			index: 5,
-			title: "No black boxes—full visibility",
-			description:
-				"Every step is logged. Every decision traceable. Total transparency, by default."
-		},
-		{
-			index: 6,
-			title: "Set it up once, it runs itself",
-			description:
-				"Launch an agent and let it go. It works around the clock—no babysitting needed."
-		}
-	]
 
 	const tabs = [
 		{
@@ -87,15 +49,11 @@ const Home = () => {
 
 	return (
 		<div className="relative flex flex-col items-center font-[500] overflow-hidden">
-			<div className="fixed top-0 left-0 flex items-center justify-between w-full h-[80px]  z-50 px-4 md:px-8 lg:px-[150px] py-5 backdrop-blur-md">
+			<div className="fixed top-0 left-0 flex items-center bg-card justify-between w-full h-[80px]  z-50 px-4 md:px-8 lg:px-[150px] py-5 backdrop-blur-md">
 				<div className="flex items-center gap-[60px]">
-					<Image
-						src={"/images/logo.png"}
-						alt="logo"
-						width={86}
-						height={23.71}
-					/>
-					<div className="hidden md:flex gap-6 items-center text-[#8C8D98]">
+					<Logo className="w-[86px] h-[24px] text-card-foreground" />
+
+					<div className="hidden md:flex gap-6 items-center text-alphii_text_sub_600">
 						<Link href={"#feature"}>{translation("lFeature")}</Link>
 						<Link href={"#about"}>{translation("lHowItWork")}</Link>
 						<Link href={"#roadmap"}>{translation("lTestimonials")}</Link>
@@ -103,24 +61,27 @@ const Home = () => {
 						<Link href={"#faq"}>{translation("lFAQs")}</Link>
 					</div>
 				</div>
-				<Link href={Routes.ROOT}>
-					<Button className="items-center gap-2">
-						{translation("lGetStartedForFree")} <ArrowUpRight />
-					</Button>
-				</Link>
+				<div className="flex items-center gap-2">
+					<ThemeButton />
+					<Link href={Routes.ROOT}>
+						<Button className="items-center gap-2">
+							{translation("lGetStartedForFree")} <ArrowUpRight />
+						</Button>
+					</Link>
+				</div>
 			</div>
 			<div className="w-full relative  max-w-[1250px] flex-col flex items-center  justify-center bg-center bg-cover px-4 md:px-8 lg:pb-[20px] lg:px-[150px] pt-[80px]">
 				<div className="text-center flex items-center flex-col mt-[180px] z-10 relative">
 					<p className="text-4xl sm:text-[64px] sm:leading-[72px] font-[500]">
 						Build wonders with your customisable A2A team
 					</p>
-					<p className="font-[500] leading-6 text-[#8C8D98] mt-3 lg:w-[528px]">
+					<p className="font-[500] leading-6 text-alphii_text_sub_600 mt-3 lg:w-[528px]">
 						Build agents that think and act—on their own, or with your team.
 						They plan, talk, and get things done. No hand-holding. No downtime.
 					</p>
 				</div>
 				<div className="mt-8 flex gap-3 z-10 relative">
-					<Button variant="outline" className="items-center w-[159px] gap-2">
+					<Button variant="outline" className="items-center w-[159px] gap-2 ">
 						<p>Watch a demo</p>
 						<ArrowUpRight />
 					</Button>
@@ -143,7 +104,10 @@ const Home = () => {
 					<p className="text-center text-[32px] leading-10">
 						Connect more apps.
 						<br />
-						<span className="text-[#8C8D98]"> Unlock more capabilities.</span>
+						<span className="text-alphii_text_sub_600">
+							{" "}
+							Unlock more capabilities.
+						</span>
 					</p>
 					<div>
 						<InfiniteMovingCards
@@ -171,7 +135,7 @@ const Home = () => {
 				<p className="text-center text-[32px] leading-10">
 					Made for trust.
 					<br />
-					<span className="text-[#8C8D98]"> Designed for you.</span>
+					<span className="text-alphii_text_sub_600"> Designed for you.</span>
 				</p>
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-[60px]">
 					<div>
@@ -186,7 +150,7 @@ const Home = () => {
 								<p className="text-xl font-[500] leading-6">
 									Always-On Strategy Companion
 								</p>
-								<p className="text-[#8C8D98]">
+								<p className="text-alphii_text_sub_600">
 									Thinks ahead, plans smartly, and helps you stay one step
 									ahead.
 								</p>
@@ -194,7 +158,7 @@ const Home = () => {
 						</div>
 					</div>
 					<div>
-						<div className="flex flex-col gap-6">
+						<div className="flex flex-col gap-6 justify-between">
 							<div className="bg-[#F9F9FB] rounded-[16px] overflow-hidden">
 								<Image
 									src={"/images/home-illust-2.png"}
@@ -206,7 +170,7 @@ const Home = () => {
 									<p className="text-xl font-[500] leading-6">
 										Perfect Memory Project Buddy
 									</p>
-									<p className="text-[#8C8D98]">
+									<p className="text-alphii_text_sub_600">
 										Remembers every detail so you can stay focused on what
 										matters.
 									</p>
@@ -223,7 +187,7 @@ const Home = () => {
 									<p className="text-xl font-[500] leading-6">
 										Teammate That Just Knows
 									</p>
-									<p className="text-[#8C8D98]">
+									<p className="text-alphii_text_sub_600">
 										Understands your flow, follows your lead, and helps you move
 										fast.
 									</p>
@@ -232,7 +196,7 @@ const Home = () => {
 						</div>
 					</div>
 					<div>
-						<div className="flex flex-col gap-6">
+						<div className="flex flex-col gap-6 justify-between">
 							<div className="bg-[#F9F9FB] rounded-[16px] overflow-hidden">
 								<Image
 									src={"/images/home-illust-4.png"}
@@ -244,7 +208,7 @@ const Home = () => {
 									<p className="text-xl font-[500] leading-6">
 										Perfect Memory Project Buddy
 									</p>
-									<p className="text-[#8C8D98]">
+									<p className="text-alphii_text_sub_600">
 										Remembers every detail so you can stay focused on what
 										matters.
 									</p>
@@ -261,7 +225,7 @@ const Home = () => {
 									<p className="text-xl font-[500] leading-6">
 										{"You're in the loop"}
 									</p>
-									<p className="text-[#8C8D98]">
+									<p className="text-alphii_text_sub_600">
 										{`With everything visible you can join in, observe because
 										it's your team too.`}
 									</p>
@@ -271,16 +235,18 @@ const Home = () => {
 					</div>
 				</div>
 
-				<p className="text-[#8C8D98] mt-[60px]">
+				<p className="text-alphii_text_sub_600 mt-[60px]">
 					Understands your flow, follows your lead, and helps you move fast.
 				</p>
 			</div>
 
-			<div className="w-full relative  max-w-[1250px] flex-col flex items-center  justify-center bg-center px-4 md:px-8 lg:pb-[100px] lg:px-[60px] pt-[60px]">
+			<div className="w-full relative  max-w-[1250px] flex-col flex items-center  justify-center bg-center px-4 md:px-8 md:pb-[100px] lg:px-[60px] pt-[60px]">
 				<div className="flex w-full items-start flex-col gap-[100px]">
 					<p className="text-[32px]">
 						What makes us special{" "}
-						<span className="text-[#8C8D98]">from other products</span>
+						<span className="text-alphii_text_sub_600">
+							from other products
+						</span>
 					</p>
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-10 container1">
 						<div className="flex group flex-col gap-6 justify-between items-start">
@@ -317,9 +283,9 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div className="w-full relative bg-[#F9F9FB] flex-col flex items-center  justify-center bg-center px-4 md:px-8 lg:pb-[100px] lg:px-[60px] pt-[100px]">
+			<div className="w-full relative bg-alphii_bg_weak_40 flex-col flex items-center  justify-center bg-center px-4 md:px-8 lg:pb-[100px] lg:px-[60px] pt-[100px]">
 				<p className="text-[32px] font-[500] text-center">
-					<span className="text-[#8C8D98]">
+					<span className="text-alphii_text_sub_600">
 						Start by choosing a template, or
 					</span>
 					<br />
@@ -335,9 +301,8 @@ const Home = () => {
 
 				<div className="w-full max-w-6xl mx-auto p-4 mt-[120px]">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-x-[120px] gap-y-10">
-						{/* Row 1 */}
 						<div className=" border-blue-500 p-6 rounded">
-							<h2 className="text-lg font-medium text-[#6530EE] mb-2">
+							<h2 className="text-lg font-medium text-primary mb-2">
 								Trained Only. Tracked Never. Yours Always.
 							</h2>
 							<p className="text-gray-600">
@@ -347,7 +312,7 @@ const Home = () => {
 						</div>
 
 						<div className=" border-blue-500 p-6 rounded">
-							<h2 className="text-lg font-medium text-[#6530EE] mb-2">
+							<h2 className="text-lg font-medium text-primary mb-2">
 								{"Pricing That Fits. Nothing You Don't."}
 							</h2>
 							<p className="text-gray-600">
@@ -356,9 +321,8 @@ const Home = () => {
 							</p>
 						</div>
 
-						{/* Row 2 */}
 						<div className=" border-blue-500 p-6 rounded">
-							<h2 className="text-lg font-medium text-[#6530EE] mb-2">
+							<h2 className="text-lg font-medium text-primary mb-2">
 								So Simple It Just Makes Sense.
 							</h2>
 							<p className="text-gray-600">
@@ -368,7 +332,7 @@ const Home = () => {
 						</div>
 
 						<div className=" border-blue-500 p-6 rounded">
-							<h2 className="text-lg font-medium text-[#6530EE] mb-2">
+							<h2 className="text-lg font-medium text-primary mb-2">
 								See It Talk. Watch It Think.
 							</h2>
 							<p className="text-gray-600">
@@ -377,9 +341,8 @@ const Home = () => {
 							</p>
 						</div>
 
-						{/* Row 3 */}
 						<div className=" border-blue-500 p-6 rounded">
-							<h2 className="text-lg font-medium text-[#6530EE] mb-2">
+							<h2 className="text-lg font-medium text-primary mb-2">
 								Customize It. Train It. Own It.
 							</h2>
 							<p className="text-gray-600">
@@ -389,7 +352,7 @@ const Home = () => {
 						</div>
 
 						<div className=" border-blue-500 p-6 rounded">
-							<h2 className="text-lg font-medium text-[#6530EE] mb-2">
+							<h2 className="text-lg font-medium text-primary mb-2">
 								Knows The Job. Never Takes Breaks.
 							</h2>
 							<p className="text-gray-600">
@@ -401,10 +364,10 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div className=" px-4 md:px-8 lg:px-[150px] py-12 md:py-[100px] text-[#1E1F24]">
+			<div className=" px-4 md:px-8 lg:px-[150px] py-12 md:py-[100px] text-black dark:text-white">
 				<div className="mt-[100px] ">
 					<p className="text-[44px] leading-[52px] font-bold">Our Pricing</p>
-					<p className="text-xl leading-7 text-[#62636C]">
+					<p className="text-xl leading-7 text-alphii_text_sub_600">
 						Incredibly powerful, yet simply affordable.
 					</p>
 
@@ -419,7 +382,7 @@ const Home = () => {
 						<p className="text-3xl md:text-4xl lg:text-[44px] leading-tight lg:leading-[52px] font-bold">
 							Frequently Asked Questions
 						</p>
-						<p className="text-lg md:text-xl leading-7 text-[#62636C] mt-4">
+						<p className="text-lg md:text-xl leading-7 text-alphii_text_sub_600 mt-4">
 							Incredibly powerful, yet simply affordable.
 						</p>
 					</div>
@@ -427,9 +390,9 @@ const Home = () => {
 				</div>
 			</div>
 			<div className="p-5 ">
-				<div className="bg-[#0A0812] text-white rounded-3xl px-4 md:px-8 lg:px-10 py-14  ">
+				<div className="bg-black dark:bg-card text-white rounded-3xl px-4 md:px-8 lg:px-10 py-14  ">
 					<div className="w-full items-center flex flex-col">
-						<Logo className="text-[#FCFCFD]" />
+						<Logo className="text-background" />
 						<p className="mt-5 text-3xl">
 							Build wonders with your <br /> customisable A2A team
 						</p>
@@ -443,7 +406,7 @@ const Home = () => {
 								<p className="bg-[linear-gradient(90deg,#777E90_0%,#FFFFFF_31.12%,#777E91_62.25%)] bg-clip-text text-transparent font-bold text-[28px] leading-8">
 									Exclusive Beta Coming Q1 2025
 								</p>
-								<p className="text-[#62636C] mt-3">
+								<p className="text-alphii_text_sub_600 mt-3">
 									{`Don't miss your chance to be part of something new. Join our
 									closed beta today.`}
 								</p>
@@ -459,7 +422,7 @@ const Home = () => {
 							</div>
 						</div>
 
-						<div className="grid grid-cols-1 gap-10 lg:grid-cols-2 mt-8 text-xs lg:gap-[60px] text-[#62636C]">
+						<div className="grid grid-cols-1 gap-10 lg:grid-cols-2 mt-8 text-xs lg:gap-[60px] text-alphii_text_sub_600">
 							<p>
 								{`Alphii AI is an emerging startup proudly built in Vietnam. As we
 								continue to grow, we're actively developing and refining our

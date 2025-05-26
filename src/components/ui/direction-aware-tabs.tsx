@@ -90,7 +90,7 @@ function DirectionAwareTabs({
 								!tab.disabled && handleTabClick(tab.id)
 							}}
 							className={cn(
-								"relative  h-[42px] bg-[#F0F0F3] px-3.5 py-1.5 flex-1 justify-center text-xs sm:text-sm font-medium  transition  flex gap-2 items-center ",
+								"relative  h-[42px] bg-background px-3.5 py-1.5 flex-1 justify-center text-xs sm:text-sm font-medium  transition  flex gap-2 items-center ",
 								tab?.disabled && "opacity-50",
 								index === 0 && "rounded-l-lg",
 								index === tabs.length - 1 && "rounded-r-lg",

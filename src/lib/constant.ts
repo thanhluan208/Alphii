@@ -2,7 +2,7 @@ export const languages = ["en", "th"]
 
 export const ACCESS_TOKEN = "access_token"
 export const REFRESH_TOKEN = "refresh_token"
-export const BASE_URL = "/app-service"
+export const BASE_URL = process.env.BASE_URL || "http://backend-default"
 export const NEXT_LOCALE = "NEXT_LOCALE"
 export const DEFAULT_INIT_PAGE = "1"
 

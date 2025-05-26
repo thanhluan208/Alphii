@@ -7,7 +7,7 @@ import {
 	REFRESH_TOKEN,
 	Routes
 } from "@/lib/constant"
-import { AuthServices } from "@/services"
+import AuthServices from "@/services/auth.service"
 import { LANGUAGE, STATUS_CODE } from "@/types"
 import axios, {
 	AxiosError,

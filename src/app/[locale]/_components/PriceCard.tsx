@@ -92,7 +92,7 @@ const PriceCard = ({ variant, className }: PriceCardProps) => {
 		switch (variant) {
 			case "basic":
 				return (
-					<div className="grid grid-cols-[50px_1fr] mt-5 gap-y-2 items-center">
+					<div className="grid text-black grid-cols-[50px_1fr] mt-5 gap-y-2 items-center">
 						<Check className="text-[#06BF78]" />
 						<p className="text-xs font-semibold">10M Token</p>
 						<Check className="text-[#06BF78]" />
@@ -105,7 +105,7 @@ const PriceCard = ({ variant, className }: PriceCardProps) => {
 				)
 			case "plus+":
 				return (
-					<div className="grid grid-cols-[50px_1fr] mt-5 gap-y-2 items-center">
+					<div className="grid text-black grid-cols-[50px_1fr] mt-5 gap-y-2 items-center">
 						<Check className="text-[#06BF78]" />
 						<p className="text-xs font-semibold">25M Token</p>
 						<Check className="text-[#06BF78]" />
@@ -120,7 +120,7 @@ const PriceCard = ({ variant, className }: PriceCardProps) => {
 				)
 			case "custom":
 				return (
-					<div className="grid grid-cols-[50px_1fr] mt-5 gap-y-2 items-center">
+					<div className="grid text-black grid-cols-[50px_1fr] mt-5 gap-y-2 items-center">
 						<Check className="text-[#06BF78]" />
 						<p className="text-xs font-semibold">100M Token</p>
 						<Check className="text-[#06BF78]" />
@@ -140,12 +140,12 @@ const PriceCard = ({ variant, className }: PriceCardProps) => {
 		<div
 			className={cn(
 				"border-2 p-1.5 rounded-3xl",
-				variant === "basic" ? "border-[#8E9CFF]" : "border-[#EFF0F3]"
+				variant === "basic" ? "border-primary" : "border-[#EFF0F3]"
 			)}
 		>
 			<div
 				className={cn(
-					"rounded-[18px] p-4 flex flex-col gap-7",
+					"rounded-t-[18px] p-4 flex flex-col gap-7",
 					card({ variant, className })
 				)}
 			>
@@ -155,7 +155,7 @@ const PriceCard = ({ variant, className }: PriceCardProps) => {
 				</div>
 				<div className="flex flex-col gap-2">
 					{price()}
-					<p className="text-base leading-6 text-[#62636C]">
+					<p className="text-base leading-6 text-alphii_text_sub_600">
 						Per user/month, billed monthly
 					</p>
 				</div>
@@ -167,8 +167,8 @@ const PriceCard = ({ variant, className }: PriceCardProps) => {
 			<Button
 				type="button"
 				className={cn(
-					"h-[52px] w-full rounded-b-[20px] rounded-t-sm",
-					variant !== "basic" && "bg-[#EFF0F3]"
+					"h-[52px] w-full rounded-b-[20px] rounded-t-none",
+					variant !== "basic" && "bg-alphii_bg_weak_50"
 				)}
 				variant={variant === "basic" ? "default" : "ghost"}
 			>

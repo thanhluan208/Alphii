@@ -1,6 +1,6 @@
 import { shallow } from "zustand/shallow"
 import { createWithEqualityFn } from "zustand/traditional"
-import { TreeNode } from "@/components/common/FolderTree/FolderTree"
+import { TreeNode } from "@/components/common/FolderTree/FolderTreeNodes"
 
 interface fileState {
 	currentFile: TreeNode | null

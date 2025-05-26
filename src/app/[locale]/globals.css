@@ -46,12 +46,14 @@
 
 		--alphii-primary: #4c46e7;
 		--alphii-primary-50: #24237180;
+		--alpgii-primary-light: #f2f2ff;
 		--alphii-border: #d8d9e0;
 		--alphii-text-sub-600: #5c5c5c;
 		--alphii-skeleton: #eff0f3;
 		--alphii-border-2: #ebebeb;
 		--alphii-bg-soft-200: #ebebeb;
 		--alphii-bg-weak-50: #f7f7f7;
+		--alphii-bg-weak-40: #f9f9fb;
 	}
 
 	.dark {
@@ -86,6 +88,20 @@
 		--sidebar-accent-foreground: oklch(0.985 0 0);
 		--sidebar-border: oklch(1 0 0 / 10%);
 		--sidebar-ring: oklch(0.439 0 0);
+
+		--alphii-primary: #6e68f8;
+		--alphii-primary-50: #6e68f880;
+		--alpgii-primary-light: #1e1c42;
+		--alphii-border: #3a3a45;
+		--alphii-text-sub-600: #b0b0b0;
+		--alphii-skeleton: #2a2a30;
+		--alphii-border-2: #333340;
+		--alphii-bg-soft-200: #282830;
+		--alphii-bg-weak-50: #1c1c24;
+		--alphii-bg-weak-40: #18181c;
+
+		--alphii-background: #121218;
+		--alphii-text-main: #e6e6e6;
 	}
 }
 
@@ -105,4 +121,8 @@
 	body {
 		@apply bg-background text-foreground;
 	}
+}
+.no-scrollbar {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 }
