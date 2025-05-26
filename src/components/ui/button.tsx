@@ -12,7 +12,7 @@ const buttonVariants = cva(
 				default:
 					"bg-[linear-gradient(0deg,#5100D9,#5100D9),linear-gradient(90deg,#3A10D1_0%,#794BFF_100%)] text-white disabled:bg-grey-2 disabled:bg-none disabled:text-white",
 				secondary: "border border-red-600 bg-background text-red-600 ",
-				outline: "border-2 bg-[#F9F9FB] border-[#D9DAE1]",
+				outline: "border-2 bg-background border-alphii_border",
 				text: "text-primary hover:bg-jungleGreen/10",
 				ghost: "hover:bg-accent hover:text-accent-foreground",
 				link: "text-primary underline-offset-4 hover:underline",

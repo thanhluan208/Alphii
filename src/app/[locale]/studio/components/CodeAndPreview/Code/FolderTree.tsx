@@ -1,27 +1,20 @@
 "use client"
 
-import React, { useMemo } from "react"
+import React, { Fragment } from "react"
 
-import { Button } from "@/components/ui"
+import FolderTreeNodes, { TreeNode } from "@/components/common/FolderTree/FolderTreeNodes"
+import { FilesIcon, SearchIcon } from "@/components/icons"
+import { ResizableHandle, ResizablePanel } from "@/components/ui/resizable"
 import data from "@/data/FolderData.json"
-import { fileIcon } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 
-import useFileStore from "@/stores/fileStore"
-
-import Folder from "./Folder"
-
-export interface TreeNode {
-	name: string
-	type: "folder" | "file"
-	path: string
-	children?: TreeNode[]
-	contents?: string
-	isBinary?: boolean
-	lastModified?: number
+export enum TreeTabs {
+	FILES = "files",
+	SEARCH = "search"
 }
 
 const FolderTree = () => {
-	const { setCurrentFile } = useFileStore()
+	const [treeTab, setTreeTab] = React.useState(TreeTabs.FILES)
 
 	function parseFolderDataToTree(data: Record<string, any>): TreeNode[] {
 		// Step 1: Collect all entries and group by path segments
@@ -113,40 +106,44 @@ const FolderTree = () => {
 
 	const tree = parseFolderDataToTree(data)
 
-	// Optional: Function to print the tree for debugging
-	function printTree(nodes: TreeNode[], indent: string = "") {
-		nodes.forEach((node) => {
-			console.log(
-				`${indent}${node.type === "folder" ? "📁" : "📄"} ${node.name}`
-			)
-			if (node.children) {
-				printTree(node.children, indent + "  ")
-			}
-		})
-	}
-
-	printTree(tree)
-
 	return (
-		<div className="flex flex-col">
-			{tree.map((node) => {
-				if (node.type === "folder")
-					return <Folder key={node.path} data={node} level={0} />
+		<Fragment>
+			<ResizablePanel defaultSize={20} className="min-w-[204px]">
+				<div className="border-r h-full border-alphii_border_2 ">
+					<div className="px-2.5 py-2 border-b border-alphii_border_2">
+						<div className="w-full grid grid-cols-2 bg-alphii_bg_weak_50 gap-1 text-sm rounded-[10px] p-1.5">
+							<button
+								onClick={() => setTreeTab(TreeTabs.FILES)}
+								className={cn(
+									"relative h-7 transition-all text-alphii_text_sub_600 flex items-center justify-center gap-2",
+									treeTab === TreeTabs.FILES &&
+										" bg-card text-muted-foreground shadow-md rounded-[6px]"
+								)}
+							>
+								<FilesIcon />
+								Files
+							</button>
+							<button
+								onClick={() => setTreeTab(TreeTabs.SEARCH)}
+								className={cn(
+									"relative h-7 transition-all text-alphii_text_sub_600 flex items-center justify-center gap-2",
+									treeTab === TreeTabs.SEARCH &&
+										" bg-card text-muted-foreground shadow-md rounded-[6px]"
+								)}
+							>
+								<SearchIcon />
+								Search
+							</button>
+						</div>
+					</div>
 
-				const Icon = fileIcon(node.name)
-				return (
-					<Button
-						key={node.name}
-						onClick={() => setCurrentFile(node)}
-						variant="ghost"
-						className="flex items-center justify-start gap-2 mt-1 h-6 p-0 px-4 shadow-none w-[230px]"
-					>
-						<Icon />
-						<span className="text-sm text-gray-500">{node.name}</span>
-					</Button>
-				)
-			})}
-		</div>
+					<div className="pb-2 max-h-[calc(100%-65px)] max-w-full overflow-auto no-scrollbar">
+						{treeTab === TreeTabs.FILES && <FolderTreeNodes data={tree}/>}
+					</div>
+				</div>
+			</ResizablePanel>
+			<ResizableHandle />
+		</Fragment>
 	)
 }
 
