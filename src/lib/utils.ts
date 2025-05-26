@@ -98,3 +98,15 @@ export const fileIcon = (fileName: string) => {
 
 	return File
 }
+
+
+export const extractMessage = (message: string) => {
+	const regex = /^\[Message\] from .+? to .+?: ([\s\S]+)$/;
+	const match = message.match(regex);
+
+	if (match) {
+		return match[1]
+	}
+
+	return ''
+}

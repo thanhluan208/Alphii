@@ -3,10 +3,9 @@ export enum LANGUAGE {
 	TH = "th"
 }
 
-export interface DefaultResponse<T> {
-	data: T
+export interface DefaultResponse {
 	message: string
-	status: STATUS_CODE
+	status_code: STATUS_CODE
 }
 
 export enum STATUS_CODE {
@@ -18,11 +17,6 @@ export enum STATUS_CODE {
 	FAIL = 400
 }
 
-export interface PagingResponse<T> {
-	meta: PagingMeta
-	result: T
-	success: boolean
-}
 
 export interface PagingMeta {
 	current: number
@@ -54,36 +48,4 @@ export interface Media {
 	mediaId: string
 	mediaUrl: string
 	mediaType: string
-}
-
-export interface PlaceOption {
-	description: string
-	matched_substrings: MatchedSubstring[]
-	place_id: string
-	reference: string
-	structured_formatting: StructuredFormatting
-	terms: Term[]
-	types: string[]
-}
-
-export interface MatchedSubstring {
-	length: number
-	offset: number
-}
-
-export interface StructuredFormatting {
-	main_text: string
-	main_text_matched_substrings: MatchedSubstring[]
-	secondary_text: string
-}
-
-export interface Term {
-	offset: number
-	value: string
-}
-
-export enum CategoryTypeEnum {
-	Accommodation = "accommodation",
-	Medical = "medical",
-	Others = "others"
 }
