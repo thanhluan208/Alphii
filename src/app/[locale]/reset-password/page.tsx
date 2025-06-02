@@ -73,7 +73,7 @@ const ResetPassword = () => {
                     <img
                         src="/images/authentication/All.png"
                         alt="Character logo"
-                        className="w-[8.125rem] h-[8.3125rem] object-cover object-top absolute top-[-8.3125rem] left-1/2 transform -translate-x-1/2"
+                        className="w-[8.125rem] h-[8.3125rem] object-cover object-top absolute top-[-8.3125rem] left-1/2 transform -translate-x-1/2 top-character"
                     />
                     
                     <CardHeader className="pb-4">

@@ -126,3 +126,9 @@
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 }
+
+@media (max-height: 650px) {
+  .top-character {
+    display: none !important;
+  }
+}

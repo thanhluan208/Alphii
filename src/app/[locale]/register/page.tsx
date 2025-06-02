@@ -154,19 +154,19 @@ const Register = () => {
                     <img
                         src="/images/authentication/Yellow.png"
                         alt="Character logo"
-                        className="w-24 absolute bottom-56 -left-32"
+                        className="w-24 absolute bottom-56 -left-32 hidden md:block"
                     />
 
                     <img
                         src="/images/authentication/Purple.png"
                         alt="Character logo"
-                        className="w-24 absolute bottom-32 -right-32 scale-x-[-1]"
+                        className="w-24 absolute bottom-32 -right-32 scale-x-[-1] hidden md:block"
                     />
 
                     <img
                         src="/images/authentication/Green-n-Blue.png"
                         alt="Character logo"
-                        className="w-[8.75rem] h-[4.375rem] object-cover object-top absolute top-[-4.375rem] left-1/2 transform -translate-x-1/2"
+                        className="w-[8.75rem] h-[4.375rem] object-cover object-top absolute top-[-4.375rem] left-1/2 transform -translate-x-1/2 top-character"
                     />
 
                     <CardHeader className="pb-4">
