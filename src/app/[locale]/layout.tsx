@@ -14,6 +14,7 @@ import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
 import { ThemeProvider } from "@/providers/themeProvider"
 import { twJoin } from "tailwind-merge"
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -54,6 +55,7 @@ export default async function RootLayout({
 						</Providers>
 					</ThemeProvider>
 				</NextIntlClientProvider>
+				<Toaster />
 			</body>
 		</html>
 	)
