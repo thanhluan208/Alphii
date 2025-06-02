@@ -10,11 +10,20 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isEmpty } from "lodash";
 import { useTranslations } from "next-intl";
-import { Routes } from "@/lib/constant"
+import { LOCAL_STORAGE_KEY, Routes } from "@/lib/constant"
+import { STATUS_CODE } from "@/types";
+import useUserStore from "@/stores/userStore";
+import { useToast } from "@/hooks/use-toast";
+import useMutateAuthentication from "@/hooks/authentication/useMutateAuthentication";
+import { api } from "@/helpers";
+import { useRouter } from 'next/navigation'
 
 const Login = () => {
     const translation = useTranslations("authentication")
-
+    const { handleLogin } = useMutateAuthentication();
+    const { toast } = useToast()
+    const router = useRouter()
+    const { setToken, setUserId } = useUserStore();
     const formSchema = z.object({
         email_or_username: z.string().min(2).max(50),
         password: z.string().min(6).max(50),
@@ -41,13 +50,8 @@ const Login = () => {
             const accessToken = event.data.access_token;
             const refreshToken = event.data.refresh_token;
             const user_email = event.data.user_data.email;
-            // console.log("Received message from popup:", event.data);
-            console.log("access_token:", accessToken);
-            console.log("refresh_token:", refreshToken);
-            console.log("email:", user_email);
-
             popup?.close();
-            // socialLoginProceeding(accessToken, refreshToken, event.data.user_data);
+            socialLoginProceeding(accessToken, refreshToken, event.data);
         });
     };
 
@@ -64,18 +68,101 @@ const Login = () => {
             const accessToken = event.data.access_token;
             const refreshToken = event.data.refresh_token;
             const user_email = event.data.user_data.email;
-            // console.log("Received message from popup:", event.data);
-            console.log("access_token:", accessToken);
-            console.log("refresh_token:", refreshToken);
-            console.log("email:", user_email);
-
             popup?.close();
-            // socialLoginProceeding(accessToken, refreshToken, event.data);
+            socialLoginProceeding(accessToken, refreshToken, event.data);
         });
     };
 
-    const handleSubmit = async () => {
+    const socialLoginProceeding = (
+        accessToken: string,
+        refreshToken: string,
+        data: any
+    ) => {
 
+        if (data && data.user_data && data.user_data.status_code === STATUS_CODE.SUCCESS) {
+            toast({
+                title: "Login Successful",
+                description: "Welcome back!",
+                duration: 3000
+            });
+            api.attachTokenToHeader(accessToken);
+            setToken(accessToken);
+            setUserId(data.user_data.user_id);
+            if (typeof window !== "undefined") {
+                localStorage.setItem(
+                    LOCAL_STORAGE_KEY.ACCESS_TOKEN,
+                    accessToken
+                );
+                localStorage.setItem(
+                    LOCAL_STORAGE_KEY.REFRESH_TOKEN,
+                    refreshToken
+                );
+                localStorage.setItem(LOCAL_STORAGE_KEY.USER_ID, data.user_data.user_id);
+                localStorage.setItem(
+                    LOCAL_STORAGE_KEY.USER_DATA,
+                    JSON.stringify(data.user_data)
+                );
+            }
+
+            router.push(Routes.ROOT);
+        } else {
+            toast({
+                title: "Login Failed",
+                description: data.message,
+                duration: 3000
+            });
+        }
+    };
+
+    const handleSubmit = async () => {
+        if (handleLogin.isPending) {
+            return;
+        }
+
+        try {
+            const response = await handleLogin.mutateAsync(loginForm.getValues());
+
+            if (response.status_code === STATUS_CODE.SUCCESS) {
+                toast({
+                    title: "Login Successful",
+                    description: "Welcome back!",
+                    duration: 3000
+                });
+                api.attachTokenToHeader(response.access_token);
+                setToken(response.access_token);
+                setUserId(response.user_data.id);
+
+                if (typeof window !== "undefined") {
+                    localStorage.setItem(
+                        LOCAL_STORAGE_KEY.ACCESS_TOKEN,
+                        response.access_token
+                    );
+                    localStorage.setItem(
+                        LOCAL_STORAGE_KEY.REFRESH_TOKEN,
+                        response.refresh_token
+                    );
+                    localStorage.setItem(LOCAL_STORAGE_KEY.USER_ID, response.user_data.id);
+                    localStorage.setItem(
+                        LOCAL_STORAGE_KEY.USER_DATA,
+                        JSON.stringify(response.user_data)
+                    );
+                }
+
+                router.push(Routes.ROOT);
+            } else {
+                toast({
+                    title: "Login Failed",
+                    description: response.message,
+                    duration: 3000
+                });
+            }
+        } catch (error) {
+            toast({
+                title: "Login Failed",
+                description: "An error occurred while logging in: " + error,
+                duration: 3000
+            });
+        }
     };
 
     const formErr = loginForm.formState.errors;
@@ -189,7 +276,7 @@ const Login = () => {
                                     type="submit"
                                     className="w-full bg-[#7D52F4]"
                                     disabled={
-                                        !isEmpty(formErr) || !isDirty // || handleSignIn.isLoading 
+                                        !isEmpty(formErr) || !isDirty || handleLogin.isPending 
                                     }
                                 >
                                     {translation("loginButton")}

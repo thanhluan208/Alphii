@@ -102,6 +102,7 @@ const ForgotPassword = () => {
     const handleOTPChange = (code: string) => {
         setOtpValue(code);
     };
+    
     const handleResendCode = async () => {
         const email = forgotPassForm.getValues().email;
         if (!email) {

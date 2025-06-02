@@ -63,7 +63,7 @@ const Home = () => {
 				</div>
 				<div className="flex items-center gap-2">
 					<ThemeButton />
-					<Link href={Routes.ROOT}>
+					<Link href={Routes.LOGIN}>
 						<Button className="items-center gap-2">
 							{translation("lGetStartedForFree")} <ArrowUpRight />
 						</Button>
@@ -85,9 +85,11 @@ const Home = () => {
 						<p>Watch a demo</p>
 						<ArrowUpRight />
 					</Button>
-					<Button className="items-center gap-2">
-						{translation("lGetStartedForFree")} <ArrowUpRight />
-					</Button>
+					<Link href={Routes.LOGIN}>
+						<Button className="items-center gap-2">
+							{translation("lGetStartedForFree")} <ArrowUpRight />
+						</Button>
+					</Link>
 				</div>
 
 				<div>
@@ -396,9 +398,11 @@ const Home = () => {
 						<p className="mt-5 text-3xl">
 							Build wonders with your <br /> customisable A2A team
 						</p>
-						<Button className="items-center gap-2 mt-5">
-							{translation("lGetStartedForFree")} <ArrowUpRight />
-						</Button>
+						<Link href={Routes.LOGIN}>
+							<Button className="items-center gap-2 mt-5">
+								{translation("lGetStartedForFree")} <ArrowUpRight />
+							</Button>
+						</Link>
 					</div>
 					<div className="mt-[60px]">
 						<div className="flex flex-wrap gap-10 justify-between items-center">

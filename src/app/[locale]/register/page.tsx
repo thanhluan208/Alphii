@@ -10,8 +10,13 @@ import { z } from "zod";
 import { useEffect, useState } from "react";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Routes } from "@/lib/constant";
+import { LOCAL_STORAGE_KEY, Routes } from "@/lib/constant";
 import { useTranslations } from "next-intl";
+import { api } from "@/helpers";
+import { toast, useToast } from "@/hooks/use-toast";
+import { STATUS_CODE } from "@/types";
+import { useRouter } from "next/navigation";
+import useUserStore from "@/stores/userStore";
 
 const passwordCriteria = [
     {
@@ -30,7 +35,9 @@ const passwordCriteria = [
 
 const Register = () => {
     const translation = useTranslations("authentication")
-
+    const { toast } = useToast()
+    const router = useRouter()
+    const { setToken, setUserId } = useUserStore();
     const [passwordStrength, setPasswordStrength] = useState(0);
     const [currentPassword, setCurrentPassword] = useState("");
 
@@ -72,12 +79,8 @@ const Register = () => {
             const accessToken = event.data.access_token;
             const refreshToken = event.data.refresh_token;
             const user_email = event.data.user_data.email;
-            // console.log("Received message from popup:", event.data);
-            console.log("access_token:", accessToken);
-            console.log("refresh_token:", refreshToken);
-            console.log("email:", user_email);
-
             popup?.close();
+            socialLoginProceeding(accessToken, refreshToken, event.data);
         });
     };
 
@@ -94,13 +97,49 @@ const Register = () => {
             const accessToken = event.data.access_token;
             const refreshToken = event.data.refresh_token;
             const user_email = event.data.user_data.email;
-            // console.log("Received message from popup:", event.data);
-            console.log("access_token:", accessToken);
-            console.log("refresh_token:", refreshToken);
-            console.log("email:", user_email);
-
             popup?.close();
+            socialLoginProceeding(accessToken, refreshToken, event.data);
         });
+    };
+
+    const socialLoginProceeding = (
+        accessToken: string,
+        refreshToken: string,
+        data: any
+    ) => {
+        if (data && data.user_data && data.user_data.status_code === STATUS_CODE.SUCCESS) {
+            toast({
+                title: "Login Successful",
+                description: "Welcome back!",
+                duration: 3000
+            });
+            api.attachTokenToHeader(accessToken);
+            setToken(accessToken);
+            setUserId(data.user_data.user_id);
+            if (typeof window !== "undefined") {
+                localStorage.setItem(
+                    LOCAL_STORAGE_KEY.ACCESS_TOKEN,
+                    accessToken
+                );
+                localStorage.setItem(
+                    LOCAL_STORAGE_KEY.REFRESH_TOKEN,
+                    refreshToken
+                );
+                localStorage.setItem(LOCAL_STORAGE_KEY.USER_ID, data.user_data.user_id);
+                localStorage.setItem(
+                    LOCAL_STORAGE_KEY.USER_DATA,
+                    JSON.stringify(data.user_data)
+                );
+            }
+
+            router.push(Routes.ROOT);
+        } else {
+            toast({
+                title: "Login Failed",
+                description: data.message,
+                duration: 3000
+            });
+        }
     };
 
     const handleSubmit = async () => {
@@ -129,7 +168,7 @@ const Register = () => {
                         alt="Character logo"
                         className="w-[8.75rem] h-[4.375rem] object-cover object-top absolute top-[-4.375rem] left-1/2 transform -translate-x-1/2"
                     />
-                    
+
                     <CardHeader className="pb-4">
                         <CardTitle className="text-xl flex gap-2 items-center justify-center">
                             <p className="text-[#171717]">{translation("registerCardTitle")}</p>
