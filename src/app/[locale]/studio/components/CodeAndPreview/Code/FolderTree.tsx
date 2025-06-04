@@ -2,11 +2,14 @@
 
 import React, { Fragment } from "react"
 
-import FolderTreeNodes, { TreeNode } from "@/components/common/FolderTree/FolderTreeNodes"
+import FolderTreeNodes, {
+	TreeNode
+} from "@/components/common/FolderTree/FolderTreeNodes"
 import { FilesIcon, SearchIcon } from "@/components/icons"
 import { ResizableHandle, ResizablePanel } from "@/components/ui/resizable"
-import data from "@/data/FolderData.json"
 import { cn } from "@/lib/utils"
+
+import useFileStore from "@/stores/fileStore"
 
 export enum TreeTabs {
 	FILES = "files",
@@ -15,6 +18,7 @@ export enum TreeTabs {
 
 const FolderTree = () => {
 	const [treeTab, setTreeTab] = React.useState(TreeTabs.FILES)
+	const { listFiles } = useFileStore()
 
 	function parseFolderDataToTree(data: Record<string, any>): TreeNode[] {
 		// Step 1: Collect all entries and group by path segments
@@ -23,14 +27,16 @@ const FolderTree = () => {
 
 		// Step 2: Process each entry in the JSON
 		Object.entries(data).forEach(([key, value]) => {
-			const { name, type, fullPath, contents, isBinary, lastModified } = value
+			const { name, type, fullPath, contents, isBinary, lastModified, status } =
+				value
 
 			// Create a node for the current entry
 			const node: TreeNode = {
 				name,
 				type,
-				path: fullPath,
-				...(type === "file" && { contents, isBinary, lastModified })
+				fullPath,
+				...(type === "file" && { contents, isBinary, lastModified }),
+				status
 			}
 
 			// Split the fullPath into segments
@@ -53,8 +59,9 @@ const FolderTree = () => {
 					parentNode = {
 						name: pathSegments[pathSegments.length - 2],
 						type: "folder",
-						path: parentPath,
-						children: []
+						fullPath: parentPath,
+						children: [],
+						status: "new"
 					}
 					nodesMap.set(parentPath, parentNode)
 
@@ -64,8 +71,9 @@ const FolderTree = () => {
 						const grandParentNode: TreeNode = {
 							name: pathSegments[pathSegments.length - 3] || grandParentPath,
 							type: "folder",
-							path: grandParentPath,
-							children: []
+							fullPath: grandParentPath,
+							children: [],
+							status: "new"
 						}
 						nodesMap.set(grandParentPath, grandParentNode)
 						if (!grandParentPath.includes("/")) {
@@ -75,8 +83,8 @@ const FolderTree = () => {
 				}
 
 				// Initialize children array if it doesn't exist
-				if (!parentNode.children) {
-					parentNode.children = []
+				if (!parentNode?.children) {
+					parentNode!.children = []
 				}
 
 				// Add the current node to its parent's children
@@ -104,11 +112,11 @@ const FolderTree = () => {
 		return sortNodes(rootNodes)
 	}
 
-	const tree = parseFolderDataToTree(data)
+	const tree = parseFolderDataToTree(listFiles)
 
 	return (
 		<Fragment>
-			<ResizablePanel defaultSize={20} className="min-w-[204px]">
+			<ResizablePanel defaultSize={25} >
 				<div className="border-r h-full border-alphii_border_2 ">
 					<div className="px-2.5 py-2 border-b border-alphii_border_2">
 						<div className="w-full grid grid-cols-2 bg-alphii_bg_weak_50 gap-1 text-sm rounded-[10px] p-1.5">
@@ -138,7 +146,7 @@ const FolderTree = () => {
 					</div>
 
 					<div className="pb-2 max-h-[calc(100%-65px)] max-w-full overflow-auto no-scrollbar">
-						{treeTab === TreeTabs.FILES && <FolderTreeNodes data={tree}/>}
+						{treeTab === TreeTabs.FILES && <FolderTreeNodes data={tree} />}
 					</div>
 				</div>
 			</ResizablePanel>

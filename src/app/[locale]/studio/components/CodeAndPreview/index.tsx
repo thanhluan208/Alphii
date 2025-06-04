@@ -16,7 +16,7 @@ const CodeAndPreview = () => {
 	const [currentTab, setCurrentTab] = useState(StudioTabs.CODE)
 
 	return (
-		<div className="flex-1 bg-card rounded-xl border border-alphii_border_2 h-full">
+		<div className="flex-1 bg-card rounded-xl border border-alphii_border_2 h-full max-h-full max-w-[calc(100%-65px)]">
 			<div className="py-2 px-2.5 flex items-center justify-center border-b border-alphii_border_2">
 				<div className="w-1/3 relative flex gap-1 p-1.5 text-sm bg-alphii_bg_weak_50 rounded-[10px]">
 					<button

@@ -1,10 +1,8 @@
 "use client"
 
-import React, { useMemo } from "react"
 import { useSearchParams } from "next/navigation"
 
 import { Button } from "@/components/ui"
-import { usePathname, useRouter } from "@/i18n/routing"
 import { cn, fileIcon } from "@/lib/utils"
 
 import useFileStore from "@/stores/fileStore"
@@ -14,11 +12,15 @@ import Folder from "./Folder"
 export interface TreeNode {
 	name: string
 	type: "folder" | "file"
-	path: string
+	fullPath: string
 	children?: TreeNode[]
-	contents?: string
+	content?: string
 	isBinary?: boolean
 	lastModified?: number
+	status: "new" | "modified" | "deleted"
+	index?: number
+	animationState?: 'new' | 'select' ,
+	lastStop?: number
 }
 
 interface FolderTreeNodesProps {
@@ -26,9 +28,8 @@ interface FolderTreeNodesProps {
 }
 
 const FolderTreeNodes = ({ data }: FolderTreeNodesProps) => {
-	const router = useRouter()
-	const pathname = usePathname()
 	const seachParams = useSearchParams()
+	const { setCurrentFile } = useFileStore()
 
 	const file = seachParams.get("file")
 
@@ -37,24 +38,21 @@ const FolderTreeNodes = ({ data }: FolderTreeNodesProps) => {
 			{data &&
 				data.map((node) => {
 					if (node.type === "folder")
-						return <Folder key={node.path} data={node} level={0} />
+						return <Folder key={node.fullPath} data={node} level={0} />
 
 					const Icon = fileIcon(node.name)
 
 					return (
 						<Button
-							key={node.path}
+							key={node.fullPath}
 							// onClick={() => setCurrentFile(node)}
 							variant="ghost"
 							onClick={() => {
-								const search = new URLSearchParams(window.location.search)
-								search.set("file", node.path)
-
-								router.replace(pathname + "?" + search.toString())
+								setCurrentFile(node.fullPath)
 							}}
 							className={cn(
 								"flex w-full items-center border-0 justify-start hover:bg-alphii_primary_light gap-2 hover:text-primary text-alphii_text_sub_600 mt-1 h-6 px-4 shadow-none",
-								file === node.path &&
+								file === node.fullPath &&
 									"bg-alphii_primary_light  hover:bg-alphii_primary_light text-primary hover:text-primary"
 							)}
 						>

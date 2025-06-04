@@ -11,7 +11,7 @@ import Agents from "./components/Agents"
 import CodeAndPreview from "./components/CodeAndPreview"
 import Prompt from "./components/Prompt"
 
-const Folder = () => {
+const Studio = () => {
 	const { theme } = useTheme()
 
 	return (
@@ -43,7 +43,7 @@ const Folder = () => {
 				</div>
 			</div>
 			<div className="h-[calc(100%-60px)] flex w-full">
-				<div className="p-2 gap-2 flex-1 flex">
+				<div className="p-2 gap-2 lg:w-[calc(100%-550px)] w-full flex">
 					<Agents />
 					<CodeAndPreview />
 				</div>
@@ -54,4 +54,4 @@ const Folder = () => {
 	)
 }
 
-export default Folder
+export default Studio

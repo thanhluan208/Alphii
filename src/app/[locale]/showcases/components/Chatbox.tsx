@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { Fragment, useEffect, useState } from "react"
 
 import { cn } from "@/lib/utils"
 
@@ -9,11 +9,15 @@ export interface ChatboxProps {
 	content: string
 	name: string
 	isUser: boolean
+	from?: string
+	to?: string
 }
 
-const Chatbox = ({ content, name, isUser }: ChatboxProps) => {
+const Chatbox = ({ content, name, isUser, to }: ChatboxProps) => {
 	const [displayedText, setDisplayedText] = useState("")
 	const [currentIndex, setCurrentIndex] = useState(0)
+
+	const listTos = to?.split(", ")
 
 	useEffect(() => {
 		if (currentIndex < content.length) {
@@ -45,9 +49,26 @@ const Chatbox = ({ content, name, isUser }: ChatboxProps) => {
 					<p className="text-sm font-medium">{name}</p>
 				</div>
 
-				<div className="flex flex-col gap-1">
-					<p className="font-medium whitespace-pre-wrap">{displayedText}</p>
-				</div>
+				<p className="text-wrap">
+					{listTos && listTos.length > 0 && (
+						<Fragment>
+							{listTos.map((to) => (
+								<span
+									key={to}
+									className="text-xs mx-1 w-fit rounded-md border-alphii_border_2 px-2 py-1 bg-orange-400/20 text-alphii_text_sub_600"
+								>{`@${to}`}</span>
+							))}
+						</Fragment>
+					)}
+					<span
+						className="font-medium whitespace-pre-wrap text-wrap text-sm"
+						style={{
+							wordBreak: "break-word"
+						}}
+					>
+						{displayedText}
+					</span>
+				</p>
 			</div>
 		</div>
 	)

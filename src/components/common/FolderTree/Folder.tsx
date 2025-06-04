@@ -9,9 +9,10 @@ import {
 	AccordionContent,
 	AccordionItem
 } from "@/components/ui/accordion"
-import { usePathname, useRouter } from "@/i18n/routing"
 import { cn, fileIcon } from "@/lib/utils"
 import { ChevronUp } from "lucide-react"
+
+import useFileStore from "@/stores/fileStore"
 
 import { TreeNode } from "./FolderTreeNodes"
 
@@ -21,12 +22,10 @@ interface FolderProps {
 }
 
 const Folder = ({ data, level }: FolderProps) => {
-	const router = useRouter()
-	const pathname = usePathname()
 	const searchParams = useSearchParams()
+	const { setCurrentFile } = useFileStore()
 
 	const file = searchParams.get("file")
-
 	const [value, setValue] = useState("")
 
 	return (
@@ -68,19 +67,14 @@ const Folder = ({ data, level }: FolderProps) => {
 
 									return (
 										<Button
-											key={child.path}
+											key={child.fullPath}
 											variant="ghost"
 											onClick={() => {
-												const search = new URLSearchParams(
-													window.location.search
-												)
-												search.set("file", child.path)
-
-												router.replace(pathname + "?" + search.toString())
+												setCurrentFile(child.fullPath)
 											}}
 											className={cn(
 												"flex items-center border-0 w-full p-0 mt-1 text-alphii_text_sub_600 justify-start hover:bg-alphii_primary_light gap-2 hover:text-primary h-6 px-4 shadow-none truncate",
-												file === child.path &&
+												file === child.fullPath &&
 													"bg-alphii_primary_light text-primary "
 											)}
 										>
