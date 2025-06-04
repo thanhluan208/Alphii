@@ -17,6 +17,7 @@ import { useToast } from "@/hooks/use-toast";
 import useMutateAuthentication from "@/hooks/authentication/useMutateAuthentication";
 import { api } from "@/helpers";
 import { useRouter } from 'next/navigation'
+import Image from "next/image";
 
 const Login = () => {
     const translation = useTranslations("authentication")
@@ -173,21 +174,27 @@ const Login = () => {
             className="relative h-screen content-center bg-[#F7F7F7]">
             <Form {...loginForm}>
                 <Card className="relative bg-white pl-6 pr-6 pb-6 shadow-md w-11/12 max-w-md z-10 m-auto rounded-3xl border border-[#EBEBEB]">
-                    <img
+                    <Image
                         src="/images/authentication/Yellow.png"
                         alt="Character logo"
                         className="w-24 absolute bottom-24 -left-32 hidden md:block"
+                        width={96}
+                        height={96}
                     />
 
-                    <img
+                    <Image
                         src="/images/authentication/Purple.png"
                         alt="Character logo"
                         className="w-24 absolute bottom-20 -right-32 scale-x-[-1] hidden md:block"
+                        width={96}
+                        height={96}
                     />
 
-                    <img
+                    <Image
                         src="/images/authentication/Green-n-Blue.png"
                         alt="Character logo"
+                        width={140}
+                        height={80} 
                         className="w-[8.75rem] h-[4.375rem] object-cover object-top absolute top-[-4.375rem] left-1/2 transform -translate-x-1/2 top-character"
                     />
 
@@ -203,10 +210,12 @@ const Login = () => {
                         <Button
                             className="w-full bg-white text-black h-10 mb-3 shadow-none rounded-[10px] bg-none border border-[#D8D9E0]"
                             onClick={handleGoogleLogIn}>
-                            <img
+                            <Image
                                 src="/images/google.svg"
                                 alt="Google logo"
                                 className="w-5 h-5 mr-1"
+                                width={20}
+                                height={20}
                             />
                             {translation("googleButton")}
                         </Button>
@@ -214,10 +223,12 @@ const Login = () => {
                         <Button
                             className="w-full bg-white text-black h-10 mb-2 shadow-none rounded-[10px] bg-none border border-[#D8D9E0]"
                             onClick={handleGithubLogIn}>
-                            <img
+                            <Image
                                 src="/images/github.png"
                                 alt="Github logo"
                                 className="w-5 h-5 mr-1"
+                                width={20}
+                                height={20}
                             />
                             {translation("githubButton")}
                         </Button>
