@@ -13,19 +13,16 @@ export const siteConfig = {
 		"AI Planning",
 		"Team Templates",
 		"Agent Communication",
-		"AI Development",
-		"Next.js",
-		"TypeScript",
-		"Tailwind CSS"
+		"AI Development"
 	],
 	author: {
 		name: "AlphiiAI",
-		url: "https://alphii.ai"
+		url: "https://alphii-ai-fe.vercel.app"
 	},
 	openGraph: {
 		type: "website",
 		locale: "en_US",
-		url: "https://alphii.ai",
+		url: "https://alphii-ai-fe.vercel.app",
 		title: "AlphiiAI - Build Your Customizable A2A Team",
 		description:
 			"Create intelligent agents that think and act independently. Start fast with templates or build from scratch. Your agents sync, share context, and collaborate seamlessly like a real team.",
