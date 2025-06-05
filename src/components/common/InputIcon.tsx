@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { Eye, EyeOff } from "lucide-react"
 
 interface CommonInputProps extends ComponentPropsWithRef<"input"> {
-	iconLeft: React.ReactNode
+	iconLeft?: React.ReactNode
 	iconRight?: React.ReactNode
 	type?: string
 }
@@ -27,11 +27,13 @@ export default function InputIcon({
 
 	return (
 		<div className="relative flex items-center">
-			<div className="absolute left-3  top-2/4 -translate-y-2/4 text-gray-500">
-				{iconLeft}
-			</div>
+			{iconLeft && (
+				<div className="absolute left-3  top-2/4 -translate-y-2/4 text-gray-500">
+					{iconLeft}
+				</div>
+			)}
 			<Input
-				className={cn("pl-10", className)}
+				className={cn("pl-10 placeholder:text-alphii_text_sub_600", className)}
 				type={type === "password" ? (showPassword ? "text" : "password") : type}
 				{...props}
 			/>

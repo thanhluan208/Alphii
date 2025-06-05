@@ -26,7 +26,7 @@
 		--muted-foreground: oklch(0.556 0 0);
 		--accent: oklch(0.97 0 0);
 		--accent-foreground: oklch(0.205 0 0);
-		--destructive: oklch(0.577 0.245 27.325);
+		--destructive: oklch(0.65 0.23 22.47);
 		--border: oklch(0.922 0 0);
 		--input: oklch(0.922 0 0);
 		--ring: oklch(0.708 0 0);
@@ -52,8 +52,10 @@
 		--alphii-skeleton: #eff0f3;
 		--alphii-border-2: #ebebeb;
 		--alphii-bg-soft-200: #ebebeb;
+		--alphii-bg-strong-950: #171717;
 		--alphii-bg-weak-50: #f7f7f7;
 		--alphii-bg-weak-40: #f9f9fb;
+		--alphii-destructive-light: #ffebec;
 	}
 
 	.dark {
@@ -97,8 +99,10 @@
 		--alphii-skeleton: #2a2a30;
 		--alphii-border-2: #333340;
 		--alphii-bg-soft-200: #282830;
+		--alphii-bg-strong-950: #f5f5f5;
 		--alphii-bg-weak-50: #1c1c24;
 		--alphii-bg-weak-40: #18181c;
+		--alphii-destructive-light: #ffebec;
 
 		--alphii-background: #121218;
 		--alphii-text-main: #e6e6e6;
@@ -128,7 +132,7 @@
 }
 
 @media (max-height: 650px) {
-  .top-character {
-    display: none !important;
-  }
+	.top-character {
+		display: none !important;
+	}
 }

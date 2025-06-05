@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { useTheme } from "next-themes"
 
@@ -7,9 +7,9 @@ import { Button } from "@/components/ui"
 import { ThemeButton } from "@/components/ui/theme-button"
 import { ChevronDown } from "lucide-react"
 
-import Agents from "./components/Agents"
 import CodeAndPreview from "./components/CodeAndPreview"
 import Prompt from "./components/Prompt"
+import Sidebar from "./components/SideBar"
 
 const Studio = () => {
 	const { theme } = useTheme()
@@ -28,23 +28,12 @@ const Studio = () => {
 						Export
 						<ChevronDown />
 					</Button>
-					<Button
-						variant="ghost"
-						className="text-card hover:text-card rounded-lg w-[100px] p-0 h-9"
-						style={{
-							background:
-								theme === "light"
-									? "linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%), #171717"
-									: "linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 1) 100%), #fafafa"
-						}}
-					>
-						Deploy
-					</Button>
+					<Button className=" rounded-lg w-[100px] p-0 h-9">Deploy</Button>
 				</div>
 			</div>
 			<div className="h-[calc(100%-60px)] flex w-full">
 				<div className="p-2 gap-2 lg:w-[calc(100%-550px)] w-full flex">
-					<Agents />
+					<Sidebar />
 					<CodeAndPreview />
 				</div>
 
