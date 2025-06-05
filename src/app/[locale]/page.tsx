@@ -13,13 +13,13 @@ import {
 import { Button, Input } from "@/components/ui"
 import { DirectionAwareTabs } from "@/components/ui/direction-aware-tabs"
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-card"
+import { ThemeButton } from "@/components/ui/theme-button"
 import { Link } from "@/i18n/routing"
 import { Routes } from "@/lib/constant"
 
 import Demos from "./_components/Demos"
 import FAQs from "./_components/FAQs"
 import PriceCard from "./_components/PriceCard"
-import { ThemeButton } from "@/components/ui/theme-button"
 
 const Home = () => {
 	const translation = useTranslations("home")
@@ -64,7 +64,7 @@ const Home = () => {
 				<div className="flex items-center gap-2">
 					<ThemeButton />
 					<Link href={Routes.LOGIN}>
-						<Button className="items-center gap-2">
+						<Button className="items-center gap-2 w-fit">
 							{translation("lGetStartedForFree")} <ArrowUpRight />
 						</Button>
 					</Link>
@@ -86,7 +86,7 @@ const Home = () => {
 						<ArrowUpRight />
 					</Button>
 					<Link href={Routes.LOGIN}>
-						<Button className="items-center gap-2">
+						<Button className="items-center gap-2 w-fit">
 							{translation("lGetStartedForFree")} <ArrowUpRight />
 						</Button>
 					</Link>
@@ -399,7 +399,7 @@ const Home = () => {
 							Build wonders with your <br /> customisable A2A team
 						</p>
 						<Link href={Routes.LOGIN}>
-							<Button className="items-center gap-2 mt-5">
+							<Button className="items-center gap-2 mt-5 w-fit">
 								{translation("lGetStartedForFree")} <ArrowUpRight />
 							</Button>
 						</Link>
