@@ -5,6 +5,8 @@ import { useTheme } from "next-themes"
 import { ExportIcon, Logo } from "@/components/icons"
 import { Button } from "@/components/ui"
 import { ThemeButton } from "@/components/ui/theme-button"
+import { Link } from "@/i18n/routing"
+import { Routes } from "@/lib/constant"
 import { ChevronDown } from "lucide-react"
 
 import CodeAndPreview from "./components/CodeAndPreview"
@@ -17,7 +19,9 @@ const Studio = () => {
 	return (
 		<div className="w-screen h-screen bg-alphii_bg_weak_50">
 			<div className="px-5 h-[60px] flex items-center border-b bg-card justify-between border-alphii_border_2">
-				<Logo className="text-black dark:text-white w-[78px] h-[21.5px]" />
+				<Link href={Routes.ROOT}>
+					<Logo className="text-black dark:text-white w-[78px] h-[21.5px]" />
+				</Link>
 				<div className="flex gap-2">
 					<ThemeButton />
 					<Button

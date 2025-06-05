@@ -51,7 +51,9 @@ const Home = () => {
 		<div className="relative flex flex-col items-center font-[500] overflow-hidden">
 			<div className="fixed top-0 left-0 flex items-center bg-card justify-between w-full h-[80px]  z-50 px-4 md:px-8 lg:px-[150px] py-5 backdrop-blur-md">
 				<div className="flex items-center gap-[60px]">
-					<Logo className="w-[86px] h-[24px] text-card-foreground" />
+					<Link href={Routes.ROOT}>
+						<Logo className="w-[86px] h-[24px] text-card-foreground" />
+					</Link>
 
 					<div className="hidden md:flex gap-6 items-center text-alphii_text_sub_600">
 						<Link href={"#feature"}>{translation("lFeature")}</Link>
@@ -394,7 +396,9 @@ const Home = () => {
 			<div className="p-5 ">
 				<div className="bg-black dark:bg-card text-white rounded-3xl px-4 md:px-8 lg:px-10 py-14  ">
 					<div className="w-full items-center flex flex-col">
-						<Logo className="text-background" />
+						<Link href={Routes.ROOT}>
+							<Logo className="text-background" />
+						</Link>
 						<p className="mt-5 text-3xl">
 							Build wonders with your <br /> customisable A2A team
 						</p>

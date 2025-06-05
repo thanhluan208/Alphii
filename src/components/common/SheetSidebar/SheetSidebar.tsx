@@ -12,6 +12,8 @@ import {
 import { Button } from "@/components/ui"
 import GradientBorderCard from "@/components/ui/gradient-border-card"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Link } from "@/i18n/routing"
+import { Routes } from "@/lib/constant"
 import { Search } from "lucide-react"
 
 import InputIcon from "../InputIcon"
@@ -32,7 +34,9 @@ const SheetSidebar = () => {
 			</Button>
 			<SheetContent side={"left"}>
 				<div className="bg-alphii_bg_weak_50 h-full px-4 py-6 rounded-xl border border-alphii_border_2">
-					<Logo />
+					<Link href={Routes.ROOT}>
+						<Logo />
+					</Link>
 
 					<Button className="w-full mt-10">Start a new chat</Button>
 
