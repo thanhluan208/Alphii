@@ -1,21 +1,22 @@
-import React, { useEffect, useRef, useState } from "react"
-import { useSearchParams } from "next/navigation"
+import { useEffect, useRef } from "react"
 
-import { cn, extractMessage } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import { MATMessageType, MATNewMessage } from "@/types/mat.type"
-import { cloneDeep } from "lodash"
+import { isEmpty } from "lodash"
 
+import useFileStore from "@/stores/fileStore"
 import useSocketStore from "@/stores/socket.store"
 
-import Chatbox, { ChatboxProps } from "./Chatbox"
+import Chatbox from "./Chatbox"
+import Loading from "./Loading"
 
 const ChatContent = () => {
 	const { socket } = useSocketStore()
-	const searchParams = useSearchParams()
-	const prompt = searchParams.get("prompt")
 	const containerRef = useRef<HTMLDivElement>(null)
+	const currentFileIndex = useRef<number>(0)
 
-	const [messages, setMessages] = useState<ChatboxProps[]>([])
+	const { setLoading, addFile, setCurrentFile, messages, setMessages } =
+		useFileStore()
 
 	useEffect(() => {
 		if (socket) {
@@ -23,35 +24,43 @@ const ChatContent = () => {
 				try {
 					const message = JSON.parse(event.data) as MATNewMessage
 
-					console.log(message, message.type === MATMessageType.NEW_MESSAGE)
 					if (message.type === MATMessageType.NEW_MESSAGE) {
-						Object.entries(message.data.messages.roles).forEach(
-							([key, value]) => {
-								value.forEach((agentContent) => {
-									setMessages((prev) => {
-										if (prev.some((elm) => elm.id === agentContent.id)) {
-											return prev
-										}
+						if (message.data.messages.team?.[0]) {
+							const sendTo = message?.data?.messages?.team?.[0]?.send_to.filter(
+								(elm) => elm !== "<all>"
+							)
 
-										const newPrev = cloneDeep(prev)
+							setMessages({
+								id: message.data.messages.team[0].id,
+								content: message.data.messages.team[0].content,
+								name: message.data.messages.team[0].sent_from,
+								isUser: false,
+								from: message.data.messages.team[0].sent_from,
+								to: sendTo.join(", ")
+							})
+						}
+						if (!isEmpty(message.data.files)) {
+							addFile(message.data.files, currentFileIndex.current)
+							setCurrentFile(
+								message.data.files[message.data.files.length - 1].fullPath,
+								true
+							)
+							currentFileIndex.current++
+						}
 
-										newPrev.push({
-											id: agentContent.id,
-											content: agentContent.content,
-											name: agentContent.role === "user" ? "Me" : key,
-											isUser: agentContent.role === "user"
-										})
-
-										return newPrev
-									})
+						for (const agent of Object.entries(message.data.messages.roles)) {
+							if (agent[1].thinking) {
+								setLoading({
+									name: agent[0],
+									isLoading: true
 								})
 							}
-						)
+						}
 					}
 
 					if (
 						message.type === MATMessageType.STATUS &&
-						message.data.status === "done"
+						message.data.round !== undefined
 					) {
 						socket.send(
 							JSON.stringify({
@@ -61,6 +70,23 @@ const ChatContent = () => {
 								}
 							})
 						)
+
+						socket.send(
+							JSON.stringify({
+								type: MATMessageType.VISUALIZE,
+								data: {
+									round: message.data.round,
+									status: "done"
+								}
+							})
+						)
+					}
+
+					if (message.type == MATMessageType.IDLE) {
+						setLoading({
+							name: "",
+							isLoading: false
+						})
 					}
 				} catch (err) {
 					console.error("Failed to parse message:", err)
@@ -69,19 +95,19 @@ const ChatContent = () => {
 		}
 	}, [socket])
 
-	console.log("messages", messages)
-
 	return (
 		<div
 			ref={containerRef}
 			className={cn(
-				"h-0 w-full transition-all duration-500 delay-500 flex flex-col gap-3 max-h-[calc(100%-220px)] overflow-y-auto no-scrollbar",
-				prompt && "h-[calc(100%-220px)]"
+				"h-[calc(100%-212px)] w-full transition-all duration-500 delay-500 flex flex-col gap-3 max-h-[calc(100%-212px)] py-4 px-5 overflow-y-auto no-scrollbar"
 			)}
 		>
-			{messages.map((msg) => {
-				return <Chatbox key={msg.id} {...msg} />
-			})}
+			{!isEmpty(messages) &&
+				messages.map((msg) => {
+					return <Chatbox key={msg.id} {...msg} />
+				})}
+
+			<Loading />
 		</div>
 	)
 }

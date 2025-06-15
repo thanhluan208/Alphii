@@ -1,30 +1,22 @@
 import React, { useRef } from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
-import { PromptIcon, SpinIcon, TokenIcon } from "@/components/icons"
+import { PromptIcon, TokenIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import GradientBorderCard from "@/components/ui/gradient-border-card"
 import { MATMessageType } from "@/types/mat.type"
 import { ArrowUp, AtSign } from "lucide-react"
 
+import useFileStore from "@/stores/fileStore"
 import useSocketStore from "@/stores/socket.store"
-import useMATMutation from "@/hooks/MultiAgentTeam/useMATMutation"
 
 const ChatInput = () => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
-	const router = useRouter()
-	const pathname = usePathname()
 	const { socket, setWebSocket } = useSocketStore()
-
-	// const { createNewMATSession } = useMATMutation()
-	// const isCreatingMATSession = createNewMATSession.isPending
+	const { setMessages, setLoading, loading } = useFileStore()
 
 	const handleSubmit = async () => {
 		if (!textareaRef.current?.value) return
 
-		// const response = await createNewMATSession.mutateAsync(
-		// 	"a65f90a6-9a28-404c-b966-b74727aea0f8"
-		// )
 		const prompt = textareaRef.current?.value
 
 		if (socket) {
@@ -44,12 +36,8 @@ const ChatInput = () => {
 			return
 		}
 
-		router.replace(
-			`${pathname}?prompt=${prompt}&session_id=45678832-782b-4523-8597-8b7357ffc654`
-		)
-
 		const ws = new WebSocket(
-			`ws://helped-dragon-entirely.ngrok-free.app/multi_agent_team/session/behaviour/start_session/b5868f5d-83ad-4939-ae40-ea4d793d0af8/45678832-782b-4523-8597-8b7357ffc654`
+			`ws://helped-dragon-entirely.ngrok-free.app/multi_agent_team/session/behaviour/start_session/56d99ecf-98cc-416e-af07-938958897f21/b723f26a-62e6-4021-b4f7-a708e332354e`
 		)
 
 		ws.addEventListener("open", () => {
@@ -72,6 +60,18 @@ const ChatInput = () => {
 					}
 				})
 			)
+
+			setMessages({
+				id: new Date().getTime().toString(),
+				content: prompt,
+				name: "Me",
+				isUser: true
+			})
+
+			setLoading({
+				name: "",
+				isLoading: true
+			})
 		})
 
 		setWebSocket(ws)
@@ -79,11 +79,12 @@ const ChatInput = () => {
 	}
 
 	return (
-		<GradientBorderCard className="p-[3px] mt-10 w-[740px] mx-auto h-[180px] rounded-3xl ">
+		<GradientBorderCard className="p-[3px] mt-4 w-[calc(100%-40px)] mx-auto h-[180px] rounded-3xl ">
 			<div className="absolute top-[3px] left-[3px] p-3 h-[calc(100%-6px)] flex justify-between flex-col w-[calc(100%-6px)] bg-white rounded-[21px]">
 				<textarea
 					ref={textareaRef}
-					className="w-full placeholder:text-[#62636C] focus-visible:outline-none resize-none px-2 min-h-5 h-[100px] overflow-y-auto"
+					disabled={loading?.isLoading}
+					className="w-full placeholder:text-[#62636C] focus-visible:outline-none resize-none min-h-5 h-[100px] overflow-y-auto"
 					placeholder="Tell us what you're building. We'll help you assign the team to build"
 				/>
 
@@ -107,6 +108,7 @@ const ChatInput = () => {
 
 						<Button
 							variant="ghost"
+							disabled={loading?.isLoading}
 							onClick={handleSubmit}
 							className="rounded-full text-white hover:text-white w-8 h-8 p-0 flex items-center justify-center border border-white bg-[linear-gradient(124.94deg,#B7C0FF_-3.78%,#3B54FF_29.53%,#EA8CFF_62.84%,#7485FF_96.14%)]"
 						>
