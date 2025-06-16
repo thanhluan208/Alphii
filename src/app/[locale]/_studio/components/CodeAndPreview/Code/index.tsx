@@ -14,7 +14,7 @@ const Code = () => {
 	return (
 		<ResizablePanelGroup
 			direction="horizontal"
-			className="w-full "
+			className="w-full !h-[calc(100%-57px)]"
 		>
 			<FolderTree />
 			<CodeEditor />

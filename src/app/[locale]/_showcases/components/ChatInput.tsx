@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useRef } from "react"
 
 import { PromptIcon, TokenIcon } from "@/components/icons"
@@ -19,6 +21,18 @@ const ChatInput = () => {
 
 		const prompt = textareaRef.current?.value
 
+		setMessages({
+			id: new Date().getTime().toString(),
+			content: prompt,
+			name: "Me",
+			isUser: true
+		})
+
+		setLoading({
+			name: "",
+			isLoading: true
+		})
+
 		if (socket) {
 			console.log("sending new prompt", prompt)
 			socket.send(
@@ -30,6 +44,18 @@ const ChatInput = () => {
 					}
 				})
 			)
+
+			setMessages({
+				id: new Date().getTime().toString(),
+				content: prompt,
+				name: "Me",
+				isUser: true
+			})
+
+			setLoading({
+				name: "",
+				isLoading: true
+			})
 
 			textareaRef.current.value = ""
 
@@ -60,18 +86,6 @@ const ChatInput = () => {
 					}
 				})
 			)
-
-			setMessages({
-				id: new Date().getTime().toString(),
-				content: prompt,
-				name: "Me",
-				isUser: true
-			})
-
-			setLoading({
-				name: "",
-				isLoading: true
-			})
 		})
 
 		setWebSocket(ws)
@@ -79,12 +93,12 @@ const ChatInput = () => {
 	}
 
 	return (
-		<GradientBorderCard className="p-[3px] mt-4 w-[calc(100%-40px)] mx-auto h-[180px] rounded-3xl ">
-			<div className="absolute top-[3px] left-[3px] p-3 h-[calc(100%-6px)] flex justify-between flex-col w-[calc(100%-6px)] bg-white rounded-[21px]">
+		<GradientBorderCard className="p-[3px] mt-4 w-[744px] mx-auto h-[120px] rounded-3xl ">
+			<div className="absolute top-[3px] left-[3px] p-3 h-[calc(100%-6px)] flex justify-between flex-col w-[calc(100%-6px)] bg-alphii_bg_weak_50 rounded-[21px]">
 				<textarea
 					ref={textareaRef}
 					disabled={loading?.isLoading}
-					className="w-full placeholder:text-[#62636C] focus-visible:outline-none resize-none min-h-5 h-[100px] overflow-y-auto"
+					className="w-full bg-transparent disabled:bg-transparent hover:bg-transparent placeholder:text-[#62636C] focus-visible:outline-none resize-none min-h-5 h-[50px] overflow-y-auto"
 					placeholder="Tell us what you're building. We'll help you assign the team to build"
 				/>
 

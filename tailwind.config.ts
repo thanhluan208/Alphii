@@ -31,11 +31,13 @@ const config = {
 				alphii_primary_light: "var(--alpgii-primary-light)",
 				alphii_border: "var(--alphii-border)",
 				alphii_text_sub_600: "var(--alphii-text-sub-600)",
+				alphii_bg_strong: "var(--alphii-bg-strong-950)",
 				alphii_skeleton: "var(--alphii-skeleton)",
 				alphii_border_2: "var(--alphii-border-2)",
 				alphii_bg_soft_200: "var(--alphii-bg-soft-200)",
 				alphii_bg_weak_50: "var(--alphii-bg-weak-50)",
 				alphii_bg_weak_40: "var(--alphii-bg-weak-40)",
+				alphii_destructive_light: "var(--alphii-destructive-light)",
 
 				background: "var(--background)",
 				foreground: "hsl(var(--foreground))",
@@ -49,7 +51,7 @@ const config = {
 					foreground: "hsl(var(--secondary-foreground))"
 				},
 				destructive: {
-					DEFAULT: "#B80704",
+					DEFAULT: "#FB3748",
 					foreground: "hsl(var(--destructive-foreground))"
 				},
 				muted: {

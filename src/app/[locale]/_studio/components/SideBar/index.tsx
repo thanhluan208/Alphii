@@ -3,12 +3,14 @@
 import React, { Fragment } from "react"
 import { useSearchParams } from "next/navigation"
 
+import SheetSidebar from "@/components/common/SheetSidebar/SheetSidebar"
+import UserSetting from "@/components/common/UserSetting/UserSetting"
 import { AddIcon, CollapseIcon } from "@/components/icons"
 import { Button } from "@/components/ui"
 import { usePathname, useRouter } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
 
-const Agents = () => {
+const Sidebar = () => {
 	const router = useRouter()
 	const pathname = usePathname()
 	const searchParams = useSearchParams()
@@ -61,18 +63,11 @@ const Agents = () => {
 			</div>
 
 			<div className="flex flex-col gap-2 p-1.5">
-				<button className="h-11 w-11 rounded-xl bg-alphii_bg_soft_200 text-alphii-text-sub-600">
-					PH
-				</button>
-				<Button
-					variant="ghost"
-					className="h-11 w-11 text-card-foreground rounded-xl bg-card border border-alphii_border"
-				>
-					<CollapseIcon />
-				</Button>
+				<UserSetting />
+				<SheetSidebar />
 			</div>
 		</div>
 	)
 }
 
-export default Agents
+export default Sidebar

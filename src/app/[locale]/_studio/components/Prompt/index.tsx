@@ -1,7 +1,7 @@
 import React from "react"
 
-import ChatContent from "@/app/[locale]/showcases/components/ChatContent"
-import ChatInput from "@/app/[locale]/showcases/components/ChatInput"
+import ChatContent from "@/app/[locale]/_showcases/components/ChatContent"
+import ChatInput from "@/app/[locale]/_showcases/components/ChatInput"
 
 const Prompt = () => {
 	return (
