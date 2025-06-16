@@ -1,6 +1,6 @@
 import { shallow } from "zustand/shallow"
 import { createWithEqualityFn } from "zustand/traditional"
-import { ChatboxProps } from "@/app/[locale]/showcases/components/Chatbox"
+import { ChatboxProps } from "@/app/[locale]/_showcases/components/Chatbox"
 import { TreeNode } from "@/components/common/FolderTree/FolderTreeNodes"
 import { cloneDeep } from "lodash"
 

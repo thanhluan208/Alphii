@@ -54,7 +54,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 					background:
 						variant === "default"
 							? "linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%), #7D52F4"
-							: "transparent"
+							: ""
 				}}
 				{...props}
 			/>
