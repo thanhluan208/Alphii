@@ -15,8 +15,8 @@ export const Routes = {
 	REGISTER: "/register",
 	FORGOT_PASSWORD: "/forgot-password",
 	RESET_PASSWORD: "/reset-password",
-	GOOGLE_LOGIN: "http://localhost:8000/auth/google",
-	GITHUB_LOGIN: "http://localhost:8000/auth/github",
+	GOOGLE_LOGIN: BASE_URL + "/auth/google",
+	GITHUB_LOGIN: BASE_URL + "/auth/github",
 	SOCIAL_LOGIN_ORIGIN: "http://localhost:8000"
 }
 
