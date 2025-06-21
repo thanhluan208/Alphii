@@ -19,6 +19,12 @@ import { Link } from "@/i18n/routing"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CheckCircle2, XCircle } from "lucide-react"
 import { z } from "zod"
+import useMutateAuthentication from "@/hooks/authentication/useMutateAuthentication"
+import { useRouter, useSearchParams } from "next/navigation"
+import { STATUS_CODE } from "@/types"
+import { Routes } from "@/lib/constant"
+import { useToast } from "@/hooks/use-toast"
+
 
 const passwordCriteria = [
 	{
@@ -36,10 +42,20 @@ const passwordCriteria = [
 ]
 
 const ResetPassword = () => {
+	const searchParams = useSearchParams()
+	const router = useRouter()
 	const translation = useTranslations("authentication")
+	const { toast } = useToast()
 	const [passwordStrength, setPasswordStrength] = useState(0)
 	const [currentPassword, setCurrentPassword] = useState("")
 	const [retypePassword, setRetypePassword] = useState("")
+
+	const token = searchParams.get("token");
+	const email = searchParams.get("email");
+
+	const { handleChangePass } = useMutateAuthentication();
+
+	const isLoading = handleChangePass.isPending;
 
 	const getPasswordStrength = (password: string) => {
 		let passed = 0
@@ -69,7 +85,42 @@ const ResetPassword = () => {
 			new_password: "",
 			retype_password: ""
 		}
-	})
+	});
+
+	const handleSubmitResetPass = async () => {
+		if (isLoading || !email || !token) {
+			return;
+		}
+
+		try {
+			const response = await handleChangePass.mutateAsync({
+				new_password: resetPasswordForm.getValues().new_password,
+				email,
+				reset_code: token,
+			});
+
+			if (response.status_code === STATUS_CODE.SUCCESS) {
+				toast({
+					title: "Reset password successfully!",
+					description: response.message,
+					duration: 2000
+				});
+
+				router.push(Routes.LOGIN);
+			} else {
+				toast({
+					title: "Reset password failed!",
+					description: response.message,
+					duration: 2000
+				});
+			}
+		} catch (error) {
+			toast({
+				title: "Reset password failed!",
+				duration: 2000
+			});
+		}
+	};
 
 	const isPasswordStrong = passwordStrength === passwordCriteria.length
 	const isRetypeMatch =
@@ -99,7 +150,7 @@ const ResetPassword = () => {
 					</CardHeader>
 
 					<CardContent className="p-0">
-						<form>
+						<form onSubmit={resetPasswordForm.handleSubmit(handleSubmitResetPass)}>
 							<div className="flex flex-col">
 								<div className="grid gap-2 mb-2">
 									<FormField

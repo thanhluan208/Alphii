@@ -220,7 +220,8 @@ const Login = () => {
 					</CardHeader>
 					<CardContent className="p-0 pb-2">
 						<Button
-							className="w-full  h-10 mb-3 shadow-none rounded-[10px] bg-none"
+							className="w-full h-10 mb-3 shadow-none rounded-[10px] bg-none border border-alphii_border_2"
+							style={{ backgroundColor: "#FFFFFF", color: "#171717" }}
 							onClick={handleGoogleLogIn}
 						>
 							<Image
@@ -234,7 +235,8 @@ const Login = () => {
 						</Button>
 
 						<Button
-							className="w-full  h-10 mb-2 shadow-none rounded-[10px] bg-none"
+							className="w-full  h-10 mb-2 shadow-none rounded-[10px] bg-none border border-alphii_border_2"
+							style={{ backgroundColor: "#FFFFFF", color: "#171717" }}
 							onClick={handleGithubLogIn}
 						>
 							<Image

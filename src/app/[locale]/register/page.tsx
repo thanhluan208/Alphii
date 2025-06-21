@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
@@ -25,7 +25,10 @@ import { CheckCircle2, XCircle } from "lucide-react"
 import { z } from "zod"
 
 import useUserStore from "@/stores/userStore"
-import { toast, useToast } from "@/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast"
+import useMutateAuthentication from "@/hooks/authentication/useMutateAuthentication"
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ui/input-otp"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
 const passwordCriteria = [
 	{
@@ -46,7 +49,12 @@ const Register = () => {
 	const translation = useTranslations("authentication")
 	const { toast } = useToast()
 	const router = useRouter()
+
+	const { handleSignUp, handleVerifyEmail, handleSubmitOTP } = useMutateAuthentication();
+
 	const { setToken, setUserId } = useUserStore()
+	const [otpValue, setOtpValue] = useState("");
+	const [showVerify, setShowVerify] = useState(false);
 	const [passwordStrength, setPasswordStrength] = useState(0)
 	const [currentPassword, setCurrentPassword] = useState("")
 
@@ -63,14 +71,14 @@ const Register = () => {
 	}, [currentPassword])
 
 	const formSchema = z.object({
-		email_or_username: z.string().min(2).max(50),
-		password: z.string().min(6).max(50)
+		email: z.string().min(2).max(50),
+		password: z.string().min(8).max(50)
 	})
 
 	const registerForm = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			email_or_username: "",
+			email: "",
 			password: ""
 		}
 	})
@@ -157,10 +165,157 @@ const Register = () => {
 		}
 	}
 
-	const handleSubmit = async () => {}
+	const handleSubmit = async (data: z.infer<typeof formSchema>) => {
+		const formData = new FormData();
+		formData.append("user_name", data.email?.trim());
+		formData.append("password", data.password?.trim());
+
+		try {
+			const response = await handleSignUp.mutateAsync(formData);
+
+			if (response.status_code === STATUS_CODE.SUCCESS) {
+				toast({
+					title: "Sign up successfully!",
+					description: response.message,
+					duration: 2000
+				})
+				setShowVerify(true);
+			} else {
+				toast({
+					title: "Sign up failed!",
+					description: response.message,
+					duration: 2000
+				})
+			}
+		} catch (err) {
+			toast({
+				title: "Sign up failed!",
+				duration: 2000
+			})
+		}
+	}
+
+	const handleOTPChange = (code: string) => {
+		setOtpValue(code);
+	};
+
+	const handleConfirmOTP = async () => {
+		if (otpValue.length === 6) {
+
+			try {
+				const response = await handleSubmitOTP.mutateAsync({
+					email: registerForm.getValues().email,
+					otp: otpValue,
+				});
+				if (response.status_code === STATUS_CODE.SUCCESS) {
+					toast({
+						title: "Verify successfully!",
+						description: response.message,
+						duration: 2000
+					})
+					setShowVerify(false);
+					router.push(Routes.LOGIN)
+				} else {
+					toast({
+						title: "Verify failed!",
+						description: response.message,
+						duration: 2000
+					})
+				}
+			} catch (err) {
+				toast({
+					title: "Verify failed!",
+					duration: 2000
+				})
+				console.error(err);
+			}
+		} else {
+			toast({
+				title: "Invalid OTP",
+				description: "The verification code is incorrect or has expired. Please try again.",
+				duration: 2000
+			})
+		}
+	};
+
+	const handleResendCode = async () => {
+		const email = registerForm.getValues().email;
+		if (!email) {
+			toast({
+				title: "Email missing",
+				description: "Email is required to resend the verification code.",
+				duration: 2000
+			})
+			return;
+		}
+
+		try {
+			const response = await handleVerifyEmail.mutateAsync(email);
+
+			if (response.status_code === STATUS_CODE.SUCCESS) {
+				toast({
+					title: "Resend code successfully!",
+					duration: 2000
+				})
+				setOtpValue("");
+			} else {
+				toast({
+					title: "Resend code failed!",
+					duration: 2000
+				})
+			}
+		} catch (error) {
+			toast({
+				title: "Resend code failed!",
+				duration: 2000
+			})
+			console.error(error);
+		}
+	};
 
 	return (
 		<div className="relative h-screen content-center bg-background">
+			<Fragment>
+				<Dialog open={showVerify} onOpenChange={(open) => setShowVerify(open)}>
+					<DialogContent className="p-6">
+						<DialogHeader>
+							<DialogTitle className="text-center">Verify your email</DialogTitle>
+							<DialogDescription className="text-center">
+								We have sent a verification code to your email. Please enter the code below to verify your email.
+							</DialogDescription>
+						</DialogHeader>
+
+						<InputOTP
+							maxLength={6}
+							pattern="^\\d+$"
+							onChange={handleOTPChange}
+						>
+							<InputOTPGroup>
+								<InputOTPSlot index={0} />
+								<InputOTPSlot index={1} />
+								<InputOTPSlot index={2} />
+							</InputOTPGroup>
+							<InputOTPSeparator />
+							<InputOTPGroup>
+								<InputOTPSlot index={3} />
+								<InputOTPSlot index={4} />
+								<InputOTPSlot index={5} />
+							</InputOTPGroup>
+						</InputOTP>
+						<div className="text-center">
+							<button
+								className="text-primary-theme hover:opacity-80 text-sm font-medium underline"
+								onClick={handleResendCode}
+							>
+								Resend code
+							</button>
+						</div>
+						<Button className="w-full" onClick={handleConfirmOTP}> Confirm</Button>
+					</DialogContent>
+				</Dialog>
+			</Fragment>
+
+
 			<Form {...registerForm}>
 				<Card className="relative bg-alphii_bg_weak_50 pl-6 pr-6 pb-6 shadow-md w-11/12 max-w-md z-10 m-auto rounded-3xl border border-alphii_border_2">
 					<Image
@@ -200,6 +355,7 @@ const Register = () => {
 					<CardContent className="p-0 pb-2">
 						<Button
 							className="w-full bg-alphii_bg_weak_50 text-black h-10 mb-3 shadow-none rounded-[10px] bg-none border border-alphii_border_2"
+							style={{ backgroundColor: "#FFFFFF", color: "#171717" }}
 							onClick={handleGoogleRegister}
 						>
 							<Image
@@ -214,6 +370,7 @@ const Register = () => {
 
 						<Button
 							className="w-full bg-alphii_bg_weak_50 text-black h-10 mb-2 shadow-none rounded-[10px] bg-none border border-alphii_border_2"
+							style={{ backgroundColor: "#FFFFFF", color: "#171717" }}
 							onClick={handleGithubRegister}
 						>
 							<Image
@@ -245,13 +402,13 @@ const Register = () => {
 								<div className="grid gap-2 mb-2">
 									<FormField
 										control={registerForm.control}
-										name="email_or_username"
+										name="email"
 										render={({ field }) => (
 											<InputField
 												className="h-10 rounded-[10px] border border-alphii_border_2"
 												field={field}
 												label={translation("emailLabel")}
-												name="email_or_username"
+												name="email"
 												maxLength={50}
 											/>
 										)}
