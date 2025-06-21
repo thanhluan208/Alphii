@@ -99,7 +99,7 @@ const ChatContent = () => {
 		<div
 			ref={containerRef}
 			className={cn(
-				"h-[calc(100%-212px)] w-full transition-all duration-500 delay-500 flex flex-col gap-3 max-h-[calc(100%-212px)] py-4 px-5 overflow-y-auto no-scrollbar"
+				"h-[calc(100%-150px)] w-full transition-all duration-500 delay-500 flex flex-col gap-3 max-h-[calc(100%-150px)] py-4 px-5 overflow-y-auto no-scrollbar"
 			)}
 		>
 			{!isEmpty(messages) &&

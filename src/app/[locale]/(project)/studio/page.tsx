@@ -9,6 +9,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox"
 
 import ChatInput from "../../_showcases/components/ChatInput"
+import ChatContent from "../../_showcases/components/ChatContent"
 
 const Studio = () => {
 	return (
@@ -146,6 +147,8 @@ const Studio = () => {
 					</div>
 				</div>
 			</div>
+
+			<ChatContent />
 
 			<ChatInput />
 		</div>

@@ -162,7 +162,7 @@ const Login = () => {
 					)
 				}
 
-				router.push(Routes.ROOT)
+				router.push(Routes.PROJECT)
 			} else {
 				toast({
 					title: "Login Failed",

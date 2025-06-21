@@ -65,7 +65,7 @@ const Home = () => {
 				</div>
 				<div className="flex items-center gap-2">
 					<ThemeButton />
-					<Link href={Routes.LOGIN}>
+					<Link href={Routes.STUDIO}>
 						<Button className="items-center gap-2 w-fit">
 							{translation("lGetStartedForFree")} <ArrowUpRight />
 						</Button>
@@ -87,7 +87,7 @@ const Home = () => {
 						<p>Watch a demo</p>
 						<ArrowUpRight />
 					</Button>
-					<Link href={Routes.LOGIN}>
+					<Link href={Routes.STUDIO}>
 						<Button className="items-center gap-2 w-fit">
 							{translation("lGetStartedForFree")} <ArrowUpRight />
 						</Button>
@@ -402,7 +402,7 @@ const Home = () => {
 						<p className="mt-5 text-3xl">
 							Build wonders with your <br /> customisable A2A team
 						</p>
-						<Link href={Routes.LOGIN}>
+						<Link href={Routes.STUDIO}>
 							<Button className="items-center gap-2 mt-5 w-fit">
 								{translation("lGetStartedForFree")} <ArrowUpRight />
 							</Button>

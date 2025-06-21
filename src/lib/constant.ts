@@ -43,7 +43,7 @@ export const COUNT_DOWN_OTP = 60 //In seconds
 export const logout = BASE_URL + "/user/log_out"
 export const refreshToken =
 	BASE_URL + "/user/generate_access_token_from_refresh_token"
-export const signInApi = BASE_URL + "/user/log_in"
+export const signInApi = BASE_URL + "/user/information/log_in"
 export const signUpApi = BASE_URL + "/user/sign_up"
 export const verifyEmail = BASE_URL + "/user/resend_verification_code"
 export const submitOTP = BASE_URL + "/user/verify_verification_code"

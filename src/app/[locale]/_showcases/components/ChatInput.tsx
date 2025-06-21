@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import React, { useRef } from "react"
 
@@ -63,7 +63,7 @@ const ChatInput = () => {
 		}
 
 		const ws = new WebSocket(
-			`ws://helped-dragon-entirely.ngrok-free.app/multi_agent_team/session/behaviour/start_session/56d99ecf-98cc-416e-af07-938958897f21/b723f26a-62e6-4021-b4f7-a708e332354e`
+			`ws://helped-dragon-entirely.ngrok-free.app/multi_agent_team/session/behaviour/start_session/25be228d-e74b-4f14-9974-c86cb552eca9/5aa1c28a8de342d798f49fa0baf0fb47`
 		)
 
 		ws.addEventListener("open", () => {
@@ -93,7 +93,7 @@ const ChatInput = () => {
 	}
 
 	return (
-		<GradientBorderCard className="p-[3px] mt-4 w-[744px] mx-auto h-[120px] rounded-3xl ">
+		<GradientBorderCard className="p-[3px] mt-4 w-[calc(100%-50px)] mx-auto h-[120px] rounded-3xl ">
 			<div className="absolute top-[3px] left-[3px] p-3 h-[calc(100%-6px)] flex justify-between flex-col w-[calc(100%-6px)] bg-alphii_bg_weak_50 rounded-[21px]">
 				<textarea
 					ref={textareaRef}

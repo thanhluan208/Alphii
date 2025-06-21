@@ -27,7 +27,7 @@ class httpServices {
 
 	constructor() {
 		this.axios = axios
-		this.axios.defaults.withCredentials = true
+		// this.axios.defaults.withCredentials = true
 		this.axios.defaults.baseURL = BASE_URL
 
 		this.axios.defaults.headers["ngrok-skip-browser-warning"] = true

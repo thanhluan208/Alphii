@@ -316,7 +316,7 @@ const CodeEditor = () => {
 				</div> */}
 				{currentFileContent && (
 					<Editor
-						height="calc(100% - 57px)"
+						height="calc(100%)"
 						defaultLanguage="typescript"
 						defaultValue=""
 						onMount={handleEditorDidMount}
