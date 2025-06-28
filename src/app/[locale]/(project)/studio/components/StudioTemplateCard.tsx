@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
+import { useTranslations } from "next-intl"
 
 import {
 	ChartIcon,
@@ -16,6 +17,7 @@ import { cn } from "@/lib/utils"
 import useChatStore from "@/stores/fileStore"
 
 const StudioTemplateCard = () => {
+	const t = useTranslations("studio")
 	const { messages } = useChatStore()
 	const [shouldHide, setShouldHide] = useState(false)
 	const hasMessages = messages && messages.length > 0
@@ -46,11 +48,10 @@ const StudioTemplateCard = () => {
 			>
 				<Logo />
 				<p className="text-[28px] font-medium leading-8 mt-10">
-					Build Something Great Together with Our Agents
+					{t("buildSomethingGreat")}
 				</p>
 				<p className="text-sm text-alphii_text_sub_600">
-					Pick a template to get started or use it as a base to create your own
-					with a simple prompt.
+					{t("pickTemplateDescription")}
 				</p>
 			</div>
 
@@ -65,10 +66,9 @@ const StudioTemplateCard = () => {
 						<PersonalPortfolioIcon />
 					</div>
 					<div>
-						<p className="font-semibold">Website for Personal Portfolio</p>
+						<p className="font-semibold">{t("personalPortfolioTitle")}</p>
 						<p className="text-alphii_text_sub_600 text-sm">
-							Pick a template to get started or use it as a base to create your
-							own with a simple prompt.
+							{t("pickTemplateDescription")}
 						</p>
 					</div>
 				</div>
@@ -90,10 +90,9 @@ const StudioTemplateCard = () => {
 						</Skeleton>
 					</div>
 					<div>
-						<p className="font-semibold">Flashcard App for Language Learning</p>
+						<p className="font-semibold">{t("flashcardAppTitle")}</p>
 						<p className="text-alphii_text_sub_600 text-sm">
-							Pick a template to get started or use it as a base to create your
-							own with a simple prompt.
+							{t("pickTemplateDescription")}
 						</p>
 					</div>
 
@@ -101,7 +100,7 @@ const StudioTemplateCard = () => {
 						variant="ghost"
 						className="w-[72px] h-9 bg-foreground text-background hover:bg-foreground/50 hover:text-background rounded-xl"
 					>
-						Start
+						{t("startButton")}
 					</Button>
 				</div>
 				<div
@@ -121,10 +120,9 @@ const StudioTemplateCard = () => {
 						</Skeleton>
 					</div>
 					<div>
-						<p className="font-semibold">Sales Dashboard with KPIs</p>
+						<p className="font-semibold">{t("salesDashboardTitle")}</p>
 						<p className="text-alphii_text_sub_600 text-sm">
-							Pick a template to get started or use it as a base to create your
-							own with a simple prompt.
+							{t("pickTemplateDescription")}
 						</p>
 					</div>
 				</div>

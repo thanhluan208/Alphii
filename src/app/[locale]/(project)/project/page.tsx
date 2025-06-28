@@ -60,29 +60,29 @@ const Project = () => {
 				/>
 			</div>
 
-			<div className="mt-8 flex flex-col gap-5">
+			<div className="mt-8 grid lg:grid-cols-3 grid-cols-1 gap-x-5 gap-y-2">
 				{Array.from({ length: 6 }).map((_, index) => {
 					return (
-						<div key={index} className="flex gap-3 items-center">
-							<Skeleton className="w-[120px] h-20" />
-							<div>
-								<p className="text-sm font-medium mt-3">
-									Korean Flashcard Website
-								</p>
-								<p className="text-alphii_text_sub_600">
-									Just tell the team how you want your website to look like
-								</p>
-							</div>
+						<div key={index}>
+							<Skeleton className="w-full h-[180px]" />
+							<p className="text-sm font-medium mt-3">
+								Korean Flashcard Website
+							</p>
+							<p className="text-alphii_text_sub_600">
+								Just tell the team how you want your website to look like
+							</p>
 						</div>
 					)
 				})}
 
-				<Link
-					href={Routes.STUDIO}
-					className="bg-black flex items-center justify-center dark:bg-white text-white dark:text-black mx-auto w-[112px] h-10 rounded-full"
-				>
-					<Plus />
-				</Link>
+				<div className="col-span-3 flex items-center justify-center mt-5">
+					<Link
+						href={Routes.STUDIO}
+						className="bg-black flex items-center justify-center dark:bg-white text-white dark:text-black mx-auto w-[112px] h-10 rounded-full"
+					>
+						<Plus />
+					</Link>
+				</div>
 			</div>
 		</div>
 	)

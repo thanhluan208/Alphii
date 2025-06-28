@@ -65,7 +65,7 @@ const Home = () => {
 				</div>
 				<div className="flex items-center gap-2">
 					<ThemeButton />
-					<Link href={Routes.STUDIO}>
+					<Link href={Routes.LOGIN}>
 						<Button className="items-center gap-2 w-fit">
 							{translation("lGetStartedForFree")} <ArrowUpRight />
 						</Button>
@@ -87,7 +87,7 @@ const Home = () => {
 						<p>Watch a demo</p>
 						<ArrowUpRight />
 					</Button>
-					<Link href={Routes.STUDIO}>
+					<Link href={Routes.LOGIN}>
 						<Button className="items-center gap-2 w-fit">
 							{translation("lGetStartedForFree")} <ArrowUpRight />
 						</Button>
@@ -99,9 +99,11 @@ const Home = () => {
 						src={"/images/home-bg.png"}
 						alt="bg"
 						fill
-						className="!static"
+						priority
+						sizes="100%"
+						className="!relative"
 					/>
-				</div>
+				</div>!
 			</div>
 			<div className="w-full relative  max-w-[1250px] flex-col flex items-center  justify-center bg-center px-4 md:px-8 lg:pb-[120px] lg:px-[60px] pt-[60px]">
 				<div className="max-w-[100%]">
@@ -148,6 +150,7 @@ const Home = () => {
 								src={"/images/home-illust-1.png"}
 								alt="illust"
 								fill
+								sizes="100%"
 								className="!relative !w-full"
 							/>
 							<div className="my-4 px-5">
@@ -168,7 +171,8 @@ const Home = () => {
 									src={"/images/home-illust-2.png"}
 									alt="illust"
 									fill
-									className="!static !w-full"
+									sizes="100%"
+									className="!relative !w-full"
 								/>
 								<div className="my-4 px-5">
 									<p className="text-xl font-[500] leading-6">
@@ -185,7 +189,8 @@ const Home = () => {
 									src={"/images/home-illust-3.png"}
 									alt="illust"
 									fill
-									className="!static !w-full"
+									sizes="100%"
+									className="!relative !w-full"
 								/>
 								<div className="my-4 px-5">
 									<p className="text-xl font-[500] leading-6">
@@ -206,7 +211,8 @@ const Home = () => {
 									src={"/images/home-illust-4.png"}
 									alt="illust"
 									fill
-									className="!static !w-full"
+									sizes="100%"
+									className="!relative !w-full"
 								/>
 								<div className="my-4 px-5">
 									<p className="text-xl font-[500] leading-6">
@@ -223,7 +229,8 @@ const Home = () => {
 									src={"/images/home-illust-5.png"}
 									alt="illust"
 									fill
-									className="!static !w-full"
+									sizes="100%"
+									className="!relative !w-full"
 								/>
 								<div className="my-4 px-5">
 									<p className="text-xl font-[500] leading-6">
@@ -402,7 +409,7 @@ const Home = () => {
 						<p className="mt-5 text-3xl">
 							Build wonders with your <br /> customisable A2A team
 						</p>
-						<Link href={Routes.STUDIO}>
+						<Link href={Routes.LOGIN}>
 							<Button className="items-center gap-2 mt-5 w-fit">
 								{translation("lGetStartedForFree")} <ArrowUpRight />
 							</Button>

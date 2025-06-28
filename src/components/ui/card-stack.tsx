@@ -91,7 +91,7 @@ export const CardStack = ({
 								src={card.image}
 								alt={card.title}
 								fill
-								className="!w-full !static object-fill rounded-[16px] object-center "
+								className="!w-full !relative object-fill rounded-[16px] object-center "
 							/>
 						</div>
 					</motion.div>

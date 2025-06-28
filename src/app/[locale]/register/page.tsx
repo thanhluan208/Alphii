@@ -344,7 +344,7 @@ const Register = () => {
 
 					<CardHeader className="pb-4">
 						<CardTitle className="text-xl flex gap-2 items-center justify-center">
-							<p className="text-[#171717]">
+							<p className="">
 								{translation("registerCardTitle")}
 							</p>
 						</CardTitle>

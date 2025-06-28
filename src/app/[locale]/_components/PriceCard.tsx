@@ -151,7 +151,7 @@ const PriceCard = ({ variant, className }: PriceCardProps) => {
 			>
 				<div className="flex gap-5 items-center">
 					{icon()}
-					<p className="font-[500] text-2xl leading-8">{capitalize(variant)}</p>
+					<p className="font-[500] text-2xl leading-8 text-[#1E1F24]">{capitalize(variant)}</p>
 				</div>
 				<div className="flex flex-col gap-2">
 					{price()}
