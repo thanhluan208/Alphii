@@ -141,28 +141,52 @@ const getLanguageConfig = (filePath: string): LanguageConfig => {
 	}
 }
 
-// Custom theme configuration
-const customTheme: monaco.editor.IStandaloneThemeData = {
-	base: 'vs-dark' as const,
+// Custom theme configurations
+const darkTheme: monaco.editor.IStandaloneThemeData = {
+	base: "vs-dark" as const,
 	inherit: true,
 	rules: [
-		{ token: 'comment', foreground: '6A9955', fontStyle: 'italic' },
-		{ token: 'keyword', foreground: 'C678DD' },
-		{ token: 'string', foreground: 'CE9178' },
-		{ token: 'identifier', foreground: '9CDCFE' },
-		{ token: 'type', foreground: '4EC9B0' },
-		{ token: 'number', foreground: 'B5CEA8' },
-		{ token: 'delimiter', foreground: 'D4D4D4' },
-		{ token: 'tag', foreground: '569CD6' },
-		{ token: 'attribute.name', foreground: '9CDCFE' },
-		{ token: 'attribute.value', foreground: 'CE9178' },
+		{ token: "comment", foreground: "6A9955", fontStyle: "italic" },
+		{ token: "keyword", foreground: "C678DD" },
+		{ token: "string", foreground: "CE9178" },
+		{ token: "identifier", foreground: "9CDCFE" },
+		{ token: "type", foreground: "4EC9B0" },
+		{ token: "number", foreground: "B5CEA8" },
+		{ token: "delimiter", foreground: "D4D4D4" },
+		{ token: "tag", foreground: "569CD6" },
+		{ token: "attribute.name", foreground: "9CDCFE" },
+		{ token: "attribute.value", foreground: "CE9178" }
 	],
 	colors: {
-		'editor.background': '#1E1E1E',
-		'editor.foreground': '#D4D4D4',
-		'editor.lineHighlightBackground': '#2F3139',
-		'editor.selectionBackground': '#264F78',
-		'editor.inactiveSelectionBackground': '#3A3D41',
+		"editor.background": "#1E1E1E",
+		"editor.foreground": "#D4D4D4",
+		"editor.lineHighlightBackground": "#2F3139",
+		"editor.selectionBackground": "#264F78",
+		"editor.inactiveSelectionBackground": "#3A3D41"
+	}
+}
+
+const lightTheme: monaco.editor.IStandaloneThemeData = {
+	base: "vs" as const,
+	inherit: true,
+	rules: [
+		{ token: "comment", foreground: "008000", fontStyle: "italic" },
+		{ token: "keyword", foreground: "0000FF" },
+		{ token: "string", foreground: "A31515" },
+		{ token: "identifier", foreground: "001080" },
+		{ token: "type", foreground: "267f99" },
+		{ token: "number", foreground: "098658" },
+		{ token: "delimiter", foreground: "000000" },
+		{ token: "tag", foreground: "0000FF" },
+		{ token: "attribute.name", foreground: "001080" },
+		{ token: "attribute.value", foreground: "A31515" }
+	],
+	colors: {
+		"editor.background": "#FFFFFF",
+		"editor.foreground": "#000000",
+		"editor.lineHighlightBackground": "#F7F7F7",
+		"editor.selectionBackground": "#ADD6FF",
+		"editor.inactiveSelectionBackground": "#E5EBF1"
 	}
 }
 
@@ -171,6 +195,7 @@ const CodeEditor = () => {
 	const theme = useTheme()
 	const { currentFile, nextCurrentFile, loading } = useChatStore()
 	const [displayedContent, setDisplayedContent] = useState("")
+	const [themesRegistered, setThemesRegistered] = useState(false)
 	const timeoutRef = useRef<NodeJS.Timeout>()
 
 	console.log(`[LOG - CodeEditor]: currentFile`, currentFile)
@@ -178,15 +203,26 @@ const CodeEditor = () => {
 	const { lastStop, animationState } = currentFile || {}
 
 	const currentFileContent = useMemo(() => {
-		if (!currentFile) return ''
+		if (!currentFile) return mockData
 		return currentFile.content
 	}, [currentFile])
+
+	// Compute current theme for Monaco Editor
+	const currentMonacoTheme = useMemo(() => {
+		if (!themesRegistered) return "vs-dark" // fallback until themes are registered
+		const currentTheme = theme.resolvedTheme || theme.theme || "dark"
+		return currentTheme === "dark" ? "customDarkTheme" : "customLightTheme"
+	}, [theme.resolvedTheme, theme.theme, themesRegistered])
+
+	console.log("Current Monaco Theme:", currentMonacoTheme)
+	console.log("Resolved Theme:", theme.resolvedTheme)
+	console.log("Theme:", theme.theme)
 
 	// Handle typewriter effect
 	useEffect(() => {
 		if (!currentFileContent) return
 
-		if(animationState === "select") {
+		if (animationState === "select") {
 			setDisplayedContent(currentFileContent)
 			return
 		}
@@ -227,14 +263,19 @@ const CodeEditor = () => {
 		}
 	}, [currentFileContent, nextCurrentFile, animationState, lastStop])
 
-	// Register custom theme when component mounts
-	useEffect(() => {
-		monaco.editor.defineTheme('customTheme', customTheme)
-	}, [])
-
 	const handleEditorDidMount: OnMount = useCallback(
 		(editor, monacoInstance) => {
 			editorRef.current = editor
+
+			// Register custom themes after Monaco is ready
+			try {
+				monacoInstance.editor.defineTheme("customDarkTheme", darkTheme)
+				monacoInstance.editor.defineTheme("customLightTheme", lightTheme)
+				setThemesRegistered(true)
+				console.log("Custom themes registered successfully")
+			} catch (error) {
+				console.error("Failed to register themes:", error)
+			}
 
 			editor.updateOptions({
 				minimap: {
@@ -249,7 +290,7 @@ const CodeEditor = () => {
 				scrollBeyondLastLine: false,
 				smoothScrolling: true,
 				cursorBlinking: "smooth",
-				cursorSmoothCaretAnimation: "on",
+				cursorSmoothCaretAnimation: "on"
 			})
 
 			if (!currentFile?.fullPath) return
@@ -267,10 +308,12 @@ const CodeEditor = () => {
 				)
 
 				// Configure JSX/TSX specific token providers
-				monacoInstance.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
-					noSemanticValidation: false,
-					noSyntaxValidation: false,
-				})
+				monacoInstance.languages.typescript.typescriptDefaults.setDiagnosticsOptions(
+					{
+						noSemanticValidation: false,
+						noSyntaxValidation: false
+					}
+				)
 			}
 
 			// Get the current model
@@ -297,6 +340,7 @@ const CodeEditor = () => {
 			})
 		}
 	}, [loading?.isLoading])
+
 	// Update editor content when displayedContent changes
 	useEffect(() => {
 		if (editorRef.current && displayedContent !== undefined) {
@@ -304,30 +348,31 @@ const CodeEditor = () => {
 		}
 	}, [displayedContent])
 
+	// Handle theme changes after themes are registered
+	useEffect(() => {
+		if (!editorRef.current || !themesRegistered) return
+
+		const targetTheme = currentMonacoTheme
+		console.log("Applying theme:", targetTheme)
+
+		try {
+			monaco.editor.setTheme(targetTheme)
+		} catch (error) {
+			console.error("Failed to set theme:", error)
+		}
+	}, [currentMonacoTheme, themesRegistered])
+
 	return (
-		<ResizablePanel defaultSize={80}>
-			<div className="h-full">
-				{/* <div className="px-2.5 py-2 border-b border-alphii_border_2 min-h-[57px] flex items-center">
-					{file && (
-						<Breadcrumb>
-							<BreadcrumbList>{renderBreadcrumbs()}</BreadcrumbList>
-						</Breadcrumb>
-					)}
-				</div> */}
-				{currentFileContent && (
-					<Editor
-						height="calc(100%)"
-						defaultLanguage="typescript"
-						defaultValue=""
-						onMount={handleEditorDidMount}
-						theme="customTheme"
-						options={{
-							readOnly: loading?.isLoading
-						}}
-					/>
-				)}
-			</div>
-		</ResizablePanel>
+		<Editor
+			height="calc(100%)"
+			defaultLanguage="typescript"
+			defaultValue=""
+			onMount={handleEditorDidMount}
+			theme={currentMonacoTheme}
+			options={{
+				readOnly: loading?.isLoading
+			}}
+		/>
 	)
 }
 

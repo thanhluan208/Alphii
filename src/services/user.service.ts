@@ -4,7 +4,7 @@ import { DefaultResponse } from "@/types";
 import { ChangePassword, ResponseSignIn as ResponseLogin, UserData } from "@/types/authentication.type";
 
 
-class UserService {
+class userService {
   getUserData(id: string): Promise<DefaultResponse & UserData> {
     return api
       .post(getUserData, {
@@ -90,4 +90,5 @@ class UserService {
 
 }
 
-export default new UserService();
+const UserService = new userService()
+export default UserService

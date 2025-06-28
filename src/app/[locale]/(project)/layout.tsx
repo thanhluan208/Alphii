@@ -16,7 +16,9 @@ const layout = ({ children }: { children: ReactNode }) => {
 	return (
 		<div className="flex w-full h-full min-h-screen">
 			<div className="w-[70px]  p-4 h-screen sticky top-0 border-r border-alphii_bg_soft_200 flex flex-col justify-between items-center">
-				<LogoIcon />
+				<Link href={Routes.ROOT}>
+					<LogoIcon />
+				</Link>
 
 				<div className="flex flex-col gap-1.5">
 					<button className="h-[38px] w-[38px] rounded-full border border-alphii_bg_soft_200 flex items-center justify-center">

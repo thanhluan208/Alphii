@@ -1,20 +1,34 @@
 "use client"
 
-import React, { useRef } from "react"
+import { useRef } from "react"
 
-import { PromptIcon, TokenIcon } from "@/components/icons"
+import {
+	ExpandIcon,
+	MonitorIcon,
+	PromptIcon,
+	SpinIcon
+} from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import GradientBorderCard from "@/components/ui/gradient-border-card"
+import { cn } from "@/lib/utils"
+import { ChatType } from "@/types"
 import { MATMessageType } from "@/types/mat.type"
 import { ArrowUp, AtSign } from "lucide-react"
 
-import useFileStore from "@/stores/fileStore"
+import useChatStore from "@/stores/fileStore"
 import useSocketStore from "@/stores/socket.store"
 
 const ChatInput = () => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 	const { socket, setWebSocket } = useSocketStore()
-	const { setMessages, setLoading, loading } = useFileStore()
+	const {
+		setMessages,
+		loading,
+		setLoading,
+		updateDeepthink,
+		viewDetail,
+		setViewDetail
+	} = useChatStore()
 
 	const handleSubmit = async () => {
 		if (!textareaRef.current?.value) return
@@ -22,6 +36,7 @@ const ChatInput = () => {
 		const prompt = textareaRef.current?.value
 
 		setMessages({
+			type: ChatType.NORMAL,
 			id: new Date().getTime().toString(),
 			content: prompt,
 			name: "Me",
@@ -46,6 +61,7 @@ const ChatInput = () => {
 			)
 
 			setMessages({
+				type: ChatType.NORMAL,
 				id: new Date().getTime().toString(),
 				content: prompt,
 				name: "Me",
@@ -93,8 +109,42 @@ const ChatInput = () => {
 	}
 
 	return (
-		<GradientBorderCard className="p-[3px] mt-4 w-[calc(100%-50px)] mx-auto h-[120px] rounded-3xl ">
-			<div className="absolute top-[3px] left-[3px] p-3 h-[calc(100%-6px)] flex justify-between flex-col w-[calc(100%-6px)] bg-alphii_bg_weak_50 rounded-[21px]">
+		<GradientBorderCard
+			className={cn(
+				"w-[744px] absolute bottom-2 group mx-auto h-[120px] min-h-[120px] z-10 rounded-3xl shadow-lg p-[1px] dark:bg-[linear-gradient(90deg,#373737_0%,#5C5C5C_50%,#373737_100%)] focus-within:!bg-none focus-within:bg-alphii_border transition-all",
+				loading.isLoading &&
+					"p-[2px] !bg-[linear-gradient(90deg,#9280FF_0%,#FFFFFF_50%,#9280FF_100%)]",
+				viewDetail && "w-[523px]"
+			)}
+		>
+			{!viewDetail && (
+				<div
+					className={cn(
+						"absolute left-[3px] opacity-0 flex justify-between overflow-hidden items-end w-[calc(100%-6px)] pb-5 px-4 -translate-y-[calc(100%-10px)] h-[6px] bg-[linear-gradient(180deg,rgba(73,42,195,0)_39.42%,rgba(73,42,195,0.35)_100%)] transition-all",
+						loading.isLoading && "h-[116px] opacity-100"
+					)}
+				>
+					<div className="flex gap-1 items-center">
+						<MonitorIcon className="text-primary" />
+						<p>See what the members are working on...</p>
+					</div>
+					<button
+						onClick={() => {
+							setViewDetail(true)
+						}}
+						className="w-[138px] cursor-pointer hover:shadow-xl bg-white/20 h-20 rounded-lg flex justify-end px-2 py-2 border border-alphii_border"
+					>
+						<ExpandIcon />
+					</button>
+				</div>
+			)}
+			<div
+				className={cn(
+					"absolute top-0.5 z-10 left-0.5 p-3 h-[calc(100%-4px)] w-[calc(100%-4px)] transition-all flex justify-between flex-col  bg-alphii_bg_weak_50 rounded-[22px]",
+					loading.isLoading &&
+						"top-[2px] left-[2px] h-[calc(100%-4px)] w-[calc(100%-4px)]"
+				)}
+			>
 				<textarea
 					ref={textareaRef}
 					disabled={loading?.isLoading}
@@ -114,23 +164,19 @@ const ChatInput = () => {
 						</div>
 					</div>
 
-					<div className="bg-[linear-gradient(167.91deg,rgba(218,218,218,0.55)_7.43%,rgba(232,232,232,0.55)_49.31%,rgba(196,196,196,0.55)_91.18%)] rounded-full p-0.5 flex items-center gap-1 ">
-						<div className="border border-alphii_border px-3 py-0.5 h-8 rounded-full flex items-center gap-1 bg-background">
-							<TokenIcon />
-							<p className="text-sm font-[500]">213</p>
-						</div>
-
-						<Button
-							variant="ghost"
-							disabled={loading?.isLoading}
-							onClick={handleSubmit}
-							className="rounded-full text-white hover:text-white w-8 h-8 p-0 flex items-center justify-center border border-white bg-[linear-gradient(124.94deg,#B7C0FF_-3.78%,#3B54FF_29.53%,#EA8CFF_62.84%,#7485FF_96.14%)]"
-						>
-							{<ArrowUp />}
-						</Button>
-					</div>
+					<Button
+						variant="ghost"
+						onClick={handleSubmit}
+						disabled={loading.isLoading}
+						className="rounded-full  bg-alphii_component_3 w-8 h-8 p-0 dark:group-focus-within:bg-foreground dark:group-focus-within:text-background flex items-center justify-center transition-colors shadow-xl"
+					>
+						{loading.isLoading ? <SpinIcon /> : <ArrowUp />}
+					</Button>
 				</div>
 			</div>
+			<p className="w-full absolute -bottom-5 text-xs text-center text-alphii_text_sub_600 opacity-40">
+				Alphii AI can make mistakes
+			</p>
 		</GradientBorderCard>
 	)
 }

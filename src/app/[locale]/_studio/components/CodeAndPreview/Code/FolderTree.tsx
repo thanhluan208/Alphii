@@ -9,7 +9,7 @@ import { FilesIcon, SearchIcon } from "@/components/icons"
 import { ResizableHandle, ResizablePanel } from "@/components/ui/resizable"
 import { cn } from "@/lib/utils"
 
-import useFileStore from "@/stores/fileStore"
+import useChatStore from "@/stores/fileStore"
 
 export enum TreeTabs {
 	FILES = "files",
@@ -18,7 +18,7 @@ export enum TreeTabs {
 
 const FolderTree = () => {
 	const [treeTab, setTreeTab] = React.useState(TreeTabs.FILES)
-	const { listFiles } = useFileStore()
+	const { listFiles } = useChatStore()
 
 	function parseFolderDataToTree(data: Record<string, any>): TreeNode[] {
 		// Step 1: Collect all entries and group by path segments

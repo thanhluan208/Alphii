@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui"
 import { cn, fileIcon } from "@/lib/utils"
 
-import useFileStore from "@/stores/fileStore"
+import useChatStore from "@/stores/fileStore"
 
 import Folder from "./Folder"
 
@@ -29,7 +29,7 @@ interface FolderTreeNodesProps {
 
 const FolderTreeNodes = ({ data }: FolderTreeNodesProps) => {
 	const seachParams = useSearchParams()
-	const { setCurrentFile } = useFileStore()
+	const { setCurrentFile } = useChatStore()
 
 	const file = seachParams.get("file")
 

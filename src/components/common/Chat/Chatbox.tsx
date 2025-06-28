@@ -3,8 +3,10 @@
 import React, { Fragment, useEffect, useState } from "react"
 
 import { cn } from "@/lib/utils"
+import { ChatType } from "@/types"
 
 export interface ChatboxProps {
+	type: ChatType
 	id: string
 	content: string
 	name: string
@@ -43,7 +45,7 @@ const Chatbox = ({ content, name, isUser, to }: ChatboxProps) => {
 		<div
 			className={cn("flex w-full", isUser ? "justify-end" : "justify-start")}
 		>
-			<div className="flex flex-col bg-card border rounded-xl w-fit max-w-[70%] rounded-br-md gap-1 p-3 border-alphii_border_2 ">
+			<div className="flex flex-col bg-card dark:bg-alphii_background_2 border rounded-xl w-fit max-w-[70%] rounded-br-md gap-1 p-3 border-alphii_border dark:border-none">
 				<div className="flex items-center gap-2">
 					<div className="w-6 h-6 rounded-full bg-[url('/images/agents/bob-avatar.png')] bg-cover bg-center" />
 					<p className="text-sm font-medium">{name}</p>

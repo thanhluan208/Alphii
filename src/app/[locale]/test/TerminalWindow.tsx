@@ -144,7 +144,7 @@ const TerminalWindow = () => {
 				xtermRef.current.dispose()
 			}
 		}
-	}, [theme])
+	}, [theme, startupSequence])
 
 	return (
 		<div

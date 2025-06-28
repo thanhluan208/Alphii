@@ -49,3 +49,9 @@ export interface Media {
 	mediaUrl: string
 	mediaType: string
 }
+
+
+export enum ChatType {
+	NORMAL = 'normal',
+	DEEPTHINK = 'deepthink'
+}

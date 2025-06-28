@@ -1,30 +1,40 @@
 import { shallow } from "zustand/shallow"
 import { createWithEqualityFn } from "zustand/traditional"
-import { ChatboxProps } from "@/app/[locale]/_showcases/components/Chatbox"
+import { ChatboxProps } from "@/components/common/Chat/Chatbox"
+import { Deepthink } from "@/components/common/Chat/DeepThinking"
 import { TreeNode } from "@/components/common/FolderTree/FolderTreeNodes"
+import { ChatType } from "@/types"
 import { cloneDeep } from "lodash"
 
 interface fileState {
 	currentFile: TreeNode | null
 	setCurrentFile: (fullPath: string, shouldCheck?: boolean) => void
+
 	listFiles: {
 		[key: string]: TreeNode
 	}
 	addFile: (value: TreeNode[], fileIndex?: number) => void
 	removeFile: (value: TreeNode) => void
 	updateFile: (value: TreeNode) => void
+
 	loading: {
 		name?: string
-		isLoading: boolean
+		isLoading?: boolean
 	}
 	setLoading: (value: { name?: string; isLoading: boolean }) => void
 
-	messages: ChatboxProps[]
-	setMessages: (value: ChatboxProps) => void
+	messages: (ChatboxProps | Deepthink)[]
+	setMessages: (value: ChatboxProps | Deepthink) => void
+	updateDeepthink: (content: string) => void
 	nextCurrentFile: () => boolean
+
+	viewDetail: boolean
+	setViewDetail: (value: boolean) => void
+
+	clearStore: () => void
 }
 
-const useFileStore = createWithEqualityFn<fileState>()(
+const useChatStore = createWithEqualityFn<fileState>()(
 	(set, get) => ({
 		currentFile: null,
 		setCurrentFile: (fullPath: string, shouldCheck = false) => {
@@ -132,10 +142,39 @@ const useFileStore = createWithEqualityFn<fileState>()(
 				loading: value
 			})
 		},
+
+		viewDetail: false,
+		setViewDetail: (value: boolean) => set({ viewDetail: value }),
+
 		messages: [],
-		setMessages: (value: ChatboxProps) => {
+		setMessages: (value: ChatboxProps | Deepthink) => {
 			set({
 				messages: [...get().messages, value]
+			})
+		},
+		updateDeepthink: (content: string) => {
+			const msges = get().messages
+			const lastDeepthinkIndex = msges?.findLastIndex(
+				(msg) => "type" in msg && msg.type === ChatType.DEEPTHINK
+			)
+			if (lastDeepthinkIndex === -1) return
+
+			const newMessage = msges.map((elm, index) => {
+				if (
+					index === lastDeepthinkIndex &&
+					"type" in elm &&
+					elm.type === ChatType.DEEPTHINK
+				)
+					return {
+						...elm,
+						isPending: false,
+						content
+					}
+				return elm
+			})
+
+			set({
+				messages: newMessage
 			})
 		},
 		nextCurrentFile: () => {
@@ -174,9 +213,20 @@ const useFileStore = createWithEqualityFn<fileState>()(
 			}
 
 			return false
-		}
+		},
+
+		clearStore: () =>
+			set({
+				currentFile: null,
+				messages: [],
+				listFiles: {},
+				loading: {
+					isLoading: false
+				},
+				viewDetail: false
+			})
 	}),
 	shallow
 )
 
-export default useFileStore
+export default useChatStore

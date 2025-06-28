@@ -1,13 +1,18 @@
-import { useEffect, useRef } from "react"
+"use client"
+
+import { memo, useEffect, useRef } from "react"
+import { useSearchParams } from "next/navigation"
 
 import { cn } from "@/lib/utils"
+import { ChatType } from "@/types"
 import { MATMessageType, MATNewMessage } from "@/types/mat.type"
-import { isEmpty } from "lodash"
+import { isEmpty, set } from "lodash"
 
-import useFileStore from "@/stores/fileStore"
+import useChatStore from "@/stores/fileStore"
 import useSocketStore from "@/stores/socket.store"
 
-import Chatbox from "./Chatbox"
+import Chatbox, { ChatboxProps } from "./Chatbox"
+import DeepThinking from "./DeepThinking"
 import Loading from "./Loading"
 
 const ChatContent = () => {
@@ -15,8 +20,15 @@ const ChatContent = () => {
 	const containerRef = useRef<HTMLDivElement>(null)
 	const currentFileIndex = useRef<number>(0)
 
-	const { setLoading, addFile, setCurrentFile, messages, setMessages } =
-		useFileStore()
+	const {
+		setLoading,
+		addFile,
+		setCurrentFile,
+		messages,
+		setMessages,
+		clearStore,
+		viewDetail
+	} = useChatStore()
 
 	useEffect(() => {
 		if (socket) {
@@ -31,6 +43,7 @@ const ChatContent = () => {
 							)
 
 							setMessages({
+								type: ChatType.NORMAL,
 								id: message.data.messages.team[0].id,
 								content: message.data.messages.team[0].content,
 								name: message.data.messages.team[0].sent_from,
@@ -93,18 +106,31 @@ const ChatContent = () => {
 				}
 			}
 		}
-	}, [socket])
+	}, [socket, addFile, setCurrentFile, setLoading, setMessages])
+
+	useEffect(() => {
+		return () => {
+			console.log("clearstore")
+			clearStore()
+		}
+	}, [clearStore])
+
+	if (isEmpty(messages)) return null
 
 	return (
 		<div
 			ref={containerRef}
 			className={cn(
-				"h-[calc(100%-150px)] w-full transition-all duration-500 delay-500 flex flex-col gap-3 max-h-[calc(100%-150px)] py-4 px-5 overflow-y-auto no-scrollbar"
+				"h-0 w-full z-10 max-w-[744px] mx-auto transition-all delay-1000 opacity-0 flex flex-col gap-3 max-h-[calc(100%-250px)] overflow-y-auto no-scrollbar",
+				!isEmpty(messages) && "h-[calc(100%-250px)] py-4 opacity-100",
+				viewDetail && "max-h-[calc(100%-125px)] h-[calc(100%-125px)]"
 			)}
 		>
 			{!isEmpty(messages) &&
-				messages.map((msg) => {
-					return <Chatbox key={msg.id} {...msg} />
+				messages.map((msg, index) => {
+					if (msg.type === ChatType.DEEPTHINK)
+						return <DeepThinking key={msg.id} {...msg} />
+					return <Chatbox key={msg.id} {...(msg as ChatboxProps)} />
 				})}
 
 			<Loading />
@@ -112,4 +138,4 @@ const ChatContent = () => {
 	)
 }
 
-export default ChatContent
+export default memo(ChatContent)

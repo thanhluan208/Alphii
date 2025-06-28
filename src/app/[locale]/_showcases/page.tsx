@@ -16,8 +16,8 @@ import useSocketStore from "@/stores/socket.store"
 import useMATMutation from "@/hooks/MultiAgentTeam/useMATMutation"
 
 import Case from "./components/Case"
-import ChatContent from "./components/ChatContent"
-import ChatInput from "./components/ChatInput"
+import ChatContent from "../../../components/common/Chat/ChatContent"
+import ChatInput from "../../../components/common/Chat/ChatInput"
 
 const Showcases = () => {
 	const searchParams = useSearchParams()

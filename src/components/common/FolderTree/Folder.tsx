@@ -12,7 +12,7 @@ import {
 import { cn, fileIcon } from "@/lib/utils"
 import { ChevronUp } from "lucide-react"
 
-import useFileStore from "@/stores/fileStore"
+import useChatStore from "@/stores/fileStore"
 
 import { TreeNode } from "./FolderTreeNodes"
 
@@ -23,7 +23,7 @@ interface FolderProps {
 
 const Folder = ({ data, level }: FolderProps) => {
 	const searchParams = useSearchParams()
-	const { setCurrentFile } = useFileStore()
+	const { setCurrentFile } = useChatStore()
 
 	const file = searchParams.get("file")
 	const [value, setValue] = useState("")

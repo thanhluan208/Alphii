@@ -33,14 +33,17 @@ const config = {
 				alphii_text_sub_600: "var(--alphii-text-sub-600)",
 				alphii_bg_strong: "var(--alphii-bg-strong-950)",
 				alphii_skeleton: "var(--alphii-skeleton)",
+				alphii_skeleton_sub: "var(--alphii-skeleton-sub)",
 				alphii_border_2: "var(--alphii-border-2)",
+				alphii_component_3: "var(--alphii-component-3)",
+				alphii_background_2: "var(--alphii-background-2)",
 				alphii_bg_soft_200: "var(--alphii-bg-soft-200)",
 				alphii_bg_weak_50: "var(--alphii-bg-weak-50)",
 				alphii_bg_weak_40: "var(--alphii-bg-weak-40)",
 				alphii_destructive_light: "var(--alphii-destructive-light)",
 
 				background: "var(--background)",
-				foreground: "hsl(var(--foreground))",
+				foreground: "var(--foreground)",
 				description: "#333639",
 				primary: {
 					DEFAULT: "#876FE5",
@@ -119,6 +122,57 @@ const config = {
 					to: {
 						transform: "translate(calc(-50% - 0.5rem))"
 					}
+				},
+				"fade-down": {
+					"0%": {
+						opacity: "1",
+						transform: "translateY(0)"
+					},
+					"100%": {
+						opacity: "0",
+						transform: "translateY(-20px)"
+					}
+				},
+				"fade-left": {
+					"0%": {
+						opacity: "1",
+						transform: "translateX(0)"
+					},
+					"100%": {
+						opacity: "0",
+						transform: "translateX(-20px)"
+					}
+				},
+				"fade-right": {
+					"0%": {
+						opacity: "1",
+						transform: "translateX(0)"
+					},
+					"100%": {
+						opacity: "0",
+						transform: "translateX(20px)"
+					}
+				},
+				"fade-up": {
+					"0%": {
+						opacity: "1",
+						transform: "translateX(0)"
+					},
+					"100%": {
+						opacity: "0",
+						transform: "translateY(20px)"
+					}
+				},
+				"height-reduce": {
+					"0%": {
+						height: "100%",
+						opacity: "1"
+					},
+					"100%": {
+						height: "0",
+						opacity: "0",
+						transform: "translateY(-100px)"
+					}
 				}
 			},
 			animation: {
@@ -126,7 +180,13 @@ const config = {
 				"accordion-up": "accordion-up 0.2s ease-out",
 				"caret-blink": "caret-blink 1.25s ease-out infinite",
 				scroll:
-					"scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite"
+					"scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+				"fade-down": "fade-down 0.5s ease-out forwards",
+				"fade-left": "fade-left 0.5s ease-out forwards",
+				"fade-right": "fade-right 0.5s ease-out forwards",
+				"fade-up": "fade-up 0.5s ease-out forwards",
+				"height-reduce": "height-reduce 0.5s ease-out forwards",
+				"spin-gradient": "spin-gradient 3s linear infinite"
 			}
 		}
 	},
