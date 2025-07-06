@@ -14,9 +14,9 @@ const FAQs = () => {
 
 	const faqItems = [
 		{
-			question: "What is Alphii AI?",
+			question: "Can agents talk to each other??",
 			answer:
-				"Alphii AI is your plug-and-play AI team—agents that build your product like a real dev squad."
+				"Yes. Agents collaborate, delegate, and share information autonomously."
 		},
 		{
 			question: "How does it work?",
@@ -24,17 +24,17 @@ const FAQs = () => {
 				"Agents coordinate through Agent-to-Agent (A2A) protocols to make smart decisions and build your product step by step."
 		},
 		{
-			question: "What makes Alphii AI different?",
+			question: "What are the benefits?",
 			answer:
 				"Every agent has a role—PM, dev, QA, etc.—and they work together like a synced-up team."
 		},
 		{
-			question: "Can I build something without knowing how to code?",
+			question: "What are the common applications?",
 			answer:
 				"100%. Just tell Alphii what you want. Agents handle the rest—planning, coding, testing, and launching."
 		},
 		{
-			question: "Can I customize how my product is built?",
+			question: "How can I get started?",
 			answer:
 				"Yes! You can tweak how agents work, guide the process, or let them do their thing. Your product, your way."
 		}
@@ -47,16 +47,16 @@ const FAQs = () => {
 					<AccordionItem
 						key={i}
 						value={`${i}`}
-						className="shadow-[0px_4px_10px_0px_#00000014] p-6 rounded-[20px] flex flex-col gap-3 mt-3 border-b-0"
+						className="border-b-[1.5px] border-[#E7E8EC] pb-4 border-dashed flex flex-col gap-3 mt-3 "
 					>
 						<div
-							className="flex items-center justify-between"
+							className="flex items-center gap-4"
 							onClick={() => {
 								setValue(value === `${i}` ? "" : `${i}`)
 							}}
 						>
+							{value === `${i}` ? <Minus /> : <Plus className="text-primary" />}
 							{item.question}
-							{value === `${i}` ? <Minus /> : <Plus />}
 						</div>
 						<AccordionContent className="text-alphii_text_sub_600">
 							{item.answer}

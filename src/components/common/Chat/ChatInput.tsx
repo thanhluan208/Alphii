@@ -31,6 +31,36 @@ const ChatInput = () => {
 	} = useChatStore()
 
 	const handleSubmit = async () => {
+		setMessages({
+			type: ChatType.NORMAL,
+			id: new Date().getTime().toString(),
+			content: "Prompt",
+			name: "Me",
+			isUser: true
+		})
+
+		setLoading({
+			isLoading: true
+		})
+
+		setTimeout(() => {
+			setMessages({
+				type: ChatType.DEEPTHINK,
+				id: new Date().getTime().toString(),
+				isPending: true,
+				content: ""
+			})
+		}, 1000)
+
+		setTimeout(() => {
+			setMessages({
+				type: ChatType.DEEPTHINK,
+				id: new Date().getTime().toString(),
+				isPending: false,
+				content: ""
+			})
+		}, 2000)
+
 		if (!textareaRef.current?.value) return
 
 		const prompt = textareaRef.current?.value

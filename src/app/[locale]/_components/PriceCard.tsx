@@ -1,179 +1,111 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { useTranslations } from "next-intl"
 
-import { BasicIcon, CustomPriceIcon, PlusIcon } from "@/components/icons"
+import {
+	BasicPriceIcon,
+	CustomPriceIcon,
+	PlusPriceIcon
+} from "@/components/icons"
 import { Button } from "@/components/ui"
 import { cn } from "@/lib/utils"
-import { cva } from "class-variance-authority"
-import { capitalize } from "lodash"
 import { Check } from "lucide-react"
 
-interface PriceCardProps extends React.HTMLAttributes<HTMLDivElement> {
-	variant: "basic" | "plus+" | "custom"
+interface PriceCardProps {
+	type: "basic" | "plus" | "custom"
 }
 
-const card = cva("", {
-	variants: {
-		variant: {
-			basic: "bg-[linear-gradient(180deg,#F1ECFF_0%,#FFFFFF_100%)]  ",
-			"plus+": "bg-[linear-gradient(180deg,#FFEEDF_0%,#FFFFFF_100%)]",
-			custom: "bg-white "
-		}
-	},
-	defaultVariants: {
-		variant: "basic"
-	}
-})
+const PriceCard = ({ type }: PriceCardProps) => {
+	const translate = useTranslations("home")
 
-const PriceCard = ({ variant, className }: PriceCardProps) => {
-	const translation = useTranslations("home")
-
-	const icon = () => {
-		switch (variant) {
+	const cardInfos = useMemo(() => {
+		switch (type) {
 			case "basic":
-				return <BasicIcon />
-			case "plus+":
-				return <PlusIcon />
+				return {
+					icon: <BasicPriceIcon />,
+					price: 20,
+					token: "10M",
+					executions: translate("advanceTeamsExecutions"),
+					support: translate("supportAdvanceFeatures")
+				}
 			case "custom":
-				return <CustomPriceIcon />
+				return {
+					icon: <CustomPriceIcon />,
+					price: 50,
+					executions: translate("unlimitedTeamsExecutions"),
+					support: translate("fullySupportAdvanceFeatures"),
+					token: "25M"
+				}
+			case "plus":
+				return {
+					icon: <PlusPriceIcon />,
+					price: 100,
+					executions: translate("unlimitedTeamsExecutions"),
+					support: translate("fullySupportAdvanceFeatures"),
+					token: "100M"
+				}
+			default:
+				return {
+					icon: <BasicPriceIcon />,
+					price: 20,
+					token: "10M",
+					executions: translate("advanceTeamsExecutions"),
+					support: translate("supportAdvanceFeatures")
+				}
 		}
-	}
-
-	const price = () => {
-		switch (variant) {
-			case "basic":
-				return (
-					<p className="text-[40px] font-[500] leading-[48px] text-[#1E1F24]">
-						$20
-					</p>
-				)
-			case "plus+":
-				return (
-					<p className="text-[40px] font-[500] leading-[48px] text-[#1E1F24]">
-						$50
-					</p>
-				)
-			case "custom":
-				return (
-					<p className="text-[40px] font-[500] leading-[48px] text-[#1E1F24]">
-						$100
-					</p>
-				)
-		}
-	}
-
-	const subTitle = () => {
-		switch (variant) {
-			case "basic":
-				return (
-					<span className="text-xs text-[#1E1F24]">
-						Perfect for casual users exploring Alphii at their own pace with
-						curiosity and ease
-					</span>
-				)
-			case "plus+":
-				return (
-					<span className="text-xs text-[#1E1F24]">
-						Designed for regular users engaging with Alphii daily for steady,
-						reliable access
-					</span>
-				)
-			case "custom":
-				return (
-					<span className="text-xs text-[#1E1F24]">
-						Built for expert users relying on Alphii as a core tool for
-						high-performance work
-					</span>
-				)
-		}
-	}
-
-	const content = () => {
-		switch (variant) {
-			case "basic":
-				return (
-					<div className="grid text-black grid-cols-[50px_1fr] mt-5 gap-y-2 items-center">
-						<Check className="text-[#06BF78]" />
-						<p className="text-xs font-semibold">10M Token</p>
-						<Check className="text-[#06BF78]" />
-						<p className="text-xs font-semibold">
-							Advance teams concurrence executions
-						</p>
-						<Check className="text-[#06BF78]" />
-						<p className="text-xs font-semibold">Support advance features</p>
-					</div>
-				)
-			case "plus+":
-				return (
-					<div className="grid text-black grid-cols-[50px_1fr] mt-5 gap-y-2 items-center">
-						<Check className="text-[#06BF78]" />
-						<p className="text-xs font-semibold">25M Token</p>
-						<Check className="text-[#06BF78]" />
-						<p className="text-xs font-semibold">
-							Unlimited teams concurrent executions
-						</p>
-						<Check className="text-[#06BF78]" />
-						<p className="text-xs font-semibold">
-							Fully support advance features
-						</p>
-					</div>
-				)
-			case "custom":
-				return (
-					<div className="grid text-black grid-cols-[50px_1fr] mt-5 gap-y-2 items-center">
-						<Check className="text-[#06BF78]" />
-						<p className="text-xs font-semibold">100M Token</p>
-						<Check className="text-[#06BF78]" />
-						<p className="text-xs font-semibold">
-							Unlimited teams concurrent executions
-						</p>
-						<Check className="text-[#06BF78]" />
-						<p className="text-xs font-semibold">
-							Fully support advance features
-						</p>
-					</div>
-				)
-		}
-	}
+	}, [type, translate])
 
 	return (
 		<div
-			className={cn(
-				"border-2 p-1.5 rounded-3xl",
-				variant === "basic" ? "border-primary" : "border-[#EFF0F3]"
-			)}
+			className={
+				cn("border rounded-3xl hover:rotate-0 transition-all border-[#D8D9E0] md:w-[calc(100%-20px)] w-[300px] p-5 flex flex-col shadow-md",
+				type === "custom" && "rotate-2",
+				type === "plus" && "-rotate-2")
+			}
 		>
-			<div
-				className={cn(
-					"rounded-t-[18px] p-4 flex flex-col gap-7",
-					card({ variant, className })
-				)}
-			>
-				<div className="flex gap-5 items-center">
-					{icon()}
-					<p className="font-[500] text-2xl leading-8 text-[#1E1F24]">{capitalize(variant)}</p>
+			<div className="flex flex-col gap-5 md:flex-row md:justify-between">
+				<div className="flex flex-col gap-5">
+					<div className="gap-3 flex items-center ">
+						{cardInfos.icon} <p className="font-medium">{translate(type)}</p>
+					</div>
+					<div>
+						<p className="text-[40px] font-medium">{`$ ${cardInfos.price}`}</p>
+						<p className="text-sm text-[#62636C] ">
+							{translate("perUserMonth")}
+						</p>
+					</div>
 				</div>
-				<div className="flex flex-col gap-2">
-					{price()}
-					<p className="text-base leading-6 text-alphii_text_sub_600">
-						Per user/month, billed monthly
-					</p>
-				</div>
-				<div>
-					<p className="text-sm font-semibold">{subTitle()}</p>
-					{content()}
+				<div className="flex flex-col gap-1 text-sm font-medium">
+					<div className="flex items-center gap-1">
+						<div className="h-9 w-9  min-w-9 flex items-center justify-center">
+							<Check size={16} />
+						</div>
+						<p>
+							{cardInfos.token} {translate("token")}
+						</p>
+					</div>
+					<div className="flex items-center gap-1">
+						<div className="h-9 w-9  min-w-9 flex items-center justify-center">
+							<Check size={16} />
+						</div>
+						<p>{cardInfos.executions}</p>
+					</div>
+					<div className="flex items-center gap-1">
+						<div className="h-9 w-9  min-w-9 flex items-center justify-center">
+							<Check size={16} />
+						</div>
+						<p>{cardInfos.support}</p>
+					</div>
 				</div>
 			</div>
-			<Button
-				type="button"
+
+			<button
 				className={cn(
-					"h-[52px] w-full rounded-b-[20px] rounded-t-none",
-					variant !== "basic" && "bg-alphii_bg_weak_50"
+					"w-full mt-3 text-center h-12 rounded-2xl hover:bg-[#1E1F24] hover:text-white transition-all text-white",
+					type === "basic" ? " bg-[#1E1F24]" : "bg-[#EFF0F3] text-[#62636C]"
 				)}
-				variant={variant === "basic" ? "default" : "ghost"}
 			>
-				{translation("lGetStartedForFree")}
-			</Button>
+				{type === "custom" ? translate("contactUs") : translate("upgrade")}
+			</button>
 		</div>
 	)
 }
