@@ -58,9 +58,11 @@ const Home = () => {
 							{translation("faqs")}
 						</SmoothLink>
 					</div>
-					<Button className="w-[124px] h-9 border-2 border-[#4100B1] rounded-full">
-						{translation("getStarted")} <ArrowUpRight />
-					</Button>
+					<Link href={Routes.LOGIN}>
+						<Button className="w-[124px] h-9 border-2 border-[#4100B1] rounded-full">
+							{translation("getStarted")} <ArrowUpRight />
+						</Button>
+					</Link>
 					<MobileMenu />
 				</div>
 			</div>
@@ -82,12 +84,8 @@ const Home = () => {
 				<div className="absolute top-0 left-0 " />
 			</div>
 			<div className="relative z-10 mt-20 text-center flex items-center justify-center flex-col">
-				<p className="text-3xl font-medium">
-					{translation("heroTitle")}
-				</p>
-				<p className="mt-5 w-[335px]">
-					{translation("heroDescription")}
-				</p>
+				<p className="text-3xl font-medium">{translation("heroTitle")}</p>
+				<p className="mt-5 w-[335px]">{translation("heroDescription")}</p>
 			</div>
 			<div className="flex items-center justify-center relative mt-14  ">
 				<div className="bg-[linear-gradient(108.45deg,rgba(255,255,255,0.35)_0.88%,#FFFFFF_48.8%,rgba(255,255,255,0.12)_96.73%)] p-[1.18px] rounded-2xl flex items-center justify-center">
@@ -151,16 +149,16 @@ const Home = () => {
 				<div className="my-14 border-t-[4px] border-dashed border-[#E0E1E6]" />
 
 				<section id="how-it-work">
-					<p className="text-3xl">
-						{translation("howItWorksTitle")}
-					</p>
+					<p className="text-3xl">{translation("howItWorksTitle")}</p>
 					<p className="text-sm font-medium text-[#62636C] mt-5">
 						{translation("howItWorksDescription")}
 					</p>
 
 					<div className="pl-5 relative mt-11">
 						<div className="pl-10 pb-5 relative border-l border-dashed border-[#E0E1E6]">
-							<p className="text-2xl font-medium">{translation("step1Title")}</p>
+							<p className="text-2xl font-medium">
+								{translation("step1Title")}
+							</p>
 							<p className="text-sm font-medium text-[#62636C] mt-2">
 								{translation("step1Description")}
 							</p>
@@ -169,7 +167,9 @@ const Home = () => {
 							</div>
 						</div>
 						<div className="pl-10 pb-5 relative border-l border-dashed border-[#E0E1E6]">
-							<p className="text-2xl font-medium">{translation("step2Title")}</p>
+							<p className="text-2xl font-medium">
+								{translation("step2Title")}
+							</p>
 							<p className="text-sm font-medium text-[#62636C] mt-2">
 								{translation("step2Description")}
 							</p>
@@ -178,7 +178,9 @@ const Home = () => {
 							</div>
 						</div>
 						<div className="pl-10 pb-5 relative ">
-							<p className="text-2xl font-medium">{translation("step3Title")}</p>
+							<p className="text-2xl font-medium">
+								{translation("step3Title")}
+							</p>
 							<p className="text-sm font-medium text-[#62636C] mt-2">
 								{translation("step3Description")}
 							</p>
@@ -192,9 +194,7 @@ const Home = () => {
 				<div className="my-14 border-t-[4px] border-dashed border-[#E0E1E6]" />
 
 				<section id="feature">
-					<p className="text-3xl font-medium">
-						{translation("featureTitle")}
-					</p>
+					<p className="text-3xl font-medium">{translation("featureTitle")}</p>
 
 					<TabList />
 				</section>
@@ -202,9 +202,7 @@ const Home = () => {
 				<div className="my-14 border-t-[4px] border-dashed border-[#E0E1E6]" />
 
 				<section id="pricing">
-					<p className="text-3xl font-medium">
-						{translation("pricingTitle")}
-					</p>
+					<p className="text-3xl font-medium">{translation("pricingTitle")}</p>
 
 					<p className=" font-medium text-[#62636C] mt-5">
 						{translation("pricingDescription")}
@@ -222,9 +220,7 @@ const Home = () => {
 				<div className="mb-14 border-t-[4px] border-dashed border-[#E0E1E6]" />
 
 				<section id="faqs">
-					<p className="text-3xl font-medium">
-						{translation("faqsTitle")}
-					</p>
+					<p className="text-3xl font-medium">{translation("faqsTitle")}</p>
 
 					<div className="px-3 py-2.5 mt-5 rounded-2xl bg-[#F8F8FF] flex items-center gap-4">
 						<div className="w-[5px] h-10 rounded-full bg-primary" />

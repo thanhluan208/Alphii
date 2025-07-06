@@ -49,7 +49,7 @@ export const siteConfig = {
 		siteName: "AlphiiAI",
 		images: [
 			{
-				url: "https://alphii-ai-fe.vercel.app/images/social.jpeg", // Use absolute URL
+				url: "https://alphii-ai-fe.vercel.app/images/social.png", // Use absolute URL
 				width: 1200,
 				height: 630,
 				alt: "AlphiiAI - Build Your Customizable A2A Team"
