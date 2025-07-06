@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+import { useTranslations } from "next-intl"
 
 import {
 	Accordion,
@@ -10,33 +11,29 @@ import {
 import { Minus, Plus } from "lucide-react"
 
 const FAQs = () => {
+	const translation = useTranslations("home")
 	const [value, setValue] = React.useState("0")
 
 	const faqItems = [
 		{
-			question: "Can agents talk to each other??",
-			answer:
-				"Yes. Agents collaborate, delegate, and share information autonomously."
+			question: translation("faq1Question"),
+			answer: translation("faq1Answer")
 		},
 		{
-			question: "How does it work?",
-			answer:
-				"Agents coordinate through Agent-to-Agent (A2A) protocols to make smart decisions and build your product step by step."
+			question: translation("faq2Question"),
+			answer: translation("faq2Answer")
 		},
 		{
-			question: "What are the benefits?",
-			answer:
-				"Every agent has a role—PM, dev, QA, etc.—and they work together like a synced-up team."
+			question: translation("faq3Question"),
+			answer: translation("faq3Answer")
 		},
 		{
-			question: "What are the common applications?",
-			answer:
-				"100%. Just tell Alphii what you want. Agents handle the rest—planning, coding, testing, and launching."
+			question: translation("faq4Question"),
+			answer: translation("faq4Answer")
 		},
 		{
-			question: "How can I get started?",
-			answer:
-				"Yes! You can tweak how agents work, guide the process, or let them do their thing. Your product, your way."
+			question: translation("faq5Question"),
+			answer: translation("faq5Answer")
 		}
 	]
 

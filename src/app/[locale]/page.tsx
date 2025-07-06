@@ -84,8 +84,8 @@ const Home = () => {
 				<div className="absolute top-0 left-0 " />
 			</div>
 			<div className="relative z-10 mt-20 text-center flex items-center justify-center flex-col">
-				<p className="text-3xl font-medium">{translation("heroTitle")}</p>
-				<p className="mt-5 w-[335px]">{translation("heroDescription")}</p>
+				<p className="text-3xl md:text-5xl font-medium">{translation("heroTitle")}</p>
+				<p className="mt-5 w-[335px] md:w-[563px]">{translation("heroDescription")}</p>
 			</div>
 			<div className="flex items-center justify-center relative mt-14  ">
 				<div className="bg-[linear-gradient(108.45deg,rgba(255,255,255,0.35)_0.88%,#FFFFFF_48.8%,rgba(255,255,255,0.12)_96.73%)] p-[1.18px] rounded-2xl flex items-center justify-center">

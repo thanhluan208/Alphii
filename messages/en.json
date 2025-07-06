@@ -80,6 +80,16 @@
 		"contactEmailText": "You can also ask us furtherby emailing to us at:",
 		"contactEmail": "hi.alphii@gmail.com",
 		"ctaTitle": "Are you ready to try Alphii AI now?",
-		"allRightsReserved": "All rights reserved, 2025"
+		"allRightsReserved": "All rights reserved, 2025",
+		"faq1Question": "What is Alphii AI?",
+		"faq1Answer": "Alphii AI is your plug-and-play AI team—agents that build your product like a real dev squad.",
+		"faq2Question": "How does it work?",
+		"faq2Answer": "Agents coordinate through Agent-to-Agent (A2A) protocols to make smart decisions and build your product step by step.",
+		"faq3Question": "What makes Alphii AI different?",
+		"faq3Answer": "Every agent has a role—PM, dev, QA, etc.—and they work together like a synced-up team.",
+		"faq4Question": "Can I build something without knowing how to code?",
+		"faq4Answer": "100%. Just tell Alphii what you want. Agents handle the rest—planning, coding, testing, and launching.",
+		"faq5Question": "Can I customize how my product is built?",
+		"faq5Answer": "Yes! You can tweak how agents work, guide the process, or let them do their thing. Your product, your way."
 	}
 }
