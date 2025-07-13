@@ -15,7 +15,7 @@ import { ChatType } from "@/types"
 import { MATMessageType } from "@/types/mat.type"
 import { ArrowUp, AtSign } from "lucide-react"
 
-import useChatStore from "@/stores/fileStore"
+import useChatStore from "@/stores/chat.store"
 import useSocketStore from "@/stores/socket.store"
 
 const ChatInput = () => {
@@ -25,42 +25,13 @@ const ChatInput = () => {
 		setMessages,
 		loading,
 		setLoading,
-		updateDeepthink,
+		updateDeepthinkContent,
+		updateFinishDeepThink,
 		viewDetail,
 		setViewDetail
 	} = useChatStore()
 
 	const handleSubmit = async () => {
-		setMessages({
-			type: ChatType.NORMAL,
-			id: new Date().getTime().toString(),
-			content: "Prompt",
-			name: "Me",
-			isUser: true
-		})
-
-		setLoading({
-			isLoading: true
-		})
-
-		setTimeout(() => {
-			setMessages({
-				type: ChatType.DEEPTHINK,
-				id: new Date().getTime().toString(),
-				isPending: true,
-				content: ""
-			})
-		}, 1000)
-
-		setTimeout(() => {
-			setMessages({
-				type: ChatType.DEEPTHINK,
-				id: new Date().getTime().toString(),
-				isPending: false,
-				content: ""
-			})
-		}, 2000)
-
 		if (!textareaRef.current?.value) return
 
 		const prompt = textareaRef.current?.value
@@ -79,7 +50,6 @@ const ChatInput = () => {
 		})
 
 		if (socket) {
-			console.log("sending new prompt", prompt)
 			socket.send(
 				JSON.stringify({
 					type: MATMessageType.NEW_MESSAGE,
@@ -109,7 +79,7 @@ const ChatInput = () => {
 		}
 
 		const ws = new WebSocket(
-			`ws://helped-dragon-entirely.ngrok-free.app/multi_agent_team/session/behaviour/start_session/25be228d-e74b-4f14-9974-c86cb552eca9/5aa1c28a8de342d798f49fa0baf0fb47`
+			`ws://helped-dragon-entirely.ngrok-free.app/multi_agent_team/session/behaviour/start_session/c4cd7115-052d-4174-bf49-503345f6fc57/705df588df4649a89c8b78310e3b4e0a`
 		)
 
 		ws.addEventListener("open", () => {

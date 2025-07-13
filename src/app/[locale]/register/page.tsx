@@ -24,7 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { CheckCircle2, XCircle } from "lucide-react"
 import { z } from "zod"
 
-import useUserStore from "@/stores/userStore"
+import useUserStore from "@/stores/user.store"
 import { useToast } from "@/hooks/use-toast"
 import useMutateAuthentication from "@/hooks/authentication/useMutateAuthentication"
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ui/input-otp"

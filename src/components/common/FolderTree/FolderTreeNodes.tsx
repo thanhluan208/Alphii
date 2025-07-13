@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui"
 import { cn, fileIcon } from "@/lib/utils"
 
-import useChatStore from "@/stores/fileStore"
+import useChatStore from "@/stores/chat.store"
 
 import Folder from "./Folder"
 
@@ -19,7 +19,7 @@ export interface TreeNode {
 	lastModified?: number
 	status: "new" | "modified" | "deleted"
 	index?: number
-	animationState?: 'new' | 'select' ,
+	animationState?: "new" | "select"
 	lastStop?: number
 }
 
@@ -45,9 +45,10 @@ const FolderTreeNodes = ({ data }: FolderTreeNodesProps) => {
 					return (
 						<Button
 							key={node.fullPath}
-							// onClick={() => setCurrentFile(node)}
 							variant="ghost"
-							onClick={() => {
+							onClick={(e) => {
+								e.stopPropagation()
+								e.preventDefault()
 								setCurrentFile(node.fullPath)
 							}}
 							className={cn(

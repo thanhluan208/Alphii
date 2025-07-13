@@ -12,7 +12,7 @@ import {
 import { cn, fileIcon } from "@/lib/utils"
 import { ChevronUp } from "lucide-react"
 
-import useChatStore from "@/stores/fileStore"
+import useChatStore from "@/stores/chat.store"
 
 import { TreeNode } from "./FolderTreeNodes"
 
@@ -34,9 +34,11 @@ const Folder = ({ data, level }: FolderProps) => {
 				<Button
 					variant="ghost"
 					className="flex items-center border-0 mt-1 text-alphii_text_sub_600 justify-start gap-2 h-6 p-0 w-full px-4 shadow-none truncate"
-					onClick={() =>
+					onClick={(e) => {
+						e.preventDefault()
+						e.stopPropagation()
 						setValue((prev) => (prev === data.name ? "" : data.name))
-					}
+					}}
 				>
 					<ChevronUp
 						className={cn(
@@ -69,7 +71,8 @@ const Folder = ({ data, level }: FolderProps) => {
 										<Button
 											key={child.fullPath}
 											variant="ghost"
-											onClick={() => {
+											onClick={(e) => {
+												e.stopPropagation()
 												setCurrentFile(child.fullPath)
 											}}
 											className={cn(

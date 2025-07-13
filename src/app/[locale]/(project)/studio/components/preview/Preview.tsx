@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation"
 import { ExitExpandIcon, SpinIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 
-import useChatStore from "@/stores/fileStore"
+import useChatStore from "@/stores/chat.store"
 
 import CodeEditor from "./CodeEditor"
 import Thinking from "./Thinking"
@@ -18,7 +18,7 @@ enum PreviewTab {
 }
 
 const Preview = () => {
-	const [tab, setTab] = useState(PreviewTab.THINKING)
+	const [tab, setTab] = useState(PreviewTab.CODE)
 	const { viewDetail, setViewDetail } = useChatStore()
 
 	const renderContent = () => {
@@ -35,7 +35,7 @@ const Preview = () => {
 	return (
 		<div
 			className={cn(
-				"h-[calc(100%-25px)] transition-all flex flex-col overflow-hidden w-0 opacity-0 rounded-lg duration-300",
+				"h-full transition-all flex flex-col overflow-hidden w-0 opacity-0 rounded-lg duration-300",
 				viewDetail &&
 					"w-[calc(55%)] ml-5 border border-alphii_skeleton_sub opacity-100"
 			)}

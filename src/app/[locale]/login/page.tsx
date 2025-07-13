@@ -23,7 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { isEmpty } from "lodash"
 import { z } from "zod"
 
-import useUserStore from "@/stores/userStore"
+import useUserStore from "@/stores/user.store"
 import useMutateAuthentication from "@/hooks/authentication/useMutateAuthentication"
 import { useToast } from "@/hooks/use-toast"
 

@@ -31,6 +31,7 @@ export interface Roles {
 
 export interface Agent {
 	thinking: boolean
+	messages: Team[]
 }
 
 export interface Team {

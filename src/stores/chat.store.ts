@@ -1,12 +1,12 @@
 import { shallow } from "zustand/shallow"
 import { createWithEqualityFn } from "zustand/traditional"
 import { ChatboxProps } from "@/components/common/Chat/Chatbox"
-import { Deepthink } from "@/components/common/Chat/DeepThinking"
+import { Deepthink } from "@/components/common/Chat/deepthink/DeepThinking"
 import { TreeNode } from "@/components/common/FolderTree/FolderTreeNodes"
 import { ChatType } from "@/types"
 import { cloneDeep } from "lodash"
 
-interface fileState {
+interface chatState {
 	currentFile: TreeNode | null
 	setCurrentFile: (fullPath: string, shouldCheck?: boolean) => void
 
@@ -25,7 +25,8 @@ interface fileState {
 
 	messages: (ChatboxProps | Deepthink)[]
 	setMessages: (value: ChatboxProps | Deepthink) => void
-	updateDeepthink: (content: string) => void
+	updateDeepthinkContent: (agentName: string, content: string) => void
+	updateFinishDeepThink: (agentName: string) => void
 	nextCurrentFile: () => boolean
 
 	viewDetail: boolean
@@ -34,7 +35,7 @@ interface fileState {
 	clearStore: () => void
 }
 
-const useChatStore = createWithEqualityFn<fileState>()(
+const useChatStore = createWithEqualityFn<chatState>()(
 	(set, get) => ({
 		currentFile: null,
 		setCurrentFile: (fullPath: string, shouldCheck = false) => {
@@ -43,9 +44,6 @@ const useChatStore = createWithEqualityFn<fileState>()(
 
 			if (shouldCheck) {
 				if (currentFileExist) {
-					console.log(`[LOG - setCurrentFile]: currentFileExist`, {
-						currentFileExist
-					})
 					if (currentFileExist.fullPath !== fullPath) {
 						get().nextCurrentFile()
 						return
@@ -152,24 +150,75 @@ const useChatStore = createWithEqualityFn<fileState>()(
 				messages: [...get().messages, value]
 			})
 		},
-		updateDeepthink: (content: string) => {
+		updateDeepthinkContent: (agentName: string, content: string) => {
+			const msges = get().messages
+			const setMsg = get().setMessages
+
+			const lastDeepthinkIndex = msges?.findLastIndex(
+				(msg) => "type" in msg && msg.type === ChatType.DEEPTHINK
+			)
+
+			const lastMsg = msges[lastDeepthinkIndex] as Deepthink
+
+			if (lastDeepthinkIndex !== -1 && lastMsg.agentName === agentName) {
+				const lastContent = lastMsg?.contents?.[lastMsg?.contents?.length - 1]
+
+				if (lastContent === content) return
+
+				const newMessage = msges.map((elm, index) => {
+					if (
+						index === lastDeepthinkIndex &&
+						"type" in elm &&
+						elm.type === ChatType.DEEPTHINK
+					) {
+						const curretnDeepthink = elm as Deepthink
+						const newContent = [...curretnDeepthink.contents, content]
+
+						return {
+							...elm,
+							contents: newContent
+						}
+					}
+					return elm
+				})
+
+				set({
+					messages: newMessage
+				})
+
+				return
+			}
+
+			setMsg({
+				type: ChatType.DEEPTHINK,
+				id: new Date().valueOf().toString(),
+				contents: [content],
+				agentName: agentName,
+				isPending: true
+			})
+		},
+		updateFinishDeepThink: (agentName: string) => {
 			const msges = get().messages
 			const lastDeepthinkIndex = msges?.findLastIndex(
 				(msg) => "type" in msg && msg.type === ChatType.DEEPTHINK
 			)
-			if (lastDeepthinkIndex === -1) return
+
+			const lastDeepthink = msges[lastDeepthinkIndex] as Deepthink
+
+			if (lastDeepthinkIndex === -1 || lastDeepthink.agentName !== agentName)
+				return
 
 			const newMessage = msges.map((elm, index) => {
 				if (
 					index === lastDeepthinkIndex &&
 					"type" in elm &&
 					elm.type === ChatType.DEEPTHINK
-				)
+				) {
 					return {
 						...elm,
-						isPending: false,
-						content
+						isPending: false
 					}
+				}
 				return elm
 			})
 

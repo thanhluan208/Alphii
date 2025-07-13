@@ -92,21 +92,20 @@ export const createQueryString = (
 export const fileIcon = (fileName: string) => {
 	const fileType = fileName.split(".").pop()
 
-	if (fileType === 'tsx' || fileType === "jsx") return Atom
+	if (fileType === "tsx" || fileType === "jsx") return Atom
 
-	if(fileType === 'json') return Braces
+	if (fileType === "json") return Braces
 
 	return File
 }
 
-
 export const extractMessage = (message: string) => {
-	const regex = /^\[Message\] from .+? to .+?: ([\s\S]+)$/;
-	const match = message.match(regex);
+	const regex = /^\[Message\] from .+? to .+?: ([\s\S]+)$/
+	const match = message.match(regex)
 
 	if (match) {
 		return match[1]
 	}
 
-	return ''
+	return ""
 }

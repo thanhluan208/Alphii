@@ -4,9 +4,9 @@ import { SpinIcon } from "@/components/icons"
 import { cn } from "@/lib/utils"
 import { ChatType } from "@/types"
 
-import useChatStore from "@/stores/fileStore"
+import useChatStore from "@/stores/chat.store"
 
-import { Deepthink } from "./DeepThinking"
+import { Deepthink } from "./deepthink/DeepThinking"
 
 const Loading = () => {
 	const { loading, messages } = useChatStore()

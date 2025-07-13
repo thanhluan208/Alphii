@@ -5,7 +5,10 @@ import { ResizablePanel } from "@/components/ui/resizable"
 import { Editor, OnMount } from "@monaco-editor/react"
 import * as monaco from "monaco-editor"
 
-import useChatStore from "@/stores/fileStore"
+import useChatStore from "@/stores/chat.store"
+import useCodeEditorStore from "@/stores/code-editor.store"
+
+import FolderTree from "./FolderTree"
 
 const mockData = `
 # 2048 Game PRD
@@ -198,12 +201,14 @@ const CodeEditor = () => {
 	const [themesRegistered, setThemesRegistered] = useState(false)
 	const timeoutRef = useRef<NodeJS.Timeout>()
 
-	console.log(`[LOG - CodeEditor]: currentFile`, currentFile)
+	const setOpenFolderTree = useCodeEditorStore(
+		(state) => state.setOpenFolderTree
+	)
 
 	const { lastStop, animationState } = currentFile || {}
 
 	const currentFileContent = useMemo(() => {
-		if (!currentFile) return mockData
+		if (!currentFile) return ""
 		return currentFile.content
 	}, [currentFile])
 
@@ -363,16 +368,24 @@ const CodeEditor = () => {
 	}, [currentMonacoTheme, themesRegistered])
 
 	return (
-		<Editor
-			height="calc(100%)"
-			defaultLanguage="typescript"
-			defaultValue=""
-			onMount={handleEditorDidMount}
-			theme={currentMonacoTheme}
-			options={{
-				readOnly: loading?.isLoading
+		<div
+			className="relative w-full h-full"
+			onClick={() => {
+				setOpenFolderTree(false)
 			}}
-		/>
+		>
+			<FolderTree />
+			<Editor
+				height="100%"
+				defaultLanguage="typescript"
+				defaultValue=""
+				onMount={handleEditorDidMount}
+				theme={currentMonacoTheme}
+				options={{
+					readOnly: loading?.isLoading
+				}}
+			/>
+		</div>
 	)
 }
 

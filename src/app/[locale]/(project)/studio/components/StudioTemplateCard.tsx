@@ -14,7 +14,7 @@ import {
 import { Button, Skeleton } from "@/components/ui"
 import { cn } from "@/lib/utils"
 
-import useChatStore from "@/stores/fileStore"
+import useChatStore from "@/stores/chat.store"
 
 const StudioTemplateCard = () => {
 	const t = useTranslations("studio")
