@@ -15,6 +15,7 @@
 		"resetPasswordButton": "Reset Password",
 		"horizontalLine": "or",
 		"emailLabel": "Email Address",
+		"usernameLabel": "Username",
 		"passwordLabel": "Password",
 		"newPasswordLabel": "Your new password",
 		"retypePasswordLabel": "Retype new password",

@@ -1,6 +1,8 @@
 "use client"
 
+import { useTransition } from "react"
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
@@ -15,24 +17,19 @@ import {
 	CardTitle
 } from "@/components/ui/card"
 import { Form, FormField } from "@/components/ui/form"
-import { api } from "@/helpers"
 import { Link } from "@/i18n/routing"
 import { LOCAL_STORAGE_KEY, Routes } from "@/lib/constant"
+import { loginAction } from "@/server/authentication"
 import { STATUS_CODE } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { isEmpty } from "lodash"
 import { z } from "zod"
 
-import useUserStore from "@/stores/user.store"
-import useMutateAuthentication from "@/hooks/authentication/useMutateAuthentication"
-import { useToast } from "@/hooks/use-toast"
-
 const Login = () => {
 	const translation = useTranslations("authentication")
-	const { handleLogin } = useMutateAuthentication()
-	const { toast } = useToast()
 	const router = useRouter()
-	const { setToken, setUserId } = useUserStore()
+	const [isPending, startTransition] = useTransition()
+
 	const formSchema = z.object({
 		email_or_username: z.string().min(2).max(50),
 		password: z.string().min(6).max(50)
@@ -100,14 +97,6 @@ const Login = () => {
 			data.user_data &&
 			data.user_data.status_code === STATUS_CODE.SUCCESS
 		) {
-			toast({
-				title: "Login Successful",
-				description: "Welcome back!",
-				duration: 3000
-			})
-			api.attachTokenToHeader(accessToken)
-			setToken(accessToken)
-			setUserId(data.user_data.user_id)
 			if (typeof window !== "undefined") {
 				localStorage.setItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN, accessToken)
 				localStorage.setItem(LOCAL_STORAGE_KEY.REFRESH_TOKEN, refreshToken)
@@ -120,63 +109,27 @@ const Login = () => {
 
 			router.push(Routes.ROOT)
 		} else {
-			toast({
-				title: "Login Failed",
-				description: data.message,
-				duration: 3000
-			})
+			toast.error("Login Failed")
 		}
 	}
 
 	const handleSubmit = async () => {
-		if (handleLogin.isPending) {
+		if (isPending) {
 			return
 		}
 
-		try {
-			const response = await handleLogin.mutateAsync(loginForm.getValues())
+		startTransition(async () => {
+			try {
+				const response = await loginAction(loginForm.getValues())
 
-			if (response.status_code === STATUS_CODE.SUCCESS) {
-				toast({
-					title: "Login Successful",
-					description: "Welcome back!",
-					duration: 3000
-				})
-				api.attachTokenToHeader(response.access_token)
-				setToken(response.access_token)
-				setUserId(response.user_data.id)
-
-				if (typeof window !== "undefined") {
-					localStorage.setItem(
-						LOCAL_STORAGE_KEY.ACCESS_TOKEN,
-						response.access_token
-					)
-					localStorage.setItem(
-						LOCAL_STORAGE_KEY.REFRESH_TOKEN,
-						response.refresh_token
-					)
-					localStorage.setItem(LOCAL_STORAGE_KEY.USER_ID, response.user_data.id)
-					localStorage.setItem(
-						LOCAL_STORAGE_KEY.USER_DATA,
-						JSON.stringify(response.user_data)
-					)
+				if (response.code === STATUS_CODE.SUCCESS) {
+					toast.success("Login successfully")
+					router.push(Routes.PROJECT)
 				}
-
-				router.push(Routes.PROJECT)
-			} else {
-				toast({
-					title: "Login Failed",
-					description: response.message,
-					duration: 3000
-				})
+			} catch (error) {
+				toast.error("Login Failed")
 			}
-		} catch (error) {
-			toast({
-				title: "Login Failed",
-				description: "An error occurred while logging in: " + error,
-				duration: 3000
-			})
-		}
+		})
 	}
 
 	const formErr = loginForm.formState.errors
@@ -304,9 +257,7 @@ const Login = () => {
 								<Button
 									type="submit"
 									className="w-full bg-primary"
-									disabled={
-										!isEmpty(formErr) || !isDirty || handleLogin.isPending
-									}
+									disabled={!isEmpty(formErr) || !isDirty || isPending}
 								>
 									{translation("loginButton")}
 								</Button>

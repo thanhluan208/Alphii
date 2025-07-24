@@ -1,5 +1,5 @@
 import userService from "@/services/user.service";
-import { ChangePassword } from "@/types/authentication.type";
+import { SignupPayload } from "@/types/authentication.type";
 import { useMutation } from "@tanstack/react-query";
 
 const useMutateAuthentication = () => {
@@ -31,7 +31,7 @@ const useMutateAuthentication = () => {
   });
 
   const handleSignUp = useMutation({
-    mutationFn: (payload: FormData) => userService.signUp(payload),
+    mutationFn: (payload: SignupPayload) => userService.signUp(payload),
   });
 
   const handleForgotPass = useMutation({
@@ -40,7 +40,7 @@ const useMutateAuthentication = () => {
   });
 
   const handleChangePass = useMutation({
-    mutationFn: (payload: ChangePassword) => userService.changePass(payload),
+    mutationFn: (payload: any) => userService.changePass(payload),
   });
 
   return {

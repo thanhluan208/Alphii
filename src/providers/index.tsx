@@ -6,7 +6,27 @@ import { cn } from "@/lib/utils"
 import { QueryProvider } from "@/providers/queryProvider"
 import { Check, X } from "lucide-react"
 
-export function Providers({ children }: { children: React.ReactNode }) {
+import "@/helpers/apiHelpers"
+
+import { ComponentPropsWithoutRef, useEffect } from "react"
+
+import { Profile } from "@/types/user.type"
+
+import useUserStore from "@/stores/user.store"
+
+interface ProvidersProps extends ComponentPropsWithoutRef<"div"> {
+	userData?: Profile
+}
+
+export function Providers({ children, userData }: ProvidersProps) {
+	const setProfile = useUserStore((state) => state.setProfileData)
+
+	useEffect(() => {
+		if (userData) {
+			setProfile(userData)
+		}
+	}, [setProfile, userData])
+
 	return (
 		<QueryProvider>
 			{children}

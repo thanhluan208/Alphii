@@ -54,12 +54,10 @@ const DeepthinkContent = ({
 
 	return (
 		<Fragment>
-			<p className="whitespace-pre-line break-words italic text-alphii_text_sub_600 text-xs">
+			<p className="whitespace-pre-line break-words text-left italic text-alphii_text_sub_600 text-xs">
 				{displayedText}
 			</p>
-			{hasDivider && !shouldAnimation && displayedText === content && (
-				<div className="w-full border border-alphii_border border-dashed my-2" />
-			)}
+			{hasDivider && !shouldAnimation && displayedText === content && <br />}
 		</Fragment>
 	)
 }

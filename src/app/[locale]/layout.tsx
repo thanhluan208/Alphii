@@ -9,11 +9,14 @@ import "./globals.css"
 
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
+import { cookies } from "next/headers"
 import { notFound } from "next/navigation"
 
 import { Toaster } from "@/components/ui/toaster"
 import { routing } from "@/i18n/routing"
+import { USER_ID } from "@/lib/constant"
 import { ThemeProvider } from "@/providers/themeProvider"
+import { getUserData } from "@/server/authentication"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { twJoin } from "tailwind-merge"
 
@@ -84,6 +87,9 @@ export default async function RootLayout({
 	}
 
 	const messages = await getMessages()
+	const userId = cookies().get(USER_ID)?.value
+
+	const data = userId ? await getUserData({ user_id: userId }) : undefined
 
 	return (
 		<html lang={locale}>
@@ -98,7 +104,7 @@ export default async function RootLayout({
 						enableSystem
 						disableTransitionOnChange
 					>
-						<Providers>
+						<Providers userData={data?.data?.user_data}>
 							<SpeedInsights />
 							<main>{children}</main>
 						</Providers>

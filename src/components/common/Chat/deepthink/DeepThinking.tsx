@@ -191,7 +191,7 @@ const DeepThinking = ({ contents, isPending, agentName }: Deepthink) => {
 						<ChevronDown className="transition-transform" />
 					</AccordionTrigger>
 					<AccordionContent className="mt-2 pb-3" >
-						<div className="max-h-96 overflow-y-auto" onScroll={handleScroll} ref={accordionContentRef}>
+						<div className="max-h-96 overflow-y-auto no-scrollbar" onScroll={handleScroll} ref={accordionContentRef}>
 							{!isEmpty(contents) &&
 								contents.map((elm, index) => {
 									return (

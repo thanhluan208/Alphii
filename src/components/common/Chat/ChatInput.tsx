@@ -1,6 +1,7 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
+import { useSearchParams } from "next/navigation"
 
 import {
 	ExpandIcon,
@@ -10,6 +11,8 @@ import {
 } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import GradientBorderCard from "@/components/ui/gradient-border-card"
+import { usePathname, useRouter } from "@/i18n/routing"
+import { BASE_URL, WS_URL } from "@/lib/constant"
 import { cn } from "@/lib/utils"
 import { ChatType } from "@/types"
 import { MATMessageType } from "@/types/mat.type"
@@ -19,6 +22,13 @@ import useChatStore from "@/stores/chat.store"
 import useSocketStore from "@/stores/socket.store"
 
 const ChatInput = () => {
+	const router = useRouter()
+	const pathname = usePathname()
+	const searchParams = useSearchParams()
+	const prompt = searchParams.get("prompt")
+	const matId = searchParams.get("matId")
+	const sessionId = searchParams.get("sessionId")
+
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 	const { socket, setWebSocket } = useSocketStore()
 	const {
@@ -30,6 +40,8 @@ const ChatInput = () => {
 		viewDetail,
 		setViewDetail
 	} = useChatStore()
+
+	const disableSubmit = !matId || !sessionId
 
 	const handleSubmit = async () => {
 		if (!textareaRef.current?.value) return
@@ -79,7 +91,7 @@ const ChatInput = () => {
 		}
 
 		const ws = new WebSocket(
-			`ws://helped-dragon-entirely.ngrok-free.app/multi_agent_team/session/behaviour/start_session/c4cd7115-052d-4174-bf49-503345f6fc57/705df588df4649a89c8b78310e3b4e0a`
+			`${WS_URL}/multi_agent_team/session/behaviour/start_session/${matId}/${sessionId}`
 		)
 
 		ws.addEventListener("open", () => {
@@ -107,6 +119,29 @@ const ChatInput = () => {
 		setWebSocket(ws)
 		textareaRef.current.value = ""
 	}
+
+	useEffect(() => {
+		if (prompt && textareaRef.current) {
+			textareaRef.current.value = prompt
+
+			const newSearch = new URLSearchParams(searchParams)
+			newSearch.delete("prompt")
+			router.replace(pathname + `?${newSearch.toString()}`)
+		}
+	}, [prompt])
+
+	useEffect(() => {
+		return () => {
+			if (socket) {
+				socket.send(
+					JSON.stringify({
+						type: MATMessageType.END_SESSION,
+						data: {}
+					})
+				)
+			}
+		}
+	}, [socket])
 
 	return (
 		<GradientBorderCard
@@ -167,7 +202,7 @@ const ChatInput = () => {
 					<Button
 						variant="ghost"
 						onClick={handleSubmit}
-						disabled={loading.isLoading}
+						disabled={loading.isLoading || disableSubmit}
 						className="rounded-full  bg-alphii_component_3 w-8 h-8 p-0 dark:group-focus-within:bg-foreground dark:group-focus-within:text-background flex items-center justify-center transition-colors shadow-xl"
 					>
 						{loading.isLoading ? <SpinIcon /> : <ArrowUp />}

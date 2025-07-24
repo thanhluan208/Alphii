@@ -1,12 +1,17 @@
-import { useMutation } from "@tanstack/react-query"
 import { MATServices } from "@/services"
+import { useMutation } from "@tanstack/react-query"
 
-export default function useMATMutation() {
-    const createNewMATSession = useMutation({
-        mutationFn: MATServices.createNewMATSession
-    })
+export default function useMultiAgentTeamMutation() {
+	const createNewMATSession = useMutation({
+		mutationFn: MATServices.createNewMATSession
+	})
 
-    return {
-        createNewMATSession
-    }
+	const createNewMATTeam = useMutation({
+		mutationFn: MATServices.createNewMATTeam
+	})
+
+	return {
+		createNewMATSession,
+		createNewMATTeam
+	}
 }

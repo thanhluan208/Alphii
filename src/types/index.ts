@@ -3,9 +3,10 @@ export enum LANGUAGE {
 	TH = "th"
 }
 
-export interface DefaultResponse {
+export interface DefaultResponse<T = unknown> {
 	message: string
 	status_code: STATUS_CODE
+	data?: T
 }
 
 export enum STATUS_CODE {
@@ -16,7 +17,6 @@ export enum STATUS_CODE {
 	INTERNAL_SERVER_ERROR = 500,
 	FAIL = 400
 }
-
 
 export interface PagingMeta {
 	current: number
@@ -50,8 +50,13 @@ export interface Media {
 	mediaType: string
 }
 
-
 export enum ChatType {
-	NORMAL = 'normal',
-	DEEPTHINK = 'deepthink'
+	NORMAL = "normal",
+	DEEPTHINK = "deepthink"
+}
+
+export interface CommonResponse<T> {
+	message?: string
+	code: number
+	data?: T
 }

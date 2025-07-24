@@ -7,7 +7,8 @@ const nextConfig = {
 	reactStrictMode: false,
 	env: {
 		BASE_URL: process.env.BASE_URL || "http://backend-default",
-	},
+		WS_URL: process.env.WS_URL
+	}
 
 	// async rewrites() {
 	// 	// Ensure BASE_URL is defined with a fallback

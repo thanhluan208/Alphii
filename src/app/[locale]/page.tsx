@@ -10,11 +10,12 @@ import { cn } from "@/lib/utils"
 import { ArrowUp, Plus } from "lucide-react"
 
 import FAQs from "./_components/FAQs"
+import HomeInput from "./_components/HomeInput"
 import MobileMenu from "./_components/MobileMenu"
 import PriceCard from "./_components/PriceCard"
 import TabList from "./_components/TabList"
 
-const Home = () => {
+const HomePage = () => {
 	const translation = useTranslations("home")
 
 	return (
@@ -103,20 +104,7 @@ const Home = () => {
 				</div>
 				<div className="absolute blur-[55px] h-[120px] md:h-[160px] bottom-5 max-w-[770px] w-[calc(100vw-32px)] bg-[conic-gradient(from_90deg_at_50%_50%,#A79CFF_0deg,#FA96FF_72deg,#FFE188_144deg,#24FFA0_216deg,#00DDF1_288deg,#A79CFF_360deg)]" />
 				<div className="bg-[linear-gradient(90deg,#A79CFF_0%,#F0EAFE_50%,#D6A7FF_100%)] max-w-[770px] absolute bottom-2.5 w-[calc(100vw-32px)] h-[120px] md:h-[160px] z-[11] rounded-[18px] border-[0.89px] border-[#0000001F] shadow-2xl p-[1.78px]">
-					<div className="h-[114px] md:h-[154px] w-full rounded-[16px] flex justify-between flex-col py-2 bg-[#FFFFFF] border-[0.45px] border-[#E2E2E2]">
-						<textarea
-							placeholder={translation("placeholderText")}
-							className="placeholder:text-[#5B5E6E] h-[60px] md:text-sm md:h-[100px] w-full  !outline-none px-3 text-xs resize-none no-scrollbar bg-transparent"
-						/>
-						<div className="flex items-center justify-between px-3">
-							<button className="rounded-full border flex items-center justify-center border-[#EAEAEA] h-8 w-8">
-								<Plus size={14} />
-							</button>
-							<button className="rounded-full border flex items-center justify-center border-[#EAEAEA] h-8 w-8">
-								<ArrowUp size={14} />
-							</button>
-						</div>
-					</div>
+					<HomeInput />
 				</div>
 			</div>
 			<div className="mt-20 px-6 w-full mx-auto max-w-[648px] overflow-x-hidden">
@@ -315,4 +303,4 @@ const Home = () => {
 	)
 }
 
-export default Home
+export default HomePage

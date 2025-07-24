@@ -1,11 +1,10 @@
 import { persist } from "zustand/middleware"
 import { shallow } from "zustand/shallow"
 import { createWithEqualityFn } from "zustand/traditional"
-import { LOCAL_STORAGE_KEY } from "@/lib/constant"
 import { Profile } from "@/types/user.type"
 
 interface userState {
-	Profile: Profile | null
+	profile: Profile | null
 	setProfileData: (value: Profile | null) => void
 	token: string | null
 	setToken: (value: string | null) => void
@@ -18,12 +17,12 @@ interface userState {
 const useUserStore = createWithEqualityFn<userState>()(
 	persist(
 		(set) => ({
-			Profile: null,
+			profile: null,
 			setProfileData: (value: Profile | null) => {
 				if (!value) return
 
 				set({
-					Profile: value
+					profile: value
 				})
 			},
 			token: null,

@@ -2,12 +2,13 @@
 
 import { Fragment, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 import InputField from "@/components/common/fields/InputField"
-import { Button, Label } from "@/components/ui"
+import { Button } from "@/components/ui"
 import {
 	Card,
 	CardContent,
@@ -15,7 +16,20 @@ import {
 	CardHeader,
 	CardTitle
 } from "@/components/ui/card"
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle
+} from "@/components/ui/dialog"
 import { Form, FormField } from "@/components/ui/form"
+import {
+	InputOTP,
+	InputOTPGroup,
+	InputOTPSeparator,
+	InputOTPSlot
+} from "@/components/ui/input-otp"
 import { api } from "@/helpers"
 import { Link } from "@/i18n/routing"
 import { LOCAL_STORAGE_KEY, Routes } from "@/lib/constant"
@@ -25,10 +39,9 @@ import { CheckCircle2, XCircle } from "lucide-react"
 import { z } from "zod"
 
 import useUserStore from "@/stores/user.store"
-import { useToast } from "@/hooks/use-toast"
 import useMutateAuthentication from "@/hooks/authentication/useMutateAuthentication"
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ui/input-otp"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+
+import VerifyDialog from "./components/VerifyDialog"
 
 const passwordCriteria = [
 	{
@@ -47,14 +60,12 @@ const passwordCriteria = [
 
 const Register = () => {
 	const translation = useTranslations("authentication")
-	const { toast } = useToast()
 	const router = useRouter()
 
-	const { handleSignUp, handleVerifyEmail, handleSubmitOTP } = useMutateAuthentication();
+	const { handleSignUp } = useMutateAuthentication()
 
 	const { setToken, setUserId } = useUserStore()
-	const [otpValue, setOtpValue] = useState("");
-	const [showVerify, setShowVerify] = useState(false);
+	const [showVerify, setShowVerify] = useState(false)
 	const [passwordStrength, setPasswordStrength] = useState(0)
 	const [currentPassword, setCurrentPassword] = useState("")
 
@@ -72,7 +83,8 @@ const Register = () => {
 
 	const formSchema = z.object({
 		email: z.string().min(2).max(50),
-		password: z.string().min(8).max(50)
+		password: z.string().min(8).max(50),
+		user_name: z.string().min(8).max(50)
 	})
 
 	const registerForm = useForm<z.infer<typeof formSchema>>({
@@ -137,12 +149,7 @@ const Register = () => {
 			data.user_data &&
 			data.user_data.status_code === STATUS_CODE.SUCCESS
 		) {
-			toast({
-				title: "Login Successful",
-				description: "Welcome back!",
-				duration: 3000
-			})
-			api.attachTokenToHeader(accessToken)
+			toast.success("Welcome back!")
 			setToken(accessToken)
 			setUserId(data.user_data.user_id)
 			if (typeof window !== "undefined") {
@@ -157,164 +164,35 @@ const Register = () => {
 
 			router.push(Routes.ROOT)
 		} else {
-			toast({
-				title: "Login Failed",
-				description: data.message,
-				duration: 3000
-			})
+			toast.error(data.message || "Login Failed")
 		}
 	}
 
 	const handleSubmit = async (data: z.infer<typeof formSchema>) => {
-		const formData = new FormData();
-		formData.append("user_name", data.email?.trim());
-		formData.append("password", data.password?.trim());
-
 		try {
-			const response = await handleSignUp.mutateAsync(formData);
+			const response = await handleSignUp.mutateAsync({
+				...data,
+				display_name: data.user_name
+			})
 
 			if (response.status_code === STATUS_CODE.SUCCESS) {
-				toast({
-					title: "Sign up successfully!",
-					description: response.message,
-					duration: 2000
-				})
-				setShowVerify(true);
+				toast.success(response?.message || "Sign up successsfully")
+				setShowVerify(true)
 			} else {
-				toast({
-					title: "Sign up failed!",
-					description: response.message,
-					duration: 2000
-				})
+				toast.error(response?.message || "Sign up failed")
 			}
 		} catch (err) {
-			toast({
-				title: "Sign up failed!",
-				duration: 2000
-			})
+			toast.error("Sign up failed")
 		}
 	}
 
-	const handleOTPChange = (code: string) => {
-		setOtpValue(code);
-	};
-
-	const handleConfirmOTP = async () => {
-		if (otpValue.length === 6) {
-
-			try {
-				const response = await handleSubmitOTP.mutateAsync({
-					email: registerForm.getValues().email,
-					otp: otpValue,
-				});
-				if (response.status_code === STATUS_CODE.SUCCESS) {
-					toast({
-						title: "Verify successfully!",
-						description: response.message,
-						duration: 2000
-					})
-					setShowVerify(false);
-					router.push(Routes.LOGIN)
-				} else {
-					toast({
-						title: "Verify failed!",
-						description: response.message,
-						duration: 2000
-					})
-				}
-			} catch (err) {
-				toast({
-					title: "Verify failed!",
-					duration: 2000
-				})
-				console.error(err);
-			}
-		} else {
-			toast({
-				title: "Invalid OTP",
-				description: "The verification code is incorrect or has expired. Please try again.",
-				duration: 2000
-			})
-		}
-	};
-
-	const handleResendCode = async () => {
-		const email = registerForm.getValues().email;
-		if (!email) {
-			toast({
-				title: "Email missing",
-				description: "Email is required to resend the verification code.",
-				duration: 2000
-			})
-			return;
-		}
-
-		try {
-			const response = await handleVerifyEmail.mutateAsync(email);
-
-			if (response.status_code === STATUS_CODE.SUCCESS) {
-				toast({
-					title: "Resend code successfully!",
-					duration: 2000
-				})
-				setOtpValue("");
-			} else {
-				toast({
-					title: "Resend code failed!",
-					duration: 2000
-				})
-			}
-		} catch (error) {
-			toast({
-				title: "Resend code failed!",
-				duration: 2000
-			})
-			console.error(error);
-		}
-	};
-
 	return (
 		<div className="relative h-screen content-center bg-background">
-			<Fragment>
-				<Dialog open={showVerify} onOpenChange={(open) => setShowVerify(open)}>
-					<DialogContent className="p-6">
-						<DialogHeader>
-							<DialogTitle className="text-center">Verify your email</DialogTitle>
-							<DialogDescription className="text-center">
-								We have sent a verification code to your email. Please enter the code below to verify your email.
-							</DialogDescription>
-						</DialogHeader>
-
-						<InputOTP
-							maxLength={6}
-							pattern="^\\d+$"
-							onChange={handleOTPChange}
-						>
-							<InputOTPGroup>
-								<InputOTPSlot index={0} />
-								<InputOTPSlot index={1} />
-								<InputOTPSlot index={2} />
-							</InputOTPGroup>
-							<InputOTPSeparator />
-							<InputOTPGroup>
-								<InputOTPSlot index={3} />
-								<InputOTPSlot index={4} />
-								<InputOTPSlot index={5} />
-							</InputOTPGroup>
-						</InputOTP>
-						<div className="text-center">
-							<button
-								className="text-primary-theme hover:opacity-80 text-sm font-medium underline"
-								onClick={handleResendCode}
-							>
-								Resend code
-							</button>
-						</div>
-						<Button className="w-full" onClick={handleConfirmOTP}> Confirm</Button>
-					</DialogContent>
-				</Dialog>
-			</Fragment>
-
+			<VerifyDialog
+				open={showVerify}
+				setOpen={setShowVerify}
+				email={registerForm.getValues().email}
+			/>
 
 			<Form {...registerForm}>
 				<Card className="relative bg-alphii_bg_weak_50 pl-6 pr-6 pb-6 shadow-md w-11/12 max-w-md z-10 m-auto rounded-3xl border border-alphii_border_2">
@@ -344,9 +222,7 @@ const Register = () => {
 
 					<CardHeader className="pb-4">
 						<CardTitle className="text-xl flex gap-2 items-center justify-center">
-							<p className="">
-								{translation("registerCardTitle")}
-							</p>
+							<p className="">{translation("registerCardTitle")}</p>
 						</CardTitle>
 						<CardDescription className="text-center text-alphii_text_sub_600">
 							{translation("registerCardDesc")}
@@ -399,6 +275,21 @@ const Register = () => {
 					<CardContent className="p-0 mt-3">
 						<form onSubmit={registerForm.handleSubmit(handleSubmit)}>
 							<div className="flex flex-col">
+								<div className="grid gap-2 mb-2">
+									<FormField
+										control={registerForm.control}
+										name="user_name"
+										render={({ field }) => (
+											<InputField
+												className="h-10 rounded-[10px] border border-alphii_border_2"
+												field={field}
+												label={translation("usernameLabel")}
+												name="user_name"
+												maxLength={50}
+											/>
+										)}
+									/>
+								</div>
 								<div className="grid gap-2 mb-2">
 									<FormField
 										control={registerForm.control}

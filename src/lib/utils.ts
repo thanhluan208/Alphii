@@ -109,3 +109,34 @@ export const extractMessage = (message: string) => {
 
 	return ""
 }
+
+
+export function decodeJwtPayload(token: string): { exp?: number; iat?: number; [key: string]: any } | null {
+	try {
+	  const parts = token.split('.');
+	  if (parts.length !== 3) return null;
+  
+	  const payload = parts[1];
+	  const paddedPayload = payload + '='.repeat((4 - payload.length % 4) % 4);
+	  const decodedPayload = atob(paddedPayload);
+	  
+	  return JSON.parse(decodedPayload);
+	} catch (error) {
+	  console.error('Error decoding JWT token:', error);
+	  return null;
+	}
+  }
+
+/**
+ * Converts a flat object to FormData (no nested objects/arrays).
+ * @param obj The object to convert
+ */
+export function objectToFormData(obj: Record<string, any>): FormData {
+  const form = new FormData();
+  Object.entries(obj).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      form.append(key, value instanceof Blob ? value : String(value));
+    }
+  });
+  return form;
+}

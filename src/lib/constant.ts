@@ -2,7 +2,9 @@ export const languages = ["en", "th"]
 
 export const ACCESS_TOKEN = "access_token"
 export const REFRESH_TOKEN = "refresh_token"
+export const USER_ID = "user_id"
 export const BASE_URL = process.env.BASE_URL || "http://backend-default"
+export const WS_URL = process.env.WS_URL || ""
 export const NEXT_LOCALE = "NEXT_LOCALE"
 export const DEFAULT_INIT_PAGE = "1"
 
@@ -23,12 +25,11 @@ export const Routes = {
 export const QueryKeys = {
 	VALIDATE_RESET: "VALIDATE_RESET",
 
-	PARTNER_SERVICE_ALL: "PARTNER_SERVICE_ALL",
-	PARTNER_SERVICE_DETAIL: "PARTNER_SERVICE_DETAIL",
-	PARTNER_SUB_SERVICE_DETAIL: "PARTNER_SUB_SERVICE_DETAIL",
-	PARTNER_CATEGORY_ALL: "PARTNER_CATEGORY_ALL",
-	PARTNER_PERMISSION_ALL: "PARTNER_PERMISSION_ALL",
-	PARTNER_CATEGORY_INFINITE: "PARTNER_CATEGORY_INFINITE"
+	//! USER
+	USER_DATA: "USER_DATA",
+
+	//! MAT
+	MAT_MAIN_PRD: "MAT_MAIN_PRD"
 }
 
 export const TIME_IN_SECONDS = {
@@ -40,22 +41,21 @@ export const TIME_IN_SECONDS = {
 export const COUNT_DOWN_OTP = 60 //In seconds
 
 //! USER API
-export const logout = BASE_URL + "/user/log_out"
-export const refreshToken =
-	BASE_URL + "/user/generate_access_token_from_refresh_token"
-export const signInApi = BASE_URL + "/user/information/log_in"
-export const signUpApi = BASE_URL + "/user/sign_up"
-export const verifyEmail = BASE_URL + "/user/resend_verification_code"
-export const submitOTP = BASE_URL + "/user/verify_verification_code"
-export const changePasswordApi = BASE_URL + "/user/change_password_user"
-export const getUserData = BASE_URL + "/user/show_user_data"
-export const searchUser = BASE_URL + "/user/search_user"
-export const updateUser = BASE_URL + "/user/update_user"
-export const voteStarAgent = BASE_URL + "/user/vote_star_agent"
-export const forgotPass = BASE_URL + "/user/forget_password"
-export const changePassword = BASE_URL + "/user/change_password_with_reset_code"
-export const getAvatar = BASE_URL + "/user/get_avatar"
-export const uploadAvatar = BASE_URL + "/user/upload_avatar"
+export const logout = "/user/log_out"
+export const refreshToken = "/user/generate_access_token_from_refresh_token"
+export const signInApi = "/user/information/log_in"
+export const getUserData = "/user/information/show_user_data"
+export const signUpApi = "/user/registration/sign_up"
+export const verifyEmail = "/user/resend_verification_code"
+export const submitOTP = "/user/registration/verify_verification_code"
+export const changePasswordApi = "/user/change_password_user"
+export const searchUser = "/user/search_user"
+export const updateUser = "/user/update_user"
+export const voteStarAgent = "/user/vote_star_agent"
+export const forgotPass = "/user/forget_password"
+export const changePassword = "/user/change_password_with_reset_code"
+export const getAvatar = "/user/get_avatar"
+export const uploadAvatar = "/user/upload_avatar"
 
 export const LOCAL_STORAGE_KEY = {
 	ACCESS_TOKEN: "ACCESS_TOKEN",
