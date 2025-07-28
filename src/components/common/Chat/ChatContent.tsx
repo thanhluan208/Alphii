@@ -5,7 +5,6 @@ import { memo, useCallback, useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 import { ChatType } from "@/types"
 import { MATMessageType, MATNewMessage } from "@/types/mat.type"
-import dayjs from "dayjs"
 import { isEmpty } from "lodash"
 
 import useChatStore from "@/stores/chat.store"
@@ -18,7 +17,6 @@ import Loading from "./Loading"
 const ChatContent = () => {
 	const { socket } = useSocketStore()
 	const containerRef = useRef<HTMLDivElement>(null)
-	const currentFileIndex = useRef<number>(0)
 	const [isAutoScrollEnabled, setIsAutoScrollEnabled] = useState(true)
 	const [userScrollTimeout, setUserScrollTimeout] =
 		useState<NodeJS.Timeout | null>(null)
@@ -35,6 +33,8 @@ const ChatContent = () => {
 		updateDeepthinkContent,
 		updateFinishDeepThink
 	} = useChatStore()
+
+	const setViewDetail = useChatStore((state) => state.setViewDetail)
 
 	// Smooth scroll to bottom function
 	const scrollToBottom = useCallback(() => {
@@ -146,6 +146,8 @@ const ChatContent = () => {
 				try {
 					const message = JSON.parse(event.data) as MATNewMessage
 
+					console.time(`[INFO]: ${message}`)
+
 					if (message.type === MATMessageType.NEW_MESSAGE) {
 						if (!isEmpty(message.data.messages.team)) {
 							message.data.messages.team.forEach((elm) => {
@@ -170,7 +172,7 @@ const ChatContent = () => {
 								} else {
 									const [initThinkingInfo, ...rest] = agentInfo.messages
 
-									updateDeepthinkContent(agent, initThinkingInfo.content)
+									updateDeepthinkContent(agent, initThinkingInfo?.content || "")
 
 									rest.forEach((elm, index) => {
 										const time = setTimeout(() => {
@@ -183,12 +185,17 @@ const ChatContent = () => {
 						)
 
 						if (!isEmpty(message.data.files)) {
-							addFile(message.data.files, currentFileIndex.current)
-							setCurrentFile(
-								message.data.files[message.data.files.length - 1].fullPath,
-								true
-							)
-							currentFileIndex.current++
+							addFile(message.data.files)
+
+							const { type, content } = message.data.files?.[0]
+							if (
+								message.data.files.length === 1 &&
+								type === "file" &&
+								!!content?.replace("\n", "")
+							) {
+								setCurrentFile(message.data.files[0])
+								setViewDetail(true)
+							}
 						}
 
 						for (const agent of Object.entries(message.data.messages.roles)) {
@@ -243,7 +250,8 @@ const ChatContent = () => {
 		setLoading,
 		setMessages,
 		updateDeepthinkContent,
-		updateFinishDeepThink
+		updateFinishDeepThink,
+		setViewDetail
 	])
 
 	useEffect(() => {
@@ -254,6 +262,8 @@ const ChatContent = () => {
 	}, [clearStore])
 
 	if (isEmpty(messages)) return null
+
+	console.log("messages", messages)
 
 	return (
 		<div

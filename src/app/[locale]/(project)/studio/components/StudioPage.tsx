@@ -1,16 +1,58 @@
 "use client"
 
+import { useEffect } from "react"
 import Image from "next/image"
 
 import ChatContent from "@/components/common/Chat/ChatContent"
 import ChatInput from "@/components/common/Chat/ChatInput"
+import { WS_URL } from "@/lib/constant"
 import { cn } from "@/lib/utils"
+import { MATMessageType } from "@/types/mat.type"
+
+import useSocketStore from "@/stores/socket.store"
 
 import Header from "./Header"
 import Preview from "./preview/Preview"
 import StudioTemplateCard from "./StudioTemplateCard"
+import PrdSelector from "./prd-selector"
 
-const StudioPage = () => {
+interface StudioPageProps {
+	matId: string
+	sessionId: string
+}
+
+const StudioPage = ({ matId, sessionId }: StudioPageProps) => {
+	const setWebSocket = useSocketStore((state) => state.setWebSocket)
+
+	useEffect(() => {
+		const ws = new WebSocket(
+			`${WS_URL}/multi_agent_team/session/behaviour/start_session/${matId}/${sessionId}`
+		)
+
+		ws.addEventListener("open", () => {
+			ws.send(
+				JSON.stringify({
+					type: MATMessageType.RECEIVE_INFO,
+					data: {
+						status: "success"
+					}
+				})
+			)
+		})
+
+		setWebSocket(ws)
+
+		return () => {
+			ws.send(
+				JSON.stringify({
+					type: MATMessageType.END_SESSION,
+					data: {}
+				})
+			)
+			ws.close()
+		}
+	}, [matId, sessionId])
+
 	return (
 		<div className="px-5 flex relative flex-col flex-1 w-full ">
 			<Header />
@@ -32,6 +74,8 @@ const StudioPage = () => {
 					<StudioTemplateCard />
 
 					<ChatContent />
+
+					<PrdSelector />
 
 					<ChatInput />
 				</div>

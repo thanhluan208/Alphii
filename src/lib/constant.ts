@@ -29,7 +29,8 @@ export const QueryKeys = {
 	USER_DATA: "USER_DATA",
 
 	//! MAT
-	MAT_MAIN_PRD: "MAT_MAIN_PRD"
+	MAT_MAIN_PRD: "MAT_MAIN_PRD",
+	ALL_MAT_PRD: "ALL_MAT_PRD"
 }
 
 export const TIME_IN_SECONDS = {

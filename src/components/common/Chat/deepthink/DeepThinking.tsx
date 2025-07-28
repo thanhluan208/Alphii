@@ -57,14 +57,13 @@ const DeepThinking = ({ contents, isPending, agentName }: Deepthink) => {
 
 	// Check if container needs scrolling
 	const shouldAutoScroll = useCallback(() => {
-		if (!accordionContentRef.current) return false
+		if (!accordionContentRef.current || !isPending) return false
 		const element = accordionContentRef.current
 		return element.scrollHeight > element.clientHeight
-	}, [])
+	}, [isPending])
 
 	// Handle user scroll detection
 	const handleScroll = useCallback(() => {
-		console.log("accordion", accordionContentRef.current)
 		if (!accordionContentRef.current) return
 
 		const element = accordionContentRef.current
@@ -151,9 +150,8 @@ const DeepThinking = ({ contents, isPending, agentName }: Deepthink) => {
 			<Accordion
 				type="single"
 				onValueChange={(value) => {
-					if (!value) {
-						setCurrentAnimation(contents?.length)
-					} else {
+					setCurrentAnimation(contents?.length)
+					if (value) {
 						scrollToBottom("instant")
 					}
 				}}
@@ -162,7 +160,7 @@ const DeepThinking = ({ contents, isPending, agentName }: Deepthink) => {
 			>
 				<AccordionItem
 					value={id}
-					className="flex flex-col transition-all w-3/4 gap-1 bg-card dark:bg-alphii_background_2 pr-20 relative dark:border-none border rounded-xl max-w-[70%] rounded-br-md px-3 border-alphii_border_2"
+					className="flex flex-col transition-all w-full gap-1 bg-card dark:bg-alphii_background_2 pr-20 relative dark:border-none border rounded-xl max-w-[85%] rounded-br-md px-3 border-alphii_border_2"
 				>
 					<AccordionTrigger className="p-0 flex items-center gap-3">
 						<div
@@ -190,8 +188,12 @@ const DeepThinking = ({ contents, isPending, agentName }: Deepthink) => {
 
 						<ChevronDown className="transition-transform" />
 					</AccordionTrigger>
-					<AccordionContent className="mt-2 pb-3" >
-						<div className="max-h-96 overflow-y-auto no-scrollbar" onScroll={handleScroll} ref={accordionContentRef}>
+					<AccordionContent className="mt-2 pb-3">
+						<div
+							className="max-h-96 overflow-y-auto no-scrollbar"
+							onScroll={handleScroll}
+							ref={accordionContentRef}
+						>
 							{!isEmpty(contents) &&
 								contents.map((elm, index) => {
 									return (
@@ -199,7 +201,7 @@ const DeepThinking = ({ contents, isPending, agentName }: Deepthink) => {
 											<DeepthinkContent
 												content={elm}
 												index={index}
-												currentAnimation={currentAnimation}
+												currentAnimation={isPending ? currentAnimation : -1}
 												setNextAnimation={() => setCurrentAnimation(index + 1)}
 												hasDivider={index < contents?.length - 1}
 											/>

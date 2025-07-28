@@ -22,7 +22,7 @@ const Loading = () => {
 
 	return (
 		<div className={cn("flex w-full justify-start")}>
-			<div className="flex flex-col bg-card dark:bg-alphii_background_2 dark:border-none border rounded-xl w-fit max-w-[70%] rounded-br-md gap-1 p-3 border-alphii_border_2 ">
+			<div className="flex flex-col bg-card dark:bg-alphii_background_2 dark:border-none border rounded-xl w-fit max-w-[85%] rounded-br-md gap-1 p-3 border-alphii_border_2 ">
 				{loading.name && (
 					<div className="flex items-center gap-2">
 						<div className="w-6 h-6 rounded-full bg-[url('/images/agents/bob-avatar.png')] bg-cover bg-center" />

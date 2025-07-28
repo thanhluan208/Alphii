@@ -73,7 +73,7 @@ const Folder = ({ data, level }: FolderProps) => {
 											variant="ghost"
 											onClick={(e) => {
 												e.stopPropagation()
-												setCurrentFile(child.fullPath)
+												setCurrentFile(child)
 											}}
 											className={cn(
 												"flex items-center border-0 w-full p-0 mt-1 text-alphii_text_sub_600 justify-start hover:bg-alphii_primary_light gap-2 hover:text-primary h-6 px-4 shadow-none truncate",

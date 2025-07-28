@@ -45,9 +45,40 @@ export interface Team {
 }
 
 export interface CreateMultiAgentTeamRequest {
-	user_id: string;           // e.g., "6411973e-d6c7-4536-a8db-2279df4810b5"
-	mat_name: string;          // e.g., "test team dev enhance gen2 3"
-	mat_description: string;   // e.g., ""
-	categories: string[];      // e.g., ["physics", "funny"]
-	team_template: string;     // e.g., "dev_team_enhance_gen2"
-  }
+	user_id: string // e.g., "6411973e-d6c7-4536-a8db-2279df4810b5"
+	mat_name: string // e.g., "test team dev enhance gen2 3"
+	mat_description: string // e.g., ""
+	categories: string[] // e.g., ["physics", "funny"]
+	team_template: string // e.g., "dev_team_enhance_gen2"
+}
+
+export interface GenerateMatPrdsPayload {
+	mat_id: string
+	session_id: string
+	user_prompt: string
+}
+
+export interface SelectMainPrd {
+	mat_id: string
+	session_id: string
+	prd_id: string
+}
+
+export interface GetAllMatPrdPayload {
+	mat_id: string
+	session_id: string
+}
+
+export interface PrdFileContent {
+	prd_id: string
+	user_prompt: string
+	content: string
+	template_recommendation: string
+	template_reasoning: string
+	created_at: Date
+	name: string
+}
+
+export interface PrdFiles {
+	[key: string]: PrdFileContent
+}

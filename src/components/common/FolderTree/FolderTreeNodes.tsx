@@ -18,9 +18,8 @@ export interface TreeNode {
 	isBinary?: boolean
 	lastModified?: number
 	status: "new" | "modified" | "deleted"
-	index?: number
-	animationState?: "new" | "select"
-	lastStop?: number
+	disabledAnimation?: boolean
+	typedContent: string
 }
 
 interface FolderTreeNodesProps {
@@ -49,10 +48,13 @@ const FolderTreeNodes = ({ data }: FolderTreeNodesProps) => {
 							onClick={(e) => {
 								e.stopPropagation()
 								e.preventDefault()
-								setCurrentFile(node.fullPath)
+								setCurrentFile({
+									...node,
+									typedContent: node.content || ""
+								})
 							}}
 							className={cn(
-								"flex w-full items-center border-0 justify-start hover:bg-alphii_primary_light gap-2 hover:text-primary text-alphii_text_sub_600 mt-1 h-6 px-4 shadow-none",
+								"flex w-full items-center border-0 justify-start truncate hover:bg-alphii_primary_light gap-2 hover:text-primary text-alphii_text_sub_600 mt-1 h-6 px-4 shadow-none",
 								file === node.fullPath &&
 									"bg-alphii_primary_light  hover:bg-alphii_primary_light text-primary hover:text-primary"
 							)}

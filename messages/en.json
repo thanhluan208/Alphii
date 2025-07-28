@@ -35,7 +35,13 @@
 		"personalPortfolioTitle": "Website for Personal Portfolio",
 		"flashcardAppTitle": "Flashcard App for Language Learning",
 		"salesDashboardTitle": "Sales Dashboard with KPIs",
-		"startButton": "Start"
+		"startButton": "Start",
+		"prdSelector": {
+			"dialogTitle": "Confirm PRD Selection",
+			"dialogDescription": "Once you select this PRD, you cannot change to a different one. Please review the content carefully before confirming.",
+			"cancelButton": "Cancel",
+			"confirmButton": "Confirm Selection"
+		}
 	},
 	"home": {
 		"feature": "Feature",
@@ -92,5 +98,15 @@
 		"faq4Answer": "100%. Just tell Alphii what you want. Agents handle the rest—planning, coding, testing, and launching.",
 		"faq5Question": "Can I customize how my product is built?",
 		"faq5Answer": "Yes! You can tweak how agents work, guide the process, or let them do their thing. Your product, your way."
+	},
+	"project": {
+		"yourProjectsTitle": "Your projects",
+		"yourProjectsSubtitle": "Public projects from our community members, just like you",
+		"newProjectButton": "New Project",
+		"projectCardTitle": "Korean Flashcard Website",
+		"projectCardDescription": "Just tell the team how you want your website to look like",
+		"latestFromCommunityTitle": "Latest from the community",
+		"latestFromCommunitySubtitle": "Public projects from our community members, just like you",
+		"searchPlaceholder": "Search"
 	}
 }

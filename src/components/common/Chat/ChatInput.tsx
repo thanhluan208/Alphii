@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
 
 import {
@@ -12,25 +12,36 @@ import {
 import { Button } from "@/components/ui/button"
 import GradientBorderCard from "@/components/ui/gradient-border-card"
 import { usePathname, useRouter } from "@/i18n/routing"
-import { BASE_URL, WS_URL } from "@/lib/constant"
 import { cn } from "@/lib/utils"
 import { ChatType } from "@/types"
 import { MATMessageType } from "@/types/mat.type"
+import { isEmpty } from "lodash"
 import { ArrowUp, AtSign } from "lucide-react"
 
 import useChatStore from "@/stores/chat.store"
 import useSocketStore from "@/stores/socket.store"
+import useGetMatMainPrd from "@/hooks/MultiAgentTeam/useGetMainMatPrd"
+import useMultiAgentTeamMutation from "@/hooks/MultiAgentTeam/useMATMutation"
 
 const ChatInput = () => {
 	const router = useRouter()
 	const pathname = usePathname()
 	const searchParams = useSearchParams()
 	const prompt = searchParams.get("prompt")
-	const matId = searchParams.get("matId")
-	const sessionId = searchParams.get("sessionId")
+	const matId = searchParams.get("matId") || ""
+	const sessionId = searchParams.get("sessionId") || ""
+
+	const { data: mainPrd, isLoading: isLoadingMainPrd } = useGetMatMainPrd(
+		matId,
+		sessionId
+	)
+
+	const { generateMATPrds } = useMultiAgentTeamMutation()
+
+	console.log("data", mainPrd)
 
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
-	const { socket, setWebSocket } = useSocketStore()
+	const socket = useSocketStore((state) => state.socket)
 	const {
 		setMessages,
 		loading,
@@ -41,10 +52,12 @@ const ChatInput = () => {
 		setViewDetail
 	} = useChatStore()
 
-	const disableSubmit = !matId || !sessionId
+	const disableSubmit = !matId || !sessionId || isLoadingMainPrd
+	const isSelectPrd = !isEmpty(mainPrd?.prd_data)
+	const buttonLoading = loading.isLoading || generateMATPrds.isPending
 
-	const handleSubmit = async () => {
-		if (!textareaRef.current?.value) return
+	const handleChat = useCallback(() => {
+		if (!socket || !textareaRef.current?.value) return
 
 		const prompt = textareaRef.current?.value
 
@@ -61,64 +74,38 @@ const ChatInput = () => {
 			isLoading: true
 		})
 
-		if (socket) {
-			socket.send(
-				JSON.stringify({
-					type: MATMessageType.NEW_MESSAGE,
-					data: {
-						message: prompt,
-						send_to: ""
-					}
-				})
-			)
-
-			setMessages({
-				type: ChatType.NORMAL,
-				id: new Date().getTime().toString(),
-				content: prompt,
-				name: "Me",
-				isUser: true
+		socket.send(
+			JSON.stringify({
+				type: MATMessageType.NEW_MESSAGE,
+				data: {
+					message: prompt,
+					send_to: ""
+				}
 			})
-
-			setLoading({
-				name: "",
-				isLoading: true
-			})
-
-			textareaRef.current.value = ""
-
-			return
-		}
-
-		const ws = new WebSocket(
-			`${WS_URL}/multi_agent_team/session/behaviour/start_session/${matId}/${sessionId}`
 		)
 
-		ws.addEventListener("open", () => {
-			console.log("Connected to WebSocket")
-			ws.send(
-				JSON.stringify({
-					type: MATMessageType.RECEIVE_INFO,
-					data: {
-						status: "success"
-					}
-				})
-			)
+		textareaRef.current.value = ""
+	}, [socket, setMessages, setLoading])
 
-			ws.send(
-				JSON.stringify({
-					type: MATMessageType.NEW_MESSAGE,
-					data: {
-						message: prompt,
-						send_to: ""
-					}
-				})
-			)
+	const handleGeneratePrds = useCallback(async () => {
+		if (!matId || !sessionId || !textareaRef.current?.value) return
+
+		const response = await generateMATPrds.mutateAsync({
+			mat_id: matId,
+			session_id: sessionId,
+			user_prompt: textareaRef.current.value
 		})
 
-		setWebSocket(ws)
-		textareaRef.current.value = ""
-	}
+		console.log(response)
+	}, [matId, sessionId])
+
+	const handleSubmit = useCallback(() => {
+		if (isSelectPrd) {
+			handleChat()
+		} else {
+			handleGeneratePrds()
+		}
+	}, [handleChat, isSelectPrd])
 
 	useEffect(() => {
 		if (prompt && textareaRef.current) {
@@ -129,19 +116,6 @@ const ChatInput = () => {
 			router.replace(pathname + `?${newSearch.toString()}`)
 		}
 	}, [prompt])
-
-	useEffect(() => {
-		return () => {
-			if (socket) {
-				socket.send(
-					JSON.stringify({
-						type: MATMessageType.END_SESSION,
-						data: {}
-					})
-				)
-			}
-		}
-	}, [socket])
 
 	return (
 		<GradientBorderCard
@@ -182,6 +156,7 @@ const ChatInput = () => {
 			>
 				<textarea
 					ref={textareaRef}
+					defaultValue="Build a landing page for a UK travel agency showcasing destinations and booking services"
 					disabled={loading?.isLoading}
 					className="w-full bg-transparent disabled:bg-transparent hover:bg-transparent placeholder:text-[#62636C] focus-visible:outline-none resize-none min-h-5 h-[50px] overflow-y-auto"
 					placeholder="Tell us what you're building. We'll help you assign the team to build"
@@ -202,10 +177,10 @@ const ChatInput = () => {
 					<Button
 						variant="ghost"
 						onClick={handleSubmit}
-						disabled={loading.isLoading || disableSubmit}
+						disabled={buttonLoading || disableSubmit}
 						className="rounded-full  bg-alphii_component_3 w-8 h-8 p-0 dark:group-focus-within:bg-foreground dark:group-focus-within:text-background flex items-center justify-center transition-colors shadow-xl"
 					>
-						{loading.isLoading ? <SpinIcon /> : <ArrowUp />}
+						{buttonLoading ? <SpinIcon /> : <ArrowUp />}
 					</Button>
 				</div>
 			</div>

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { useTranslations } from "next-intl"
+import { useSearchParams } from "next/navigation"
 
 import {
 	ChartIcon,
@@ -13,23 +14,43 @@ import {
 } from "@/components/icons"
 import { Button, Skeleton } from "@/components/ui"
 import { cn } from "@/lib/utils"
+import { isEmpty } from "lodash"
 
 import useChatStore from "@/stores/chat.store"
+import useGetAllMatPrd from "@/hooks/MultiAgentTeam/useGetAllMatPrd"
+import useGetMatMainPrd from "@/hooks/MultiAgentTeam/useGetMainMatPrd"
 
 const StudioTemplateCard = () => {
 	const t = useTranslations("studio")
-	const { messages } = useChatStore()
 	const [shouldHide, setShouldHide] = useState(false)
+	const [hasPrd, setHasPrd] = useState(false)
+
+	const searchParams = useSearchParams()
+	const matId = searchParams.get("matId") || ""
+	const sessionId = searchParams.get("sessionId") || ""
+
+	const { messages } = useChatStore()
 	const hasMessages = messages && messages.length > 0
 
+	const readyToHide = hasMessages || hasPrd
+
+	const { data: prds } = useGetAllMatPrd(matId, sessionId)
+	const { data: mainPrd } = useGetMatMainPrd(matId, sessionId)
+
 	useEffect(() => {
-		if (hasMessages) {
+		if (readyToHide) {
 			const timeout = setTimeout(() => {
 				setShouldHide(true)
 				clearTimeout(timeout)
 			}, 1000)
 		}
-	}, [hasMessages])
+	}, [readyToHide])
+
+	useEffect(() => {
+		if (!prds || !mainPrd) return
+
+		if (!isEmpty(prds.prd_files) || !isEmpty(mainPrd.prd_data)) setHasPrd(true)
+	}, [prds, mainPrd])
 
 	if (shouldHide) return null
 
@@ -37,13 +58,13 @@ const StudioTemplateCard = () => {
 		<div
 			className={cn(
 				"flex flex-col pt-10 items-center z-10 transition-all h-full delay-500",
-				hasMessages && "animate-height-reduce  !pt-0"
+				readyToHide && "animate-height-reduce  !pt-0"
 			)}
 		>
 			<div
 				className={cn(
 					"transition-all duration-500 flex flex-col items-center",
-					hasMessages && "animate-fade-down"
+					readyToHide && "animate-fade-down"
 				)}
 			>
 				<Logo />
@@ -59,7 +80,7 @@ const StudioTemplateCard = () => {
 				<div
 					className={cn(
 						"flex gap-5 items-center transition-all duration-500",
-						hasMessages && "animate-fade-left"
+						readyToHide && "animate-fade-left"
 					)}
 				>
 					<div className="w-[150px] h-[100px] bg-alphii_bg_weak_40 flex items-center justify-center rounded-[20px] border dark:border-0 border-alphii_border">
@@ -75,7 +96,7 @@ const StudioTemplateCard = () => {
 				<div
 					className={cn(
 						"flex gap-5 items-center transition-all duration-500",
-						hasMessages && "animate-fade-right"
+						readyToHide && "animate-fade-right"
 					)}
 				>
 					<div className="w-[150px] h-[100px] bg-alphii_bg_weak_40 flex items-center justify-center rounded-[20px] border dark:border-0 border-alphii_border">
@@ -106,7 +127,7 @@ const StudioTemplateCard = () => {
 				<div
 					className={cn(
 						"flex gap-5 items-center transition-all duration-500",
-						hasMessages && "animate-fade-left"
+						readyToHide && "animate-fade-left"
 					)}
 				>
 					<div className="w-[150px] h-[100px] bg-alphii_bg_weak_40 flex items-center justify-center rounded-[20px] border dark:border-0 border-alphii_border">

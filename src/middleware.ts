@@ -13,7 +13,7 @@ const AUTHEN_ROUTES = [
 	"/forgot-password",
 	"/reset-password"
 ]
-const PRIVATE_ROUTES = ["/dashboard", "/profile", "/settings", "/admin"]
+const PRIVATE_ROUTES = ["/studio"]
 
 // Token names
 const ACCESS_TOKEN = "access_token"

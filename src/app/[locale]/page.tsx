@@ -9,7 +9,10 @@ import { Routes } from "@/lib/constant"
 import { cn } from "@/lib/utils"
 import { ArrowUp, Plus } from "lucide-react"
 
+import useUserStore from "@/stores/user.store"
+
 import FAQs from "./_components/FAQs"
+import GetStartedLink from "./_components/GetStartedLink"
 import HomeInput from "./_components/HomeInput"
 import MobileMenu from "./_components/MobileMenu"
 import PriceCard from "./_components/PriceCard"
@@ -58,11 +61,11 @@ const HomePage = () => {
 							{translation("faqs")}
 						</SmoothLink>
 					</div>
-					<Link href={Routes.LOGIN}>
+					<GetStartedLink>
 						<Button className="w-[124px] h-9 border-2 border-[#4100B1] rounded-full">
 							{translation("getStarted")} <ArrowUpRight />
 						</Button>
-					</Link>
+					</GetStartedLink>
 					<MobileMenu />
 				</div>
 			</div>
@@ -117,11 +120,11 @@ const HomePage = () => {
 					</p>
 
 					<div className="mt-10 flex gap-2 flex-wrap ">
-						<Link href={Routes.LOGIN}>
+						<GetStartedLink>
 							<Button className="w-[124px] h-11 border-2 border-[#4100B1] rounded-full">
 								{translation("getStarted")} <ArrowUpRight />
 							</Button>
-						</Link>
+						</GetStartedLink>
 						<button className="px-2 font-medium pl-3 py-2.5 border border-[#EFF0F3] rounded-full flex items-center gap-2">
 							{translation("documentation")}
 							<Document />
@@ -239,11 +242,11 @@ const HomePage = () => {
 						{translation("ctaTitle")}
 					</p>
 					<div className="flex gap-2">
-						<Link href={Routes.LOGIN}>
+						<GetStartedLink>
 							<Button className="w-[124px] h-11 border-2 border-[#4100B1] rounded-full">
 								{translation("getStarted")} <ArrowUpRight />
 							</Button>
-						</Link>
+						</GetStartedLink>
 						<button className="px-2 bg-white font-medium pl-3 py-2.5 border border-[#EFF0F3] rounded-full flex items-center gap-2">
 							{translation("documentation")}
 							<Document />

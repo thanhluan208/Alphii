@@ -5,6 +5,8 @@ import React, { Fragment, useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 import { ChatType } from "@/types"
 
+import useUserStore from "@/stores/user.store"
+
 export interface ChatboxProps {
 	type: ChatType
 	id: string
@@ -18,6 +20,7 @@ export interface ChatboxProps {
 const Chatbox = ({ content, name, isUser, to }: ChatboxProps) => {
 	const [displayedText, setDisplayedText] = useState("")
 	const [currentIndex, setCurrentIndex] = useState(0)
+	const profile = useUserStore((state) => state.profile)
 
 	const listTos = to?.split(", ")
 
@@ -45,7 +48,7 @@ const Chatbox = ({ content, name, isUser, to }: ChatboxProps) => {
 		<div
 			className={cn("flex w-full", isUser ? "justify-end" : "justify-start")}
 		>
-			<div className="flex flex-col bg-card dark:bg-alphii_background_2 border rounded-xl w-fit max-w-[70%] rounded-br-md gap-1 p-3 border-alphii_border dark:border-none">
+			<div className="flex flex-col bg-card dark:bg-alphii_background_2 border rounded-xl w-fit max-w-[85%] rounded-br-md gap-1 p-3 border-alphii_border dark:border-none">
 				<div className="flex items-center gap-2">
 					<div className="w-6 h-6 rounded-full bg-[url('/images/agents/bob-avatar.png')] bg-cover bg-center" />
 					<p className="text-sm font-medium">{name}</p>
@@ -54,12 +57,15 @@ const Chatbox = ({ content, name, isUser, to }: ChatboxProps) => {
 				<p className="text-wrap">
 					{listTos && listTos.length > 0 && (
 						<Fragment>
-							{listTos.map((to) => (
-								<span
-									key={to}
-									className="text-xs mx-1 w-fit rounded-md border-alphii_border_2 px-2 py-1 bg-orange-400/20 text-alphii_text_sub_600"
-								>{`@${to}`}</span>
-							))}
+							{listTos.map((to) => {
+								if (!to) return null
+								return (
+									<span
+										key={to}
+										className="text-xs mx-1 w-fit rounded-md border-alphii_border_2 px-2 py-1 bg-orange-400/20 text-alphii_text_sub_600"
+									>{`@${to === "<user>" ? profile?.display_name : to}`}</span>
+								)
+							})}
 						</Fragment>
 					)}
 					<span

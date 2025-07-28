@@ -25,3 +25,8 @@ export interface SignupPayload {
 	password: string
 	display_name: string
 }
+
+export interface AuthLoginSuccessParams {
+	redirectTo: string
+	params: Record<string, string>
+}

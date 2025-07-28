@@ -25,10 +25,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { isEmpty } from "lodash"
 import { z } from "zod"
 
+import useAuthStore from "@/stores/auth.store"
+
 const Login = () => {
 	const translation = useTranslations("authentication")
 	const router = useRouter()
 	const [isPending, startTransition] = useTransition()
+	const { authParams } = useAuthStore()
 
 	const formSchema = z.object({
 		email_or_username: z.string().min(2).max(50),
@@ -124,7 +127,18 @@ const Login = () => {
 
 				if (response.code === STATUS_CODE.SUCCESS) {
 					toast.success("Login successfully")
-					router.push(Routes.PROJECT)
+					if (authParams) {
+						let href = `${authParams.redirectTo}?`
+						Object.entries(authParams.params).forEach(([key, value]) => {
+							if (value) {
+								href += `&${key}=${value}`
+							}
+						})
+
+						router.push(href)
+					} else {
+						router.push(Routes.PROJECT)
+					}
 				}
 			} catch (error) {
 				toast.error("Login Failed")

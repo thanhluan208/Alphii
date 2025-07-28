@@ -13,17 +13,17 @@ import useChatStore from "@/stores/chat.store"
 import useCodeEditorStore from "@/stores/code-editor.store"
 
 const FolderTree = () => {
-	const { listFiles } = useChatStore()
+	const listFiles = useChatStore(state => state.listFiles)
 	const { openFolderTree, setOpenFolderTree } = useCodeEditorStore()
 
-	function parseFolderDataToTree(data: Record<string, any>): TreeNode[] {
+	function parseFolderDataToTree(data: Record<string, TreeNode>): TreeNode[] {
 		// Step 1: Collect all entries and group by path segments
 		const nodesMap = new Map<string, TreeNode>()
 		const rootNodes: TreeNode[] = []
 
 		// Step 2: Process each entry in the JSON
 		Object.entries(data).forEach(([key, value]) => {
-			const { name, type, fullPath, contents, isBinary, lastModified, status } =
+			const { name, type, fullPath, content, isBinary, lastModified, status, typedContent } =
 				value
 
 			// Create a node for the current entry
@@ -31,8 +31,9 @@ const FolderTree = () => {
 				name,
 				type,
 				fullPath,
-				...(type === "file" && { contents, isBinary, lastModified }),
-				status
+				...(type === "file" && { content, isBinary, lastModified }),
+				status,
+				typedContent
 			}
 
 			// Split the fullPath into segments
@@ -57,7 +58,8 @@ const FolderTree = () => {
 						type: "folder",
 						fullPath: parentPath,
 						children: [],
-						status: "new"
+						status: "new",
+						typedContent: ''
 					}
 					nodesMap.set(parentPath, parentNode)
 
@@ -69,7 +71,8 @@ const FolderTree = () => {
 							type: "folder",
 							fullPath: grandParentPath,
 							children: [],
-							status: "new"
+							status: "new",
+							typedContent: ''
 						}
 						nodesMap.set(grandParentPath, grandParentNode)
 						if (!grandParentPath.includes("/")) {

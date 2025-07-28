@@ -8,7 +8,7 @@ import { cloneDeep } from "lodash"
 
 interface chatState {
 	currentFile: TreeNode | null
-	setCurrentFile: (fullPath: string, shouldCheck?: boolean) => void
+	setCurrentFile: (file: TreeNode) => void
 
 	listFiles: {
 		[key: string]: TreeNode
@@ -27,7 +27,6 @@ interface chatState {
 	setMessages: (value: ChatboxProps | Deepthink) => void
 	updateDeepthinkContent: (agentName: string, content: string) => void
 	updateFinishDeepThink: (agentName: string) => void
-	nextCurrentFile: () => boolean
 
 	viewDetail: boolean
 	setViewDetail: (value: boolean) => void
@@ -38,82 +37,69 @@ interface chatState {
 const useChatStore = createWithEqualityFn<chatState>()(
 	(set, get) => ({
 		currentFile: null,
-		setCurrentFile: (fullPath: string, shouldCheck = false) => {
+		setCurrentFile: (file: TreeNode) => {
 			const currentFileExist = get().currentFile
-			const newCurrentFile = cloneDeep(get().listFiles[fullPath])
 
-			if (shouldCheck) {
-				if (currentFileExist) {
-					if (currentFileExist.fullPath !== fullPath) {
-						get().nextCurrentFile()
-						return
+			if (currentFileExist && currentFileExist.fullPath === file.fullPath) {
+				set({
+					currentFile: {
+						...file,
+						typedContent: currentFileExist.content || ""
 					}
-
-					if (
-						currentFileExist.lastStop &&
-						newCurrentFile?.content?.length &&
-						currentFileExist.lastStop === newCurrentFile?.content?.length
-					) {
-						return
-					}
-				}
-			}
-
-			newCurrentFile.animationState = shouldCheck ? "new" : "select"
-
-			if (
-				currentFileExist &&
-				currentFileExist.fullPath === newCurrentFile.fullPath
-			) {
-				newCurrentFile.lastStop = currentFileExist.content?.length || 0
-			}
-
-			if (newCurrentFile) {
-				set({ currentFile: newCurrentFile })
+				})
+			} else {
+				set({ currentFile: file })
 			}
 		},
 		listFiles: {},
-		addFile: (value: TreeNode[], fileIndex?: number) => {
-			set({
-				listFiles: {
-					...get().listFiles,
-					...value.reduce(
-						(acc: Record<string, TreeNode>, curr) => {
-							const currSegmentPath = curr.fullPath.split("/")
+		addFile: (value: TreeNode[]) => {
+			const oldFiles = cloneDeep(get().listFiles)
+			const oldFilesKey = Object.keys(oldFiles)
 
-							if (currSegmentPath.length === 1) {
-								acc[curr.fullPath] = {
-									...curr,
-									index: fileIndex,
-									animationState: "new"
-								}
-								return acc
+			console.log("new files", value)
+
+			value.forEach((newFile) => {
+				const currSegmentPath = newFile.fullPath.split("/")
+
+				if (currSegmentPath.length > 1) {
+					for (let i = 0; i < currSegmentPath.length - 1; i++) {
+						const currPath = currSegmentPath.slice(0, i + 1).join("/")
+
+						if (!oldFiles[currPath]) {
+							console.log('new folder !', currPath)
+							oldFiles[currPath] = {
+								name: currSegmentPath[i],
+								type: "folder",
+								fullPath: currPath,
+								status: "new",
+								lastModified: newFile.lastModified,
+								typedContent: ""
 							}
-
-							for (let i = 0; i < currSegmentPath.length - 1; i++) {
-								const currPath = currSegmentPath.slice(0, i + 1).join("/")
-
-								if (!acc[currPath]) {
-									acc[currPath] = {
-										name: currSegmentPath[i],
-										type: "folder",
-										fullPath: currPath,
-										status: "new",
-										lastModified: curr.lastModified
-									}
-								}
-							}
-
-							acc[curr.fullPath] = {
-								...curr,
-								index: fileIndex,
-								animationState: "new"
-							}
-							return acc
-						},
-						{} as Record<string, TreeNode>
-					)
+						}
+					}
 				}
+
+				if (oldFilesKey.includes(newFile.fullPath)) {
+					console.log(
+						"Fullpath single exist",
+						newFile,
+						oldFiles[newFile.fullPath]
+					)
+					oldFiles[newFile.fullPath] = {
+						...oldFiles[newFile.fullPath],
+						...newFile,
+						typedContent: oldFiles[newFile.fullPath]?.content || ""
+					}
+				} else {
+					console.log("fullpath single not exist", newFile)
+					oldFiles[newFile.fullPath] = newFile
+				}
+			})
+
+			console.log("oldFiles", oldFiles)
+
+			set({
+				listFiles: oldFiles
 			})
 		},
 		removeFile: (value: TreeNode) => {
@@ -225,43 +211,6 @@ const useChatStore = createWithEqualityFn<chatState>()(
 			set({
 				messages: newMessage
 			})
-		},
-		nextCurrentFile: () => {
-			const currentFile = cloneDeep(get().currentFile)
-
-			if (currentFile) {
-				currentFile.animationState = "select"
-				currentFile.lastStop = currentFile.content?.length || 0
-			}
-
-			if (currentFile?.index) {
-				const listFiles = get().listFiles
-				const nextCurrentFile = Object.values(listFiles).find(
-					(file) =>
-						currentFile.index !== undefined &&
-						file.index === currentFile.index + 1
-				)
-
-				if (nextCurrentFile) {
-					set({
-						currentFile: nextCurrentFile,
-						listFiles: {
-							...listFiles,
-							[currentFile.fullPath]: currentFile
-						}
-					})
-					return true
-				}
-
-				set({
-					listFiles: {
-						...listFiles,
-						[currentFile.fullPath]: currentFile
-					}
-				})
-			}
-
-			return false
 		},
 
 		clearStore: () =>

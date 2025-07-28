@@ -196,16 +196,21 @@ const lightTheme: monaco.editor.IStandaloneThemeData = {
 const CodeEditor = () => {
 	const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
 	const theme = useTheme()
-	const { currentFile, nextCurrentFile, loading } = useChatStore()
+	const { currentFile, loading } = useChatStore((state) => ({
+		currentFile: state.currentFile,
+		loading: state.loading
+	}))
 	const [displayedContent, setDisplayedContent] = useState("")
 	const [themesRegistered, setThemesRegistered] = useState(false)
 	const timeoutRef = useRef<NodeJS.Timeout>()
+
+	console.log(currentFile)
 
 	const setOpenFolderTree = useCodeEditorStore(
 		(state) => state.setOpenFolderTree
 	)
 
-	const { lastStop, animationState } = currentFile || {}
+	const { typedContent } = currentFile || {}
 
 	const currentFileContent = useMemo(() => {
 		if (!currentFile) return ""
@@ -219,21 +224,12 @@ const CodeEditor = () => {
 		return currentTheme === "dark" ? "customDarkTheme" : "customLightTheme"
 	}, [theme.resolvedTheme, theme.theme, themesRegistered])
 
-	console.log("Current Monaco Theme:", currentMonacoTheme)
-	console.log("Resolved Theme:", theme.resolvedTheme)
-	console.log("Theme:", theme.theme)
-
 	// Handle typewriter effect
 	useEffect(() => {
 		if (!currentFileContent) return
 
-		if (animationState === "select") {
-			setDisplayedContent(currentFileContent)
-			return
-		}
-
-		setDisplayedContent(lastStop ? currentFileContent.slice(0, lastStop) : "")
-		let currentPosition = lastStop || 0
+		setDisplayedContent(typedContent ? typedContent : "")
+		let currentPosition = typedContent ? typedContent?.length - 1 : 0
 
 		const typeNextChunk = () => {
 			if (!currentFileContent) return
@@ -249,13 +245,6 @@ const CodeEditor = () => {
 
 			if (currentPosition < currentFileContent.length) {
 				timeoutRef.current = setTimeout(typeNextChunk, TYPING_SPEED)
-			} else {
-				// When typing is complete, call nextCurrentFile
-				const hasNext = nextCurrentFile()
-				if (!hasNext) {
-					// Animation sequence is complete
-					console.log("Animation sequence complete")
-				}
 			}
 		}
 
@@ -266,7 +255,7 @@ const CodeEditor = () => {
 				clearTimeout(timeoutRef.current)
 			}
 		}
-	}, [currentFileContent, nextCurrentFile, animationState, lastStop])
+	}, [currentFileContent, typedContent])
 
 	const handleEditorDidMount: OnMount = useCallback(
 		(editor, monacoInstance) => {

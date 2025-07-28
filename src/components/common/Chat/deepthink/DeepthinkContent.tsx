@@ -49,8 +49,8 @@ const DeepthinkContent = ({
 	}, [content, displayedText, setNextAnimation, shouldAnimation])
 
 	useEffect(() => {
-		if (skipAnimation) setDisplayedText(content)
-	}, [skipAnimation, content])
+		if (skipAnimation || !shouldAnimation) setDisplayedText(content)
+	}, [skipAnimation,shouldAnimation, content])
 
 	return (
 		<Fragment>
