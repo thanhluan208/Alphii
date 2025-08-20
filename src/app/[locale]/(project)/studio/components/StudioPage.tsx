@@ -12,9 +12,9 @@ import { MATMessageType } from "@/types/mat.type"
 import useSocketStore from "@/stores/socket.store"
 
 import Header from "./Header"
+import PrdSelector from "./prd-selector"
 import Preview from "./preview/Preview"
 import StudioTemplateCard from "./StudioTemplateCard"
-import PrdSelector from "./prd-selector"
 
 interface StudioPageProps {
 	matId: string
@@ -51,7 +51,7 @@ const StudioPage = ({ matId, sessionId }: StudioPageProps) => {
 			)
 			ws.close()
 		}
-	}, [matId, sessionId])
+	}, [matId, sessionId, setWebSocket])
 
 	return (
 		<div className="px-5 flex relative flex-col flex-1 w-full ">
@@ -67,15 +67,15 @@ const StudioPage = ({ matId, sessionId }: StudioPageProps) => {
 
 			<div
 				className={cn(
-					"flex w-full items-end h-[calc(100vh-72px)] min-w-[1220px] pb-5"
+					"flex w-full items-end h-[calc(100vh-72px)] min-w-[1220px] pb-5 z-10"
 				)}
 			>
 				<div className="relative pb-5 flex h-full flex-1 flex-col items-center ">
-					<StudioTemplateCard />
+					{/* <StudioTemplateCard /> */}
 
-					<ChatContent />
+					{/* <ChatContent /> */}
 
-					<PrdSelector />
+					{/* <PrdSelector /> */}
 
 					<ChatInput />
 				</div>

@@ -70,15 +70,42 @@ export interface GetAllMatPrdPayload {
 }
 
 export interface PrdFileContent {
-	prd_id: string
-	user_prompt: string
 	content: string
-	template_recommendation: string
-	template_reasoning: string
-	created_at: Date
 	name: string
 }
 
 export interface PrdFiles {
-	[key: string]: PrdFileContent
+	[key: string]: string
+}
+
+export interface DomainInfo {
+	session_id: string
+	project_name: string
+	project_path: string
+	container_name: string
+	domain: string
+	container_port: number
+	status: string
+	created_at: string
+	last_updated_at: string
+}
+
+export interface RunContainerDetail {
+	success: boolean
+	container_id: string
+	container_ip: string
+	domain: string
+	domain_assign_log: string
+	url: string
+	deployment_type: string
+	project_name: string
+	container_port: number
+	message: string
+	monitoring_result: MonitoringResult
+}
+
+export interface MonitoringResult {
+	success: boolean
+	logs: string
+	message: string
 }

@@ -52,7 +52,8 @@ export interface Media {
 
 export enum ChatType {
 	NORMAL = "normal",
-	DEEPTHINK = "deepthink"
+	DEEPTHINK = "deepthink",
+	PRD = "prd"
 }
 
 export interface CommonResponse<T> {

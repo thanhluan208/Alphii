@@ -3,13 +3,13 @@
 import { ComponentPropsWithoutRef, useEffect, useMemo, useState } from "react"
 import ReactMarkdown from "react-markdown"
 
+import { cn } from "@/lib/utils"
 import { PrdFileContent } from "@/types/mat.type"
 import dayjs from "dayjs"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 
 import { Button } from "./button"
-import { cn } from "@/lib/utils"
 
 interface AnimatedPRDProps extends ComponentPropsWithoutRef<"div"> {
 	prds: PrdFileContent[]
@@ -31,8 +31,8 @@ export const AnimatedPRD = ({
 			// Use a combination of index and prd_id for consistent randomness
 			const seed =
 				index +
-				(prd.prd_id
-					? prd.prd_id.split("").reduce((a, b) => a + b.charCodeAt(0), 0)
+				(prd.name
+					? prd.name.split("").reduce((a, b) => a + b.charCodeAt(0), 0)
 					: 0)
 			// Create a more natural distribution with 14deg range
 			const baseRotation = (seed % 18) - 9 // Range: -9 to 9
@@ -46,8 +46,8 @@ export const AnimatedPRD = ({
 		return prds.map((prd, index) => {
 			const seed =
 				index +
-				(prd.prd_id
-					? prd.prd_id.split("").reduce((a, b) => a + b.charCodeAt(0), 0)
+				(prd.name
+					? prd.name.split("").reduce((a, b) => a + b.charCodeAt(0), 0)
 					: 0) +
 				100
 			const rotation = (seed % 14) - 7 // Range: -7 to 7 for hover variation
@@ -82,7 +82,7 @@ export const AnimatedPRD = ({
 						<AnimatePresence>
 							{prds.map((prd, index) => (
 								<motion.div
-									key={prd.prd_id}
+									key={prd.name}
 									initial={{
 										opacity: 0,
 										scale: 0.9,
@@ -93,9 +93,7 @@ export const AnimatedPRD = ({
 										opacity: isActive(index) ? 1 : 0.7,
 										scale: isActive(index) ? 1 : 0.95,
 										z: isActive(index) ? 0 : -100,
-										rotate: isActive(index)
-											? 0
-											: rotations[index],
+										rotate: isActive(index) ? 0 : rotations[index],
 										zIndex: isActive(index) ? 40 : prds.length + 2 - index,
 										y: isActive(index) ? [0, -80, 0] : 0
 									}}
@@ -157,12 +155,9 @@ export const AnimatedPRD = ({
 						<h3 className="text-2xl font-bold text-black dark:text-white">
 							{prds[active].name}
 						</h3>
-						<p className="text-sm text-gray-500 dark:text-neutral-500">
-							Created at:{" "}
-							{dayjs(prds[active].created_at).format("DD/MM/YYYY HH:mm:ss")}
-						</p>
+
 						<motion.p className="mt-8 text-lg text-gray-500 dark:text-neutral-300">
-							{prds[active].template_reasoning.split(" ").map((word, index) => (
+							{prds[active].name.split(" ").map((word, index) => (
 								<motion.span
 									key={index}
 									initial={{

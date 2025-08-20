@@ -46,11 +46,56 @@ export default function useMultiAgentTeamMutation() {
 		mutationFn: MATServices.getMainPrdIdea
 	})
 
+	const checkDeployable = useMutation({
+		mutationFn: MATServices.checkDeployable
+	})
+
+	const checkImageExist = useMutation({
+		mutationFn: MATServices.checkImageExist
+	})
+
+	const checkContainerRunning = useMutation({
+		mutationFn: MATServices.checkContainerRunning
+	})
+
+	const buildAndRunContainer = useMutation({
+		mutationFn: MATServices.buildAndRunContainer,
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({
+				queryKey: [QueryKeys.MAT_DOMAIN_SESSION_INFO]
+			})
+		}
+	})
+
+	const runContainer = useMutation({
+		mutationFn: MATServices.runContainer,
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({
+				queryKey: [QueryKeys.MAT_DOMAIN_SESSION_INFO]
+			})
+		}
+	})
+
+	const stopContainer = useMutation({
+		mutationFn: MATServices.stopContainer,
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({
+				queryKey: [QueryKeys.MAT_DOMAIN_SESSION_INFO]
+			})
+		}
+	})
+
 	return {
 		createNewMATSession,
 		createNewMATTeam,
 		generateMATPrds,
 		selectMainPrd,
-		getMainPrdIdea
+		getMainPrdIdea,
+		checkDeployable,
+		checkImageExist,
+		checkContainerRunning,
+		buildAndRunContainer,
+		runContainer,
+		stopContainer
 	}
 }

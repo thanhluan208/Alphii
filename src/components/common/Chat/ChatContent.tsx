@@ -11,6 +11,7 @@ import useChatStore from "@/stores/chat.store"
 import useSocketStore from "@/stores/socket.store"
 
 import Chatbox, { ChatboxProps } from "./Chatbox"
+import ChatPrd from "./ChatPrd"
 import DeepThinking, { Deepthink } from "./deepthink/DeepThinking"
 import Loading from "./Loading"
 
@@ -277,6 +278,8 @@ const ChatContent = () => {
 		>
 			{!isEmpty(messages) &&
 				messages.map((msg, index) => {
+					if (msg.type === ChatType.PRD)
+						return <ChatPrd key={msg.id} {...(msg as ChatboxProps)} />
 					if (msg.type === ChatType.DEEPTHINK)
 						return <DeepThinking key={msg.id} {...(msg as Deepthink)} />
 					return <Chatbox key={msg.id} {...(msg as ChatboxProps)} />

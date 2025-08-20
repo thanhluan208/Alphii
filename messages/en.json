@@ -38,6 +38,7 @@
 		"startButton": "Start",
 		"prdSelector": {
 			"dialogTitle": "Confirm PRD Selection",
+			"confirmedTitle": "Selected PRD",
 			"dialogDescription": "Once you select this PRD, you cannot change to a different one. Please review the content carefully before confirming.",
 			"cancelButton": "Cancel",
 			"confirmButton": "Confirm Selection"

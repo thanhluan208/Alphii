@@ -38,19 +38,10 @@ const ChatInput = () => {
 
 	const { generateMATPrds } = useMultiAgentTeamMutation()
 
-	console.log("data", mainPrd)
-
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 	const socket = useSocketStore((state) => state.socket)
-	const {
-		setMessages,
-		loading,
-		setLoading,
-		updateDeepthinkContent,
-		updateFinishDeepThink,
-		viewDetail,
-		setViewDetail
-	} = useChatStore()
+	const { setMessages, loading, setLoading, viewDetail, setViewDetail } =
+		useChatStore()
 
 	const disableSubmit = !matId || !sessionId || isLoadingMainPrd
 	const isSelectPrd = !isEmpty(mainPrd?.prd_data)
@@ -96,8 +87,10 @@ const ChatInput = () => {
 			user_prompt: textareaRef.current.value
 		})
 
+		textareaRef.current.value = ""
+
 		console.log(response)
-	}, [matId, sessionId])
+	}, [matId, sessionId, generateMATPrds])
 
 	const handleSubmit = useCallback(() => {
 		if (isSelectPrd) {
@@ -105,17 +98,19 @@ const ChatInput = () => {
 		} else {
 			handleGeneratePrds()
 		}
-	}, [handleChat, isSelectPrd])
+	}, [handleChat, isSelectPrd, handleGeneratePrds])
 
 	useEffect(() => {
 		if (prompt && textareaRef.current) {
 			textareaRef.current.value = prompt
 
 			const newSearch = new URLSearchParams(searchParams)
-			newSearch.delete("prompt")
-			router.replace(pathname + `?${newSearch.toString()}`)
+			if (newSearch.has("prompt")) {
+				newSearch.delete("prompt")
+				router.replace(pathname + `?${newSearch.toString()}`)
+			}
 		}
-	}, [prompt])
+	}, [prompt, pathname, searchParams, router])
 
 	return (
 		<GradientBorderCard

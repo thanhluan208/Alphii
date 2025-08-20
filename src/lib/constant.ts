@@ -30,7 +30,8 @@ export const QueryKeys = {
 
 	//! MAT
 	MAT_MAIN_PRD: "MAT_MAIN_PRD",
-	ALL_MAT_PRD: "ALL_MAT_PRD"
+	ALL_MAT_PRD: "ALL_MAT_PRD",
+	MAT_DOMAIN_SESSION_INFO: "MAT_DOMAIN_SESSION_INFO",
 }
 
 export const TIME_IN_SECONDS = {

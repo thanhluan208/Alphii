@@ -46,19 +46,19 @@ const PrdSelector = () => {
 
 		return Object.entries(prds?.prd_files).map(([key, value]) => {
 			return {
-				...value,
+				content: value,
 				name: key
 			}
 		})
 	}, [prds])
 
 	const handelConfirmMainPrd = async () => {
-		if (!matId || !sessionId || !selectedPrd?.prd_id) return
+		if (!matId || !sessionId || !selectedPrd?.name) return
 
 		await selectMainPrd.mutateAsync({
 			mat_id: matId,
 			session_id: sessionId,
-			prd_id: selectedPrd?.prd_id
+			prd_id: selectedPrd?.name
 		})
 
 		const prdIdeaResponse = await getMainPrdIdea.mutateAsync({
@@ -78,10 +78,11 @@ const PrdSelector = () => {
 					}
 				})
 			)
+
 			setMessages({
-				type: ChatType.NORMAL,
+				type: ChatType.PRD,
 				id: new Date().getTime().toString(),
-				content: selectedPrd.user_prompt,
+				content: selectedPrd.content,
 				name: "Me",
 				isUser: true
 			})

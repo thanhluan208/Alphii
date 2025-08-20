@@ -22,8 +22,7 @@ class HttpServices {
 
 	constructor() {
 		this.axios = axios.create({
-			baseURL: "/api/alphii", // Route all requests through Next.js proxy
-			timeout: 30000 // 30 second timeout
+			baseURL: "/api/alphii" // Route all requests through Next.js proxy
 		})
 
 		this.setupDefaultHeaders()
