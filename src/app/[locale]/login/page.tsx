@@ -139,6 +139,8 @@ const Login = () => {
 					} else {
 						router.push(Routes.PROJECT)
 					}
+				} else {
+					toast.error("Login Failed")
 				}
 			} catch (error) {
 				toast.error("Login Failed")

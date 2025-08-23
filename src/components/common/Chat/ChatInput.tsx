@@ -151,7 +151,6 @@ const ChatInput = () => {
 			>
 				<textarea
 					ref={textareaRef}
-					defaultValue="Build a landing page for a UK travel agency showcasing destinations and booking services"
 					disabled={loading?.isLoading}
 					className="w-full bg-transparent disabled:bg-transparent hover:bg-transparent placeholder:text-[#62636C] focus-visible:outline-none resize-none min-h-5 h-[50px] overflow-y-auto"
 					placeholder="Tell us what you're building. We'll help you assign the team to build"

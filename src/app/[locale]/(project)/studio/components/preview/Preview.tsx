@@ -54,7 +54,7 @@ const Preview = () => {
 		<div
 			className={cn(
 				"h-full transition-all flex flex-col overflow-hidden w-0 opacity-0 rounded-lg duration-300",
-				!viewDetail &&
+				viewDetail &&
 					"w-[calc(55%)] ml-5 border border-alphii_skeleton_sub opacity-100"
 			)}
 		>

@@ -33,6 +33,7 @@ export const loginAction = async (
 	try {
 		// Call the API
 		const response = await baseLoginAction(payload)
+		console.log("Login response:", response)
 
 		// Check if login failed
 		if (response.error || !response.data) {

@@ -10,6 +10,8 @@ import useUserStore from "@/stores/user.store"
 const GetStartedLink = ({ children }: { children: React.ReactNode }) => {
 	const { user_id } = useUserStore((state) => state.profile) || {}
 
+	console.log("user", user_id)
+
 	return <Link href={user_id ? Routes.PROJECT : Routes.LOGIN}>{children}</Link>
 }
 

@@ -71,11 +71,11 @@ const StudioPage = ({ matId, sessionId }: StudioPageProps) => {
 				)}
 			>
 				<div className="relative pb-5 flex h-full flex-1 flex-col items-center ">
-					{/* <StudioTemplateCard /> */}
+					<StudioTemplateCard />
 
-					{/* <ChatContent /> */}
+					<ChatContent />
 
-					{/* <PrdSelector /> */}
+					<PrdSelector />
 
 					<ChatInput />
 				</div>
