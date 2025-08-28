@@ -47,7 +47,9 @@ const Preview = () => {
 	}
 
 	useEffect(() => {
-		setTab(PreviewTab.PREVIEW)
+		if (domainUrl) {
+			setTab(PreviewTab.PREVIEW)
+		}
 	}, [domainUrl])
 
 	return (

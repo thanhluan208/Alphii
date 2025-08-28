@@ -24,6 +24,25 @@ const Chatbox = ({ content, name, isUser, to }: ChatboxProps) => {
 
 	const listTos = to?.split(", ")
 
+	const avatar = [
+		{
+			name: "michel",
+			image: "/images/agents/dany-avatar.png"
+		},
+		{
+			name: "nix",
+			image: "/images/agents/ray-avatar.png"
+		},
+		{
+			name: "david",
+			image: "/images/agents/bob-avatar.png"
+		}
+	]
+
+	const agentAvatar = avatar.find(
+		(a) => a.name?.toLowerCase() === name?.toLowerCase()
+	)?.image
+
 	useEffect(() => {
 		if (currentIndex < content.length) {
 			const timer = setTimeout(() => {
@@ -50,7 +69,14 @@ const Chatbox = ({ content, name, isUser, to }: ChatboxProps) => {
 		>
 			<div className="flex flex-col bg-card dark:bg-alphii_background_2 border rounded-xl w-fit max-w-[85%] rounded-br-md gap-1 p-3 border-alphii_border dark:border-none">
 				<div className="flex items-center gap-2">
-					<div className="w-6 h-6 rounded-full bg-[url('/images/agents/bob-avatar.png')] bg-cover bg-center" />
+					<div
+						className="w-6 h-6 rounded-full bg-cover bg-center"
+						style={{
+							background: `url(${agentAvatar})`,
+							backgroundSize: "cover",
+							backgroundPosition: "center"
+						}}
+					/>
 					<p className="text-sm font-medium">{name}</p>
 				</div>
 

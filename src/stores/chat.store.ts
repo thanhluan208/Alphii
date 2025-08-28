@@ -48,7 +48,12 @@ const useChatStore = createWithEqualityFn<chatState>()(
 					}
 				})
 			} else {
-				set({ currentFile: file })
+				set({
+					currentFile: {
+						...file,
+						typedContent: file.content || ""
+					}
+				})
 			}
 		},
 		listFiles: {},
@@ -66,7 +71,7 @@ const useChatStore = createWithEqualityFn<chatState>()(
 						const currPath = currSegmentPath.slice(0, i + 1).join("/")
 
 						if (!oldFiles[currPath]) {
-							console.log('new folder !', currPath)
+							console.log("new folder !", currPath)
 							oldFiles[currPath] = {
 								name: currSegmentPath[i],
 								type: "folder",
